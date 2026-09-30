@@ -1,11 +1,16 @@
 # Prereqs and Setup Guide
 
+> **Original VS Code workshop reference.** Start the new GitHub Copilot app
+> workshop with [workshop/SETUP.md](workshop/SETUP.md). Hosted-agent lessons are
+> now in [workshop/02-hosted-agents.md](workshop/02-hosted-agents.md); the
+> originally advertised `03-microsoft-foundry-hosted-agents` folder is absent.
+
 This guide is a **full sequence** for running the examples in this repo from a machine that does not have Python or VS Code installed.
 
 Scope covered:
 - `01-agent-framework`
 - `02-microsoft-foundry-agents`
-- `03-microsoft-foundry-hosted-agents` (**optional**)
+- For hosted agents, use [workshop/02-hosted-agents.md](workshop/02-hosted-agents.md).
 
 ---
 
@@ -146,8 +151,8 @@ cd ..
 ```powershell
 cd 02-microsoft-foundry-agents
 python 01-quickstart-responses.py
-python 02-quickstart-chat-with-agent.py
-python 03-quickstart-create-agent.py
+python 02-quickstart-create-agent.py
+python 03-quickstart-chat-with-agent.py
 cd ..
 ```
 
@@ -173,7 +178,7 @@ cd ..
 2. `01-agent-framework/02_add_tools.py`
 3. `01-agent-framework/03_multi_turn.py`
 4. `02-microsoft-foundry-agents/01-quickstart-responses.py`
-5. `02-microsoft-foundry-agents/03-quickstart-create-agent.py`
+5. `02-microsoft-foundry-agents/02-quickstart-create-agent.py`
 6. *(Optional)* `03.../agent-with-local-tools/main.py`
 7. *(Optional)* `03.../agents-in-workflow/main.py`
 8. *(Optional)* Remaining `03` samples as needed

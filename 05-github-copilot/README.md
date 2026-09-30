@@ -1,5 +1,10 @@
 # Get started with GitHub Copilot in VS Code
 
+> **Original VS Code tutorial, retained as reference.** The main workshop now
+> runs in the [GitHub Copilot app](../workshop/README.md). Its optional
+> [IT support capstone](../workshop/CAPSTONE.md) reuses the ticketing examples
+> without requiring this VS Code tutorial.
+
 > **Note:** This readme has been adapted from https://code.visualstudio.com/docs/copilot/getting-started.
 
 GitHub Copilot transforms how you write code in Visual Studio Code. In this hands-on tutorial, you build a complete IT support ticketing system while discovering VS Code's AI capabilities: autonomous agents that implement features across multiple files, intelligent inline suggestions, precise editing with inline chat, integrated smart actions, and powerful customization options.

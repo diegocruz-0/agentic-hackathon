@@ -1,5 +1,9 @@
 # Prereqs for GitHub Copilot Enterprise
 
+> **Original VS Code setup reference.** The current workshop uses the GitHub
+> Copilot app and does not require these VS Code extensions. Follow
+> [workshop/SETUP.md](workshop/SETUP.md) and your facilitator's app-access guidance.
+
 This guide explains how to install and set up **GitHub Copilot Enterprise** and the key **Azure add-ons** in VS Code.
 
 ## Important roles

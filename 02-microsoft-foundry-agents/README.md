@@ -1,5 +1,10 @@
 # Microsoft Foundry Agents Quickstarts
 
+> **Reference examples.** For the coached GitHub Copilot app experience, start
+> with the [prompt-agent lessons](../workshop/01-prompt-agents.md). These scripts
+> illustrate creation and chat; they do not implement the new test checkpoints,
+> memory/skills progression, or stable-endpoint release flow.
+
 This folder contains top-level quickstarts for working with Azure AI Foundry project agents and Responses.
 
 ## Prerequisites
@@ -39,8 +44,8 @@ These quickstarts show the core Azure AI Foundry agent workflow:
 | # | File | What you'll learn |
 |---|------|-------------------|
 | 1 | [01-quickstart-responses.py](01-quickstart-responses.py) | Call the Responses API through an Azure AI Foundry project client. |
-| 2 | [02-quickstart-chat-with-agent.py](02-quickstart-chat-with-agent.py) | Chat with an existing Foundry agent reference in a conversation. |
-| 3 | [03-quickstart-create-agent.py](03-quickstart-create-agent.py) | Create a new prompt agent version in your Foundry project. |
+| 2 | [02-quickstart-create-agent.py](02-quickstart-create-agent.py) | Create a new prompt agent version in your Foundry project. |
+| 3 | [03-quickstart-chat-with-agent.py](03-quickstart-chat-with-agent.py) | Chat with an existing Foundry agent reference in a conversation. |
 
 Run any sample with:
 

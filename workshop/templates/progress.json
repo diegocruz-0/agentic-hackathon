@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "curriculum_version": "original-sequence-v2",
+  "paused": false,
+  "scenario": null,
+  "student_project_root": "student",
+  "current_checkpoint": "00",
+  "completed": false,
+  "context": {
+    "subscription_id": null,
+    "project_endpoint": null,
+    "prompt_agent_name": null,
+    "hosted_agent_name": null,
+    "capstone_agent_name": null,
+    "publishing_model": null
+  },
+  "capabilities": {},
+  "resources": [],
+  "checkpoints": [
+    {"id": "00", "status": "not_started", "attempts": []},
+    {"id": "01", "status": "not_started", "attempts": []},
+    {"id": "02", "status": "not_started", "attempts": []},
+    {"id": "03", "status": "not_started", "attempts": []},
+    {"id": "04", "status": "not_started", "attempts": []},
+    {"id": "05", "status": "not_started", "attempts": []},
+    {"id": "06", "status": "not_started", "attempts": []},
+    {"id": "07", "status": "not_started", "attempts": []},
+    {"id": "08", "status": "not_started", "attempts": []},
+    {"id": "09", "status": "not_started", "attempts": []},
+    {"id": "10", "status": "not_started", "attempts": []},
+    {"id": "11", "status": "not_started", "attempts": []},
+    {"id": "12", "status": "not_started", "attempts": []},
+    {"id": "13", "status": "not_started", "attempts": []},
+    {"id": "14", "status": "not_started", "attempts": []},
+    {"id": "15", "status": "not_started", "attempts": []},
+    {"id": "16", "status": "not_started", "attempts": []},
+    {"id": "17", "status": "not_started", "attempts": []},
+    {"id": "18", "status": "not_started", "attempts": []}
+  ]
+}

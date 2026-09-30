@@ -1,11 +1,16 @@
 # Prereqs and Setup Guide
 
+> **Original VS Code workshop reference.** For the current coached GitHub
+> Copilot app experience, use [workshop/SETUP.md](workshop/SETUP.md).
+> These steps and dependency versions are not prerequisites for the new path.
+
 This guide is a **full sequence** for running the examples in this repo from a machine that does not have Python or VS Code installed.
 
 Scope covered:
 - `01-agent-framework`
 - `02-microsoft-foundry-agents`
-- `03-microsoft-foundry-hosted-agents` (**optional**)
+- For hosted agents, use the current [hosted lessons](workshop/02-hosted-agents.md);
+  the originally advertised `03-microsoft-foundry-hosted-agents` folder is absent.
 
 ---
 

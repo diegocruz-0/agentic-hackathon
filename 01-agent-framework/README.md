@@ -1,5 +1,10 @@
 # Get Started with Agent Framework for Python
 
+> **Reference examples.** The current [Copilot app workshop](../workshop/README.md)
+> starts with prompt agents and introduces these SDK concepts later, one at a
+> time. Use [workshop setup](../workshop/SETUP.md) for that path rather than
+> installing the original example dependencies below.
+
 This folder contains a progressive set of samples that introduce the core
 concepts of **Agent Framework** one step at a time.
 
