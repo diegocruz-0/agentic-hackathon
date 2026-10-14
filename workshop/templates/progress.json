@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "curriculum_version": "original-sequence-v2",
+  "curriculum_version": "publishable-prompt-v3",
   "paused": false,
   "scenario": null,
   "student_project_root": "student",
@@ -34,7 +34,6 @@
     {"id": "14", "status": "not_started", "attempts": []},
     {"id": "15", "status": "not_started", "attempts": []},
     {"id": "16", "status": "not_started", "attempts": []},
-    {"id": "17", "status": "not_started", "attempts": []},
-    {"id": "18", "status": "not_started", "attempts": []}
+    {"id": "17", "status": "not_started", "attempts": []}
   ]
 }

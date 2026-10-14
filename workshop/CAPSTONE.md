@@ -5,7 +5,7 @@ Choose a capstone only after the foundational prompt and hosted lessons.
 the work; it does not generate a complete solution before the student makes
 design choices and predicts behavior.
 
-## 16: Choose and scope
+## 15: Choose and scope
 
 | Option | Possible outcome | Boundaries and additional prerequisites |
 |--------|------------------|----------------------------------------|
@@ -20,13 +20,15 @@ mentions an idea earlier, record it as a candidate, not a committed course theme
 
 Create a short source-controlled brief under `student/capstone/` containing:
 the user need, expected behavior, exclusions, prompt or hosted choice and why,
-tool contracts, approved MCP source, conversation behavior, memory scope and
-retention, reusable skill and delivery strategy, workflow, tests, cost boundary,
-and release target. Use public/synthetic fixtures.
+approved MCP sources, conversation behavior, memory scope and retention,
+reusable skill and delivery strategy, tests, cost boundary, and release target.
+For a hosted architecture, also define the custom function and workflow
+contracts. Use public/synthetic fixtures.
 
-A prompt implementation can retain client-side function execution and workflow;
-the brief must name that consumer responsibility. A hosted implementation can
-own them in its runtime. Neither choice automatically implies better quality.
+A prompt implementation uses Foundry-managed or remote capabilities and does
+not claim to package custom Python functions or code workflows. A hosted
+implementation can own custom executable functions and workflows in its runtime.
+Neither choice automatically implies better quality.
 Keep the two practice releases unchanged for comparison.
 
 Run K01: the student explains the design and every resource/data boundary is
@@ -38,17 +40,20 @@ authorizing execution.
 custom idea with equivalent tests.
 **Teach-back:** "Why is this agent type appropriate, and what will you not build?"
 
-## 17: Build and test
+## 16: Build and test
 
-Apply the same sequence to the selected scenario: baseline -> tools ->
-conversations -> memory -> workflow -> remote MCP -> instructions/skills.
-Reuse reviewed components, not old progress passes. Pause and test at every
-addition, even though this checkpoint contains several small substeps.
+Apply the concepts appropriate to the selected architecture. Every capstone
+must cover baseline behavior, instruction refinement, conversation boundaries,
+scoped memory, approved remote MCP integrations, skill delivery, and release
+evidence. A hosted capstone must additionally cover a custom function and an
+explicit executable workflow. Reuse reviewed components, not old progress
+passes. Pause and test at every addition.
 
-The capstone must demonstrate the concepts already learned: a useful baseline,
-one deterministic function, conversation isolation, scoped persistent memory,
-an explicit workflow, one approved MCP integration, a versioned skill, and
-regression-driven instruction changes. A read-only capstone is fully valid.
+The prompt architecture is not failed for omitting custom executable code it
+cannot package. The hosted architecture must prove that its function and
+workflow execute inside the deployed runtime. Both architectures require two
+approved MCP connections unless the facilitator records why one is unavailable
+and explicitly approves a partial route. A read-only capstone is fully valid.
 Do not introduce writes just to make the project look more advanced.
 
 For each concept, adapt the corresponding test inputs in TESTS.md and record
@@ -71,13 +76,14 @@ then ask a focused debugging question if it fails.
 not an autonomous parallel build of the whole capstone.
 **Teach-back:** "What did this capability add, and which test proves it?"
 
-## 18: Release and demonstrate
+## 17: Release and demonstrate
 
 Use [PUBLISHING.md](PUBLISHING.md) for the capstone's selected architecture.
 Run P01-P04 on its stable endpoint with the approved consumer client, including
-rollback. Demonstrate K03: normal case, ambiguous input, a tool call, memory
-recall/isolation/forget, workflow failure, skill version behavior, and endpoint
-invocation. Include rejected action evidence if the capstone writes data.
+rollback. Demonstrate K03: normal case, ambiguous input, both MCP boundaries,
+memory recall/isolation/forget, skill version behavior, and endpoint invocation.
+For a hosted capstone, also demonstrate its custom function and workflow failure.
+Include rejected action evidence if the capstone writes data.
 
 Hand off the endpoint, selected version, consumer responsibilities, limitations,
 sanitized evidence locations, rollback target, and still-running owned resources.

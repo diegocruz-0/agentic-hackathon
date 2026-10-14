@@ -1,8 +1,10 @@
-# Prompt agents: the original six steps
+# Prompt agents: managed capabilities first
 
-Follow the original samples' concept order with small, neutral exercises.
-Do not choose a business scenario yet. Use [TESTS.md](TESTS.md) and introduce
-the related [app technique](APP-GUIDE.md) at each checkpoint.
+Build a publishable Foundry prompt agent using capabilities that Foundry can
+manage or reach after release. Custom executable Python functions and explicit
+code workflows are reserved for the hosted-agent phase. Do not choose a business
+scenario yet. Use [TESTS.md](TESTS.md) and introduce the related
+[app technique](APP-GUIDE.md) at each checkpoint.
 
 Keep a reproducible definition and test client in `student/prompt-agent/`.
 Use current supported APIs and isolated dependencies, not the old root pins.
@@ -30,138 +32,100 @@ supported, explaining that output delivery does not change the agent's abilities
 **Alternative:** ask for a proposed diff before accepting implementation.
 **Teach-back:** "What defines this agent, and what has not been added yet?"
 
-## 02: Add tools
+## 02: Refine instructions
 
-**Concept:** the model requests a function; another component executes it.
-Reference [add tools](../01-agent-framework/02_add_tools.py).
+**Concept:** improve a prompt agent through one evidence-driven instruction
+change while holding the model and capabilities constant.
 
-Use the sample's weather idea, but make the new exercise deterministic:
-`get_weather("Seattle")` returns a labeled fixture with `condition: sunny`,
-`temperature_c: 20`, and `source: workshop-fixture`. An unknown location returns
-an explicit unsupported-location result; blank input is a validation error.
-Never present this synthetic data as a live weather service.
+Review the baseline responses from 01. Add a small, measurable response contract,
+such as the headings `Answer`, `Source`, and `Uncertainty`. Explain what belongs
+under each heading and prohibit invented sources or capabilities. Create a new
+agent version rather than silently changing the tested version.
 
-For a prompt agent, define the supported function schema and implement execution
-in the local test client. Inspect each function-call argument, dispatch only
-allowlisted functions, validate inputs, and return the result using the matching
-call ID and supported continuation protocol. Bound the tool loop and report
-errors; do not evaluate arbitrary model-generated code.
+Run I01 with the same inputs before and after the instruction change. Inspect
+the actual version metadata and responses. Do not change the model, add tools,
+or introduce a business scenario at the same time; otherwise the student cannot
+attribute the observed difference to the instructions.
 
-The Python decorator in the original Agent Framework sample is not a drop-in
-prompt-agent registration API. Confirm the current function-calling contract.
-Run T01-T03 directly and through the actual Foundry agent. Inspect execution,
-not just the assistant's text. This is real tool execution with synthetic data.
+**App practice:** review the focused instruction diff before creating the version.
+**Alternative:** ask the coach to propose the instruction change without applying it.
+**Teach-back:** "Which observed behavior changed, and what evidence ties it to the instructions?"
 
-**App practice:** inspect tool name, arguments, result, and execution location.
-**Alternative:** inspect sanitized client logs when no trace viewer exists.
-**Teach-back:** "Who actually ran the function: the model, the service, or our client?"
+## 03: Observe and test managed conversations
 
-Later, a supported built-in tool can be compared as an optional extension.
-Do not replace the original function-calling lesson with search-only behavior.
-
-## 03: Multi-turn conversations
-
-**Concept:** conversation history persists across requests to the same
-conversation, not automatically across every invocation.
+**Concept:** Foundry automatically maintains history inside a conversation.
+The student highlights and tests that managed behavior rather than implementing
+conversation storage. The application still decides when to continue an
+authorized conversation and when to start a new one.
 Reference [multi-turn](../01-agent-framework/03_multi_turn.py) and the
 [Foundry chat example](../02-microsoft-foundry-agents/03-quickstart-chat-with-agent.py).
 
-In a conversation, say "My name is Alice and I love hiking." Ask what the agent
-remembers. Then start a new conversation without replaying that history.
-Run D01-D02 and record the actual conversation identifiers. Persistent memory
-has not been configured, so the new conversation should not know that fact.
-Do not interpret the coach's own recall as evidence about the Foundry agent.
+First use the Foundry playground. Say "My name is Alice and I love hiking",
+then ask what the agent remembers in the same playground conversation. Explain
+that Foundry created and maintained this conversation automatically; no student
+conversation-store implementation is required.
+
+Start a fresh playground conversation and ask the same follow-up. It should not
+know Alice's facts. Then use the supported SDK/API only to make the boundary
+observable: capture conversation A's identifier, reuse it for the two related
+turns, and create conversation B for the clean-context test. Do not build a
+custom history store, manually replay messages, or add persistent memory here.
+
+Run D01-D02 and record the actual identifiers where exposed. The UI observation
+demonstrates the experience; the identifiers prove whether the same or a fresh
+Foundry conversation was used. Persistent memory has not been configured, so
+conversation B must not know Alice's facts. Do not interpret the coach's own
+recall as evidence about the Foundry agent.
 
 **App practice:** contrast the current Copilot session with both runtime
 conversations, without creating a second coaching session unnecessarily.
 **Alternative:** discuss when a fresh app session helps isolate a separate task.
-**Teach-back:** "Which conversation contained Alice's name, and why?"
+**Teach-back:** "What did Foundry manage automatically, and what decision remains
+the client application's responsibility?"
 
-## 04: Memory and context
+## 04: Connect one remote MCP, then two
 
-**Concept:** injected context, conversation history, and durable memory differ.
-Reference [context provider](../01-agent-framework/04_memory.py): it keeps a
-name in a Python object, not a persistent multi-user memory store.
+**Concept:** first understand one remote tool boundary, then test selection and
+provenance when a prompt agent can use two independent MCP servers.
+Reference [remote MCP](../01-agent-framework/06_remote_mcp.py) for the concept.
 
-First inspect that reference and predict what happens when the process restarts.
-Then add a real student-owned Foundry memory store using the
-[current memory guide](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/memory-usage).
-Check chat/embedding deployments, permissions, supported API, and cost approval.
-Allow only synthetic style/language preferences, with agreed retention.
+**First MCP:** connect the facilitator-approved, Foundry-reachable, read-only
+weather MCP with a narrow allowlist. Discover its actual schemas, data source,
+and approval requirements; do not assume it is live weather or reuse the old
+random local function. Ask one supported weather question. Run C01 and inspect
+discovery, selected tool, arguments, result, source, and the grounded response.
 
-Configure both retrieval and the documented write/remember path. Map memory
-scope from trusted identity, not an ID asserted in a chat message. A static test
-scope is acceptable only in an explicitly isolated synthetic harness.
-Run M01-M03: recall in a new conversation, different-user isolation, and forget.
-Confirm the update completes before checking recall; report a bounded timeout.
+**Second MCP:** after the first integration passes, connect the approved
+read-only cultural-travel MCP. Run C02 using one weather question, one cultural
+travel question, and one request that makes the correct server choice observable.
+Evidence must identify the server and tool used for each result; similar tool
+names are not sufficient provenance. Do not turn this neutral integration
+exercise into the capstone travel scenario.
 
-Keep the earlier D02 no-memory observation as historical evidence. After adding
-memory, use fresh empty test scopes to distinguish deliberate recall from leaks.
+Run C03 by declining an approval where configured or injecting a controlled
+failure in one integration. The agent must expose the limitation rather than
+claiming a successful lookup or silently treating the other MCP server as an
+equivalent source. Never disable approvals globally to make the test pass.
 
-**App practice:** save and resume workshop progress; identify where it is stored.
-**Alternative:** discuss how a new app session could read that progress in the
-same checkout, while a different worktree needs an approved import.
-**Teach-back:** "Which state survives a new conversation, and where is it stored?"
+Use current [Foundry MCP guidance](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/model-context-protocol).
+Attach both connections to the Foundry agent, not merely to the Copilot coach.
 
-## 05: First workflow
+**App practice:** compare Copilot's MCP registrations with both agent runtime
+connections and inspect which server handled each request.
+**Alternative:** compare direct agent configuration with a supported Toolbox
+only when useful; do not add duplicate connections for demonstration.
+**Teach-back:** "How did you prove which MCP server supplied each result?"
 
-**Concept:** explicit execution order instead of one large prompt.
-Reference [first workflow](../01-agent-framework/05_first_workflow.py).
+## 05: Work with skills
 
-Begin with its two deterministic steps: uppercase text, then reverse it.
-Predict and verify that `hello world` becomes `DLROW OLLEH`. Inspect both steps.
-Run the local part of W01 before adding a model call.
-
-Next, let the local client run that deterministic workflow and ask the Foundry
-prompt agent to explain its output. Verify both the deterministic result and the
-actual remote response. Fail a step in an isolated test and run W02; do not
-report a final result or call the next step after failure.
-
-This is **client-side orchestration around a prompt agent**, not a deployed
-Foundry workflow or custom code running inside a prompt definition. The hosted
-phase will move execution into the runtime. Do not assume a visual Foundry
-workflow builder is available or needed.
-
-**App practice:** ask for a plan and expected outputs before implementation.
-**Alternative:** use Plan mode if exposed; otherwise use a planning-only Chat
-request. Neither is approval for resource changes.
-**Teach-back:** "Which parts are deterministic, and where do they execute?"
-
-## 06: Remote MCP
-
-**Concept:** discover and call external tools through a standard protocol.
-Reference [remote MCP](../01-agent-framework/06_remote_mcp.py).
-
-Use a facilitator-approved read-only documentation service, such as the
-Microsoft Learn MCP endpoint documented in the
-[Foundry MCP guide](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/model-context-protocol).
-Discover real schemas; configure only needed read-only tools and authentication/
-approval behavior. Attach it to the student's Foundry agent, not just Copilot.
-
-Ask a public documentation question and run C01. Inspect the discovery,
-invocation, result, and grounding. Handle approval requests with the documented
-continuation if required. Run C02 for decline/error behavior in an isolated test;
-never disable approvals globally to get a green result.
-
-**App practice:** compare Copilot's registered tools with the runtime's tool
-configuration. Similar names do not mean they are the same connection.
-**Alternative:** compare a supported direct SDK client with an available app
-integration, without executing both or adding duplicate resources.
-**Teach-back:** "Where does the MCP server run, and which agent is its client?"
-
-## 07: Refine instructions and work with skills
-
-**Concept:** use test evidence to improve instructions, then extract a reusable
-procedure. This extends the original sequence rather than replacing its steps.
-
-Review the weather and documentation responses. Make one instruction change,
-such as the headings `Answer`, `Source`, and `Uncertainty`. Run I01 with the
-same inputs before and after the new version. Do not change the model at the
-same time or fabricate a source for a general-knowledge answer.
+**Concept:** package a reviewed procedure for reuse and make its delivery to the
+prompt agent explicit.
 
 Author `student/skills/explain-results/SKILL.md` with that procedure and a useful
-trigger description. Require clear separation of fixture data, retrieved
-evidence, and uncertainty. Upload a student-owned skill version and retrieve it
+trigger description. Require clear separation of general knowledge, evidence
+retrieved from each MCP server, and uncertainty. It can also define how future
+fixture data must be labeled without claiming such a fixture exists yet.
+Upload a student-owned skill version and retrieve it
 using the [current skills guide](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/skills).
 Run S01 against the retrieved version and its resulting agent behavior.
 
@@ -169,7 +133,7 @@ For the portable prompt path, incorporate the reviewed skill content at build
 time into a new agent instruction version. Label this **static composition**.
 A skill uploaded to Foundry is not automatically loaded by the prompt runtime.
 Toolbox skills use MCP resources, not just tools; verify runtime support before
-claiming dynamic use. Hosted runtime loading is taught at 14.
+claiming dynamic use. Hosted runtime loading is taught at 13.
 
 Keep trust boundaries and authorization outside skills. Record the exact source
 skill version; do not silently follow an untested shared default.
@@ -179,12 +143,48 @@ of changes to the coach versus the runtime.
 **Alternative:** use an editor panel if available or request a focused Chat diff.
 **Teach-back:** "When does a skill update reach this agent, and what does it not control?"
 
-## 08: Release the prompt agent
+## 06: Add and test persistent memory
 
-Follow [PUBLISHING.md](PUBLISHING.md). The consumer test client must support the
-function-call loop from 02; the endpoint alone does not host that function.
-Document the workflow's client-side location as well.
+**Concept:** injected context, conversation history, and durable memory differ.
+Memory is added after the agent has useful instructions, remote capabilities,
+and a reusable skill so the student can see what long-term personalization
+changes—and what it must not silently change.
+Reference [context provider](../01-agent-framework/04_memory.py): it keeps a
+name in a Python object, not a persistent multi-user memory store.
+
+First return to the observation from 03: a fresh conversation did not remember
+Alice. Predict what would happen if the original Python process restarted.
+Then add a real student-owned Foundry memory store using the
+[current memory guide](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/memory-usage).
+Check chat/embedding deployments, permissions, supported API, and cost approval.
+Allow only synthetic style/language preferences, with agreed retention.
+
+Configure both retrieval and the documented write/remember path. Map memory
+scope from trusted identity, not an ID asserted in a chat message. A static test
+scope is acceptable only in an explicitly isolated synthetic harness.
+Run M01-M03: recall in a new conversation, different-user isolation, explicit
+current-request override, and forget. Confirm updates complete before checking
+recall and report a bounded timeout.
+
+Keep the earlier D02 no-memory observation as historical evidence. After adding
+memory, use fresh empty test scopes to distinguish deliberate recall from leaks.
+Re-run one MCP and skill-formatted response to prove memory personalizes style
+without changing tool selection, provenance, authorization, or factual results.
+
+**App practice:** save and resume workshop progress; identify where it is stored.
+**Alternative:** discuss how a new app session could read that progress in the
+same checkout, while a different worktree needs an approved import.
+**Teach-back:** "What changed across a fresh conversation, and which agent
+capabilities remained independent of memory?"
+
+## 07: Release the prompt agent
+
+Follow [PUBLISHING.md](PUBLISHING.md). Release the tested agent version with its
+instructions, managed conversations, two approved MCP connections, reviewed
+skill-delivery strategy, and memory configuration. No local Python function or
+client-side workflow is part of this prompt-agent release.
 
 **App practice:** request endpoint/version metadata and observed test evidence.
 **Alternative:** inspect sanitized raw responses instead of a narrative summary.
-**Teach-back:** "What must a consumer implement, and what does Foundry manage?"
+**Teach-back:** "What does the released endpoint manage, and which access or
+connection responsibilities still remain?"

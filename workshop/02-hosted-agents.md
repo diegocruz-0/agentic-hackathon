@@ -1,15 +1,15 @@
 # Hosted agents: repeat the concepts with custom execution
 
 Keep the tested prompt release. Build a separate hosted practice agent, adding
-one capability at a time in the original order. Do not port every capability in
-the scaffold. Hosted code adds control and operational responsibilities; tools
-and memory alone are not reasons that every agent must be hosted.
+one capability at a time. Do not port every capability in the scaffold. Hosted
+code adds custom execution and operational responsibilities; tools and memory
+alone are not reasons that every agent must be hosted.
 
 Use [TESTS.md](TESTS.md) and [APP-GUIDE.md](APP-GUIDE.md). Use a current official
 hosting sample and the installed Foundry skill workflow, not an old console
 script as a server entry point.
 
-## 09: Hosted hello agent
+## 08: Hosted hello agent
 
 Verify hosting support, CLI/extensions, runtime, project, and cost boundary.
 After approval, scaffold the smallest appropriate
@@ -31,12 +31,14 @@ for explanation, mixed tasks, and troubleshooting. Resume the learning gate
 after any Canvas handoff.
 **Teach-back:** "What does local success prove, and what does remote success add?"
 
-## 10: Hosted tools
+## 09: Hosted tools
 
-Move the deterministic weather fixture from 02 into a validated, allowlisted
+Introduce the deterministic weather fixture as a validated, allowlisted
 function in the hosted runtime. Reference
 [add tools](../01-agent-framework/02_add_tools.py) for the idea, adapting to the
-current SDK. Keep the fixture labeled as synthetic.
+current SDK. Keep the fixture labeled as synthetic. This is the first required
+custom executable function in the workshop; unlike a prompt-agent function-call
+schema, its implementation is packaged with the hosted runtime.
 
 Run T01-T03 directly and through the local agent, then deploy the approved
 change and run them remotely. Explain why consumers no longer execute this
@@ -48,7 +50,7 @@ the diff before deployment.
 **Alternative:** ask for a hint or explanation before asking Copilot to implement.
 **Teach-back:** "What moved from the client into the hosted runtime?"
 
-## 11: Hosted conversations, then memory
+## 10: Hosted conversations, then memory
 
 Teach these as two substeps, each with its own test and pause.
 
@@ -57,7 +59,7 @@ Run D01-D02 before connecting persistent memory, locally and remotely. Inspect
 the IDs and state boundaries. A global shared session is not a valid solution.
 
 **Then, memory:** connect a dedicated store with the same narrow preference
-policy as 04. Use a trusted identity-to-scope mapping and the documented write/
+policy as 06. Use a trusted identity-to-scope mapping and the documented write/
 read paths. Do not assume prompt-agent automatic memory behavior exists in the
 hosted SDK. Reuse the prompt store only with explicit approval and compatible
 scope/ownership boundaries.
@@ -72,16 +74,17 @@ If identity isolation cannot be implemented, block multi-user release.
 pass relevant artifact paths and do not assume prior chat context transfers.
 **Teach-back:** "Which state survives a restart, and how are users separated?"
 
-## 12: Hosted workflow
+## 11: Hosted workflow
 
-Move the deterministic uppercase -> reverse graph from 05 into the hosted
-request path. Keep the stages observable. Reference
+Introduce the deterministic uppercase -> reverse graph in the hosted request
+path. Keep the stages observable. Reference
 [first workflow](../01-agent-framework/05_first_workflow.py) for graph concepts.
 Use the model only to explain the computed output, not to impersonate execution.
 
 Run W01-W02 locally and remotely. A controlled intermediate failure must stop
 the graph and reach the caller explicitly, without a fabricated final result.
-Preserve the prompt release for comparison with its client-side workflow.
+Contrast this executable workflow with the prompt release, which contains no
+custom workflow code.
 
 **App practice:** present a reproducible input, observed failure, and expected
 result when requesting diagnosis. Ask for a focused fix.
@@ -89,12 +92,12 @@ result when requesting diagnosis. Ask for a focused fix.
 do not require a particular debugging UI.
 **Teach-back:** "Where does this workflow execute now, and why is its order reliable?"
 
-## 13: Hosted remote MCP
+## 12: Hosted remote MCP
 
-Connect the same approved read-only documentation MCP service from 06, with
-explicit tools, authentication, and approval handling. Run C01-C02 locally and
-remotely. Confirm the deployed identity and network path rather than assuming
-developer access transfers.
+Connect the same two approved read-only MCP services from 04, with explicit
+tools, authentication, provenance, and approval handling. Run C01-C03 locally
+and remotely. Confirm the deployed identity and network path rather than
+assuming developer access transfers.
 
 Keep the core exercise read-only. The old ticketing MCP demo is an optional
 capstone reference, not a required shared service for this lesson. Foundry cannot
@@ -106,9 +109,9 @@ internet to avoid arranging a supported endpoint.
 Toolbox when useful; do not add a Toolbox merely to demonstrate another UI.
 **Teach-back:** "Which permissions and network path changed when we deployed?"
 
-## 14: Hosted runtime skills
+## 13: Hosted runtime skills
 
-Reuse the versioned `explain-results` skill from 07. Integrate a current supported
+Reuse the versioned `explain-results` skill from 05. Integrate a current supported
 skills provider: approved skill download or compatible Toolbox MCP resources.
 Show discovery and loading, not merely a Markdown file in the image.
 
@@ -126,7 +129,7 @@ the active configuration.
 first verify which source and local evidence it contains.
 **Teach-back:** "How do you know which skill content this process loaded?"
 
-## 15: Hosted release
+## 14: Hosted release
 
 Follow [PUBLISHING.md](PUBLISHING.md) and run P01-P04. Demonstrate the same
 consumer endpoint across upgrade and rollback. Record what remains running.

@@ -5,9 +5,10 @@ which capabilities can actually be used. Do not create an agent at this step.
 
 ## Student experience
 
-Follow the [participant start guide](START.md): open a normal Chat session in
-the repository project and say **"Start the workshop."** No agent selection
-is needed. The coach welcomes you before asking for setup information, checks
+Follow the [participant start guide](START.md): in the GitHub Copilot app's
+repository project, select **Workshop Coach**, then say **"Start the workshop."**
+Use normal repository Chat only if the app has no agent selector.
+The coach welcomes you before asking for setup information, checks
 saved progress, and helps with one missing value at a time. There is no VS Code
 extension setup in the core path.
 
@@ -16,13 +17,15 @@ to the cohort. Do not assume a public download URL or a particular app build.
 Verify that the app can read the repository and use its execution environment.
 
 The first question is whether the student has an existing Foundry project, not
-which business scenario they want. Foundational exercises follow the original
-hello/tools/conversations/memory/workflow/MCP sequence. Capstone choice comes later.
+which business scenario they want. Prompt exercises cover baseline behavior,
+instructions, conversations, MCP, skills, and memory. Custom executable tools
+and workflows begin in the hosted phase. Capstone choice comes later.
 
 **App practice:** ask the coach to explain repository context without making
 changes, then compare that read-only request with asking it to perform a
 specific change. Starting the workshop does not grant blanket permission to
-change Azure resources. The optional custom-agent profile is not a startup step.
+change Azure resources. Selecting Workshop Coach chooses the coaching profile;
+it does not create a Foundry agent or grant Azure permissions.
 
 ## Minimum environment, then just-in-time additions
 
@@ -72,8 +75,8 @@ The coach creates only files needed for the current lesson:
 student/
   prompt-agent/       Agent instructions, definition, tests, isolated dependencies
   skills/            Student-authored SKILL.md packages
-  hosted-agent/      Current official scaffold, added at checkpoint 09
-  capstone/          Chosen final project, added at checkpoint 16
+  hosted-agent/      Current official scaffold, added at checkpoint 08
+  capstone/          Chosen final project, added at checkpoint 15
 .workshop/
   progress.json      Local progress, never committed
   evidence/          Sanitized test observations, never committed

@@ -1,7 +1,8 @@
 # Participant start guide
 
-You do not need to select a custom agent or install a VS Code extension.
-**A normal repository Chat session is the workshop's front door.**
+**Select Workshop Coach in the GitHub Copilot app, then say "Start the workshop."**
+This is the preferred live entry. VS Code and its extensions are not required.
+Normal repository Chat is a fallback only when the app has no agent selector.
 
 ## Before opening the app
 
@@ -15,16 +16,17 @@ can get help starting.
 1. Open the GitHub Copilot app and open/add the workshop repository as a project
    using the controls available in your app build. If the repository is already
    listed as a project, use that project.
-2. Start a normal Chat session **inside that project**, rather than an unrelated
-   general chat. This gives Copilot access to the workshop instructions.
-3. Type:
+2. Start a session **inside that project**, rather than an unrelated general
+   chat. In the app's agent selector, select the agent named exactly
+   **Workshop Coach**.
+3. With Workshop Coach selected, type:
 
    > Start the workshop.
 
-That is the entire starter prompt. "Workshop Coach" describes the role Copilot
-takes in this repository; it is not a button you must locate.
-If your build exposes a custom-agent selector, the provided Workshop Coach
-profile is an optional shortcut to the same protocol, not a prerequisite.
+That is the entire starter prompt. The repository defines Workshop Coach in
+`.github/agents/workshop-coach.agent.md`; its teaching protocol is shared with
+the fallback. If your app has no agent selector, start normal repository Chat
+and send the same message. Selecting the profile alone does not start the lesson.
 
 Controls vary by app build. If you cannot open the project or start its session,
 tell the facilitator what you see. Do not follow guessed menu paths or switch
@@ -46,7 +48,7 @@ checkpoint 00. For a fresh start, its first setup question is whether you have
 an existing Foundry project. "No" or "I'm not sure" is fine: it explains what is
 needed and helps you coordinate with the facilitator, not silently provision it.
 
-You should not be asked to choose IT support, find an agent picker, install all
+After starting, you should not be asked to choose IT support, install all
 future dependencies, or deploy a complete solution at this point.
 
 ## Your first app controls are plain-language requests
@@ -60,10 +62,19 @@ future dependencies, or deploy a complete solution at this point.
 | "Pause the workshop." | Saves local progress; does not stop or delete Azure resources |
 | "Resume the workshop." | Checks saved progress and the target before continuing |
 
-## If the welcome does not appear
+## If the profile or welcome does not appear
+
+Picker visibility has not yet been verified in a fresh participant session.
+The supported profile file is not proof that your app build discovers it.
+If you have a selector but Workshop Coach is absent, check that this checkout
+contains `.github/agents/workshop-coach.agent.md` and the current curriculum.
+Have the facilitator verify discovery in a fresh session using that revision.
+Do not switch to VS Code, invent a refresh command, or select an unrelated agent.
+If the app has no selector at all, use the normal repository Chat fallback.
 
 First verify that this is a repository session containing `AGENTS.md` and
-`workshop/COACH.md`. If you can see them but Copilot gives a generic answer, send:
+`workshop/COACH.md`. If the selected coach (or no-selector fallback) gives a
+generic answer despite those files being present, send:
 
 > Read AGENTS.md and workshop/COACH.md from this repository and start the
 > guided workshop at checkpoint 00. Ask one question at a time.

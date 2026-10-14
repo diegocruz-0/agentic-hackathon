@@ -6,18 +6,27 @@ The numbered example folders are reference material from the earlier workshop.
 
 ## Workshop participation
 
-Normal repository Chat is the primary entry point; no custom-agent selector is
-required. For "How do I start this workshop?" or equivalent onboarding questions,
+The preferred entry in the GitHub Copilot app is to select the custom agent
+named exactly **Workshop Coach**, then say "Start the workshop."
+Normal repository Chat is the fallback only when the app has no agent selector.
+Do not claim selector availability or profile discovery without evidence.
+For "How do I start this workshop?" or equivalent onboarding questions,
 read workshop/START.md and guide the participant from their current point.
 Orientation alone does not start a lesson, create progress, or authorize cloud
 work. Do not interpret workshop-authoring requests as participant onboarding.
 
 When the user asks to start, resume, or participate in the workshop, read
 workshop/COACH.md and follow its welcome and teaching/checkpoint protocol.
-The plain message "Start the workshop" is sufficient; do not require the student
-to select a coach profile or name instruction files.
-Follow the original hello/tools/conversations/memory/workflow/MCP sequence,
-teach Copilot app techniques throughout, and defer scenario choice to the capstone.
+The plain message "Start the workshop" is sufficient after selecting the profile
+or in the no-selector fallback; students need not name instruction files.
+For every coaching turn follow COACH.md's purpose -> guidance -> one question
+pattern. Show actual prompt/reply evidence, guide read-only Foundry inspection
+after cloud changes, and lead into the next unmet requirement without bypassing
+learning gates, approvals, read-only requests, or pauses.
+Follow the current prompt sequence in workshop/README.md: baseline, instructions,
+managed conversations, one MCP then two, skills, memory, and release. Introduce
+custom executable functions and workflows only in the hosted phase. Teach
+Copilot app techniques throughout and defer scenario choice to the capstone.
 Do not start coaching or provision resources merely because the repo is open.
 
 When the user asks to edit the curriculum, documentation, examples, or coach,

@@ -1,7 +1,7 @@
 # Release through stable Foundry endpoints
 
-Use this guide at **08 for the prompt practice agent**, **15 for the hosted
-practice agent**, and **18 for the chosen capstone**. Keep separate names and
+Use this guide at **07 for the prompt practice agent**, **14 for the hosted
+practice agent**, and **17 for the chosen capstone**. Keep separate names and
 endpoints so students can compare implementations without overwriting evidence.
 Tests and evidence requirements are in [TESTS.md](TESTS.md).
 
@@ -50,18 +50,17 @@ agent endpoint.
    access configuration, test evidence, and rollback target in local progress.
    Never copy access tokens into a shareable handoff.
 
-For the prompt practice agent, the consumer client must implement the allowlisted
-function-call execution loop and the workflow from lessons 02 and 05. Merely
-calling the endpoint does not execute that client-side code. Record this in the
-handoff and test the entire consumer path. The hosted implementation owns those
-operations inside its runtime.
+For the prompt practice agent, verify its managed conversation behavior, memory,
+two remote MCP connections, instructions, and skill-delivery strategy through
+the released endpoint. It does not rely on a local custom-function executor or
+client-side code workflow.
 
-Prompt checkpoint 08 stops here, after a teach-back. Preserve the prompt release
+Prompt checkpoint 07 stops here, after a teach-back. Preserve the prompt release
 while the hosted implementation is developed.
 
 ## Hosted update and rollback
 
-At checkpoint 15, first pass the same release checks for the hosted target.
+At checkpoint 14, first pass the same release checks for the hosted target.
 Then make one small visible instruction change as a separate candidate version,
 run the relevant regressions, and perform P04 after approval.
 
@@ -70,7 +69,7 @@ invoke it; do not infer selection from creation order or an unverified answer.
 Restore the previous selection and repeat the invocation. Retain the known-good
 code, configuration, and skill versions needed for rollback.
 
-At 18, repeat release and P04 for the capstone's chosen architecture. Preserve
+At 17, repeat release and P04 for the capstone's chosen architecture. Preserve
 the two practice releases; do not make the capstone silently replace them.
 
 **App practice:** compare the proposed routing change, the resulting metadata,

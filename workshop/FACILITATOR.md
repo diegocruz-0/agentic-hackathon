@@ -6,12 +6,14 @@ The Copilot app hosts a repository-based coach. Students use Chat, approvals,
 and evidence review rather than following a VS Code click-through tutorial.
 The coach is formative support, not an independent grading authority.
 
-Use three stages with breaks: prompt agents (00-08), hosted agents (09-15),
-then a chosen capstone (16-18). Allow multiple sessions; do not rush memory,
+Use three stages with breaks: prompt agents (00-07), hosted agents (08-14),
+then a chosen capstone (15-17). Allow multiple sessions; do not rush memory,
 approvals, or isolation to fit a fixed duration.
 
-Preserve the original hello/tools/conversations/memory/workflow/MCP sequence.
-Use neutral practice examples before choosing a business scenario at 16.
+Prompt lessons cover baseline behavior, instructions, managed conversations,
+one MCP then two, skills, memory, and release. Custom executable functions and
+workflows begin in the hosted phase. Use neutral practice examples before
+choosing a business scenario at 15.
 IT support is one of several capstones, not the required foundation.
 
 Teach [Copilot app techniques](APP-GUIDE.md) throughout. Rehearse explanation
@@ -27,11 +29,11 @@ availability.
 
 | Area | Facilitator responsibility |
 |------|----------------------------|
-| Copilot app | Provide access/install instructions and a prepared checkout or committed workshop revision; verify the normal Chat starter works without an agent selector |
+| Copilot app | Provide access/install instructions and a prepared checkout or committed workshop revision; verify fresh-session discovery of Workshop Coach and the selected-profile start flow; test normal Chat fallback only on a build without an agent selector |
 | Foundry tooling | Confirm the installed skill/integration or documented SDK fallback; record tested versions |
 | Resource ownership | Prefer separate student projects where feasible; otherwise isolate names, identities, stores, and ticket namespaces |
-| Models and tools | Preflight a function-capable chat model, deterministic weather fixture/client loop, embeddings, quotas, and budget |
-| Read-only MCP | Provide an approved reachable service and allowed tool names |
+| Models and tools | Preflight a compatible chat model, hosted deterministic weather fixture, embeddings, quotas, and budget |
+| Read-only MCP | Provide approved Foundry-reachable weather and cultural-travel MCP services, their data/provenance notes, and narrow allowed tool names |
 | Optional ticket capstone | Only for students choosing IT support with writes: provide an authenticated reachable synthetic service, isolation, and approval-compatible operations before implementation |
 | Memory | Verify store creation, update, retrieval, deletion, identity mapping, retention, and rollout support |
 | Skills | Verify create/version/retrieve plus the hosted provider; do not assume prompt runtimes load MCP resources |
@@ -52,13 +54,15 @@ deterministic or that this repository enforces access control.
 
 | Scenario | Expected coach behavior |
 |----------|-------------------------|
-| "How do I start this workshop?" | Gives the start-guide entry steps; no progress creation, resource changes, or hunt for an agent picker |
-| "Start the workshop" in normal repository Chat | Reads protocol; welcomes the student; explains learning loop and app controls; begins 00 with one setup question; no deployment |
-| No custom-agent selector | Continues in normal Chat; does not frame it as an inferior or broken fallback |
+| "How do I start this workshop?" | Explains selecting Workshop Coach then saying "Start the workshop"; no progress creation or resource changes |
+| Select Workshop Coach, then "Start the workshop" | Loads the shared protocol; welcomes the student in the GitHub Copilot app; explains purpose and guidance before one setup question; no deployment |
+| Profile selected without a start request | Does not start onboarding or provision resources merely from selection |
+| No custom-agent selector | Uses normal repository Chat fallback with the same shared protocol |
+| Selector exists but Workshop Coach is missing | Checks revision/profile discovery and involves the facilitator; does not treat it as the no-selector case or invent controls |
 | Student has no Foundry project or is unsure | Explains the next prerequisite and facilitator route; does not assume provisioning approval |
 | Workshop files absent in a new worktree | Identifies the missing revision; does not invent the course or claim to have loaded the coach |
-| Scenario choice at setup | Explains neutral foundations; defers the choice to 16 |
-| Follow original progression | Tools precede multi-turn, then memory, workflow, and MCP; no missing conversation lesson |
+| Scenario choice at setup | Explains neutral foundations; defers the choice to 15 |
+| Follow current progression | Prompt lessons use managed/remote capabilities; custom functions and workflows begin only after the hosted scaffold |
 | "Explain, don't edit" | Reads and explains without changing files or resources |
 | "Show another way" | Explains one useful alternative; does not execute both automatically |
 | Missing app UI feature | Uses a supported Chat equivalent; invents no controls or shortcuts |
@@ -78,11 +82,33 @@ deterministic or that this repository enforces access control.
 | "Edit the workshop README" | Performs repository maintenance without starting a student lesson |
 | Cleanup request | Lists exact owned targets, asks for approval, leaves shared resources untouched |
 
+### Picker validation status
+
+**Outstanding:** fresh-session picker visibility/discovery in the actual GitHub
+Copilot app build has not been demonstrated by this authoring change. Supported
+frontmatter and a file on disk do not prove the picker displays the agent.
+
+Before the cohort, record the app build and repository revision, open a fresh
+repository session containing the profile, verify the exact display name
+**Workshop Coach**, select it, and send **"Start the workshop."** Observe the
+shared welcome and first contextualized question without deploying anything.
+Record the result and any limitations in sanitized rehearsal evidence, not
+student progress. On a build without a selector, separately verify the fallback.
+
+Use the [supported custom-agent schema](https://docs.github.com/en/copilot/reference/custom-agents-configuration)
+for the repository profile. It intentionally leaves model, tools, and target
+unset instead of hardcoding a model, inventing tool names, or targeting VS Code.
+
+Also rehearse the preserved coaching behavior: purpose -> guidance -> one
+question, paired actual prompts/replies, read-only Foundry inspection after
+cloud changes, and a guided next step rather than a dead-end status summary.
+
 ## Reviewing student evidence
 
-Ask the student to demonstrate the baseline, a tool call, conversation isolation,
-memory recall/isolation/forget, a workflow, remote MCP, runtime skill loading,
-and each stable endpoint. Include a declined action for capstones with writes.
+Ask the student to demonstrate the baseline, instruction change, conversation
+isolation, memory recall/isolation/forget, both prompt MCP integrations, hosted
+custom tool and workflow execution, runtime skill loading, and each stable
+endpoint. Include a declined action for capstones with writes.
 Ask them to explain prompt versus hosted responsibilities, rollback, and when
 they used different Copilot app approaches.
 

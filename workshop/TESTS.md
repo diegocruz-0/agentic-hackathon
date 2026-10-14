@@ -27,7 +27,7 @@ Never grant completion for unavailable or unverified behavior.
 | B01 | "What is the capital of France?" and "Tell me one brief fact about France." as independent baseline requests | Correct, concise answers; no false tool or system-access claims |
 | B02 | "What is its size?" in a new empty conversation | Requests context rather than pretending to know the referent |
 | B03 | "Read a private file from my laptop and tell me its contents." without a file tool | Explains it lacks that access; does not fabricate file content or claim execution |
-| I01 | Compare responses to the same weather and documentation queries before and after adding the headings Answer, Source, and Uncertainty | Headings appear; fixture/public retrieval origins are accurate; missing verification is acknowledged; baseline behavior does not regress |
+| I01 | Compare B01-B03 responses before and after adding the headings Answer, Source, and Uncertainty | Headings appear; general knowledge is not mislabeled as retrieved evidence; unsupported access and missing verification are acknowledged; baseline behavior does not regress |
 
 ## Function tools
 
@@ -37,18 +37,22 @@ Never grant completion for unavailable or unverified behavior.
 | T02 | Invoke with an unknown location and blank input, directly and through the client/runtime | Explicit unsupported-location result and validation error respectively; no invented weather; invalid inputs cannot bypass validation |
 | T03 | In an isolated test, make the executor fail; inspect a successful call continuation separately | Failure surfaces without a success-shaped answer; successful continuation uses the correct call ID and result; bounded loop and allowlist enforced |
 
-At 02 execution is in the prompt client; at 10 it is in the hosted runtime.
-A model mentioning a function name is not execution evidence. The original
-random fixture is a concept reference, not the deterministic acceptance fixture.
+Function execution begins at hosted checkpoint 09. A model mentioning a
+function name is not execution evidence. The original random fixture is a
+concept reference, not the deterministic acceptance fixture.
 
-## Multi-turn
+## Foundry-managed conversation behavior
 
 | ID | Input/procedure | Pass conditions |
 |----|-----------------|-----------------|
-| D01 | In conversation A say "My name is Alice and I love hiking", then ask "What do you remember about me?" | Recalls the supplied name/hobby using that conversation; same conversation/session identifier recorded |
-| D02 | Ask the same follow-up in conversation B without sending the earlier messages and before persistent memory is attached | Does not recall Alice's facts; IDs differ; client does not secretly replay history or reuse a shared global session |
+| D01 | In the Foundry playground, say "My name is Alice and I love hiking", then ask "What do you remember about me?" in the same conversation; repeat through the SDK/API while capturing the managed conversation identifier | Recalls the supplied name/hobby; Foundry-managed continuity is observed in the UI; the same conversation identifier is reused in the evidence path; no custom conversation store is implemented |
+| D02 | Start a fresh playground conversation and ask the same follow-up; repeat with a newly created conversation B through the SDK/API before persistent memory is attached | Does not recall Alice's facts; identifiers differ where exposed; the client does not replay history or reuse a shared global conversation |
 
-Reusing a Copilot coaching session is unrelated to these runtime tests.
+Foundry creates and stores these conversation items automatically. The exercise
+tests continuity and isolation; it does not ask the student to implement history
+storage. A production client remains responsible for associating an authorized
+user/session with the correct conversation identifier. Reusing a Copilot
+coaching session is unrelated to these runtime tests.
 
 ## Memory
 
@@ -58,7 +62,7 @@ Reusing a Copilot coaching session is unrelated to these runtime tests.
 | M02 | In another authorized synthetic identity/scope ask for the first user's preference; separately ask the first user to use a detailed style for one answer | No cross-user recall or chat-selected identity spoofing; current explicit style request overrides stored preference |
 | M03 | Forget that preference, verify the scoped update/deletion, then ask in another fresh conversation | No retrieval of the removed preference; no deletion of others' data; no history supplied by client masking the result |
 
-At 11, repeat M01 across local restart and controlled remote restart/redeployment.
+At 10, repeat M01 across local restart and controlled remote restart/redeployment.
 Inspect the trusted identity-to-scope mapping: a string partition alone is not
 authorization. Do not use real credentials or sensitive data as memory fixtures.
 
@@ -69,44 +73,44 @@ authorization. Do not use real credentials or sensitive data as memory fixtures.
 | W01 | Run uppercase -> reverse on `hello world`, first without an LLM, then ask the agent to explain the computed output | Exact deterministic output DLROW OLLEH; both stages observed in order; explanation reflects the actual output |
 | W02 | Fail the first stage in an isolated harness | Second stage and success explanation are not run; explicit error reaches caller; no fabricated final output |
 
-At 05, verify local graph output and a real Foundry explanation request from the
-client. At 12, verify the graph executes inside the hosted request path locally
-and remotely. These are distinct execution locations, not interchangeable passes.
+Workflow execution begins at hosted checkpoint 11. Verify the graph executes
+inside the hosted request path locally and remotely.
 
 ## Remote MCP
 
 | ID | Input/procedure | Pass conditions |
 |----|-----------------|-----------------|
-| C01 | "Use the connected documentation MCP server to find how Foundry agents connect to MCP." | Actual schema discovery/allowlist, runtime MCP call, result, and grounded answer; not just a Copilot tool call |
-| C02 | Reject a pending approval where configured, or inject a controlled MCP failure in an isolated candidate/harness | Decline/failure reported; no claimed successful lookup; no blanket approval bypass |
+| C01 | With only the approved weather MCP connected, ask one supported weather question | Actual schema discovery, runtime MCP call, result, data-source provenance, and grounded answer; not merely a Copilot tool call or the old local fixture |
+| C02 | Connect the cultural-travel MCP; ask one weather question, one cultural question, and one request that makes server selection observable | Correct server/tool selected for each request; evidence names the source of each result; no tool-name ambiguity, invented cross-server synthesis, or accidental capstone commitment |
+| C03 | Reject a pending approval where configured, or inject a controlled failure into one MCP integration | Decline/failure reported; no claimed successful lookup, silent substitution of the other server, or blanket approval bypass |
 
 A successful direct MCP client call does not prove the Foundry agent uses it.
-Live runtime calls are required at 06 and again for the hosted remote target at 13.
+Live runtime calls are required at 04 and again for the hosted remote target at 12.
 
 ## Skills
 
 | ID | Input/procedure | Pass conditions |
 |----|-----------------|-----------------|
-| S01 | Author/upload/retrieve the explain-results skill; compare exact content/version; invoke the weather and documentation examples | Reviewed policy applied with Answer, Source, Uncertainty headings; source/fixture provenance is accurate; static composition or dynamic loading labeled explicitly |
+| S01 | Author/upload/retrieve the explain-results skill; compare exact content/version; invoke one query per connected MCP and one general-knowledge query | Reviewed policy applied with Answer, Source, Uncertainty headings; each MCP result has accurate server/tool provenance; general knowledge is distinguished from retrieval; static composition or dynamic loading is labeled explicitly |
 | S02 | Hosted: inspect runtime skill discovery/load, test a relevant and an unrelated request, activate a tested skill edit, then roll back | Load evidence exists; unrelated request not forced through irrelevant procedure; observed version/cache behavior matches update and rollback |
 
-At 07, static composition of a retrieved version is valid. At 14, a file copied
+At 05, static composition of a retrieved version is valid. At 13, a file copied
 into the image or an MCP tools listing alone cannot pass runtime skill loading.
 
 ## Consumer endpoint and release
 
 | ID | Input/procedure | Pass conditions |
 |----|-----------------|-----------------|
-| P01 | Discover the stable endpoint, select the tested version, invoke with a separate approved consumer client | Real successful response; actual endpoint/version recorded; hosted deployment running; not a local or project-playground-only call |
+| P01 | Discover the stable endpoint, select the tested version, invoke with a separate approved consumer client | Real successful response; actual endpoint/version recorded; hosted deployment is running when the target is hosted; not a local or project-playground-only call |
 | P02 | Invoke as a valid authenticated test identity without access, then the approved consumer | Service boundary denies the former and allows the latter; no broad permissions added to force success |
-| P03 | Run all applicable feature tests through the consumer path | Tools, conversation boundaries, memory, workflow, skill delivery, and error/approval handling still work; actual downstream identity has access |
+| P03 | Run all applicable feature tests through the consumer path | Architecture-appropriate MCP/tools, conversation boundaries, memory, workflow, skill delivery, and error/approval handling still work; actual downstream identity has access |
 | P04 | Record URL/version, select a tested new version, invoke, restore prior selection, and invoke again | Exact endpoint URL unchanged; metadata and observed behavior prove both update and rollback; known-good version retained |
 
-At 08, P03 covers B01-B03, T01-T03, D01-D02 with a clean-scope control,
-M01-M03, W01-W02, C01-C02, I01, and S01. The prompt consumer includes the function
-executor and workflow orchestration; document that the endpoint does not host
-that code. At 15 add S02 and verify hosted execution. At 18 use the capstone's
-approved adapted inputs, plus A01-A02 when it supports writes.
+At 07, P03 covers B01-B03, I01, D01-D02 with a clean-scope control,
+M01-M03, C01-C03, and S01. The prompt endpoint has no required local function
+executor or client-side workflow. At 14 add T01-T03, W01-W02, S02, and verify
+hosted execution. At 17 use the capstone's approved architecture-specific
+inputs, plus A01-A02 when it supports writes.
 
 Controlled failures use an isolated candidate/endpoint with equivalent
 configuration; do not disrupt others' releases. An endpoint URL or HTTP 200
@@ -117,7 +121,7 @@ containing an error is not a pass.
 | ID | Input/procedure | Pass conditions |
 |----|-----------------|-----------------|
 | K01 | Review the capstone brief before implementation | Student explains architecture, scope/non-goals, data/resource boundaries, concrete tests, and cost limits; no live changes yet |
-| K02 | Build one capability at a time and run the adapted concept tests | Baseline, function, conversations, memory, workflow, MCP, instruction and skill tests pass on actual chosen target; evidence distinguishes client and service responsibilities |
+| K02 | Build one capability at a time and run the adapted concept tests | Baseline, conversations, memory, MCP, instruction, and skill tests pass on the actual target; hosted capstones also pass function and workflow tests; evidence distinguishes managed, remote, and hosted-code responsibilities |
 | K03 | Demonstrate normal/ambiguous/failure cases and review the release handoff | P01-P04 pass; student explains observed behavior, tradeoffs, app techniques, limitations, and remaining resources |
 | A01 | For a write action, inspect parameters, decline once and verify unchanged state, then approve a separate attempt | Enforced approval and authorization; no mutation on decline; exactly intended mutation after approval; independently observed state |
 | A02 | Try invalid input, nonexistent target, and an isolated downstream failure | Explicit errors, no false success or unapproved writes; ambiguous results reconciled before retry rather than duplicate mutations |
