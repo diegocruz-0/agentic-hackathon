@@ -6,10 +6,23 @@ Normal repository Chat is a fallback only when the app has no agent selector.
 
 ## Before opening the app
 
-Your facilitator provides access to the GitHub Copilot app and the repository
-link/revision containing this workshop. If you do not have those, ask the
-facilitator for them. You do not need to provision Azure resources before you
-can get help starting.
+Use only organization-approved installers. On a managed computer, ask the
+facilitator or IT administrator before installing anything.
+
+| Needed now | Official source |
+|------------|-----------------|
+| GitHub Copilot app | [Download the GitHub Copilot app](https://github.com/features/ai/github-app) and follow the [official app quickstart](https://docs.github.com/en/copilot/get-started/quickstart-copilot-app) |
+| Git | [Download Git](https://git-scm.com/install/) |
+| Workshop repository | Use the repository URL and `haforsbe-agentic-workshop` revision supplied by the facilitator |
+
+The GitHub Copilot app requires an eligible GitHub account/Copilot entitlement
+or the access arrangement documented by your organization. Your facilitator
+must provide the repository link and confirm the revision. You do not need
+Python, Azure CLI, Azure Developer CLI, VS Code, or newly provisioned Azure
+resources merely to open the workshop and receive checkpoint 00 guidance.
+
+Later lessons introduce additional tools only when they become necessary. Their
+official installation links are listed in [Setup](SETUP.md#official-installation-links).
 
 ## Open the workshop
 

@@ -12,8 +12,8 @@ The coach welcomes you before asking for setup information, checks
 saved progress, and helps with one missing value at a time. There is no VS Code
 extension setup in the core path.
 
-The facilitator supplies the app installation/access instructions appropriate
-to the cohort. Do not assume a public download URL or a particular app build.
+The facilitator confirms organizational access and any managed-install policy.
+Use the official links below rather than copied installers or guessed commands.
 Verify that the app can read the repository and use its execution environment.
 
 The first question is whether the student has an existing Foundry project, not
@@ -34,11 +34,11 @@ it does not create a Foundry agent or grant Azure permissions.
 | Start | Copilot app access, Git, repository workspace | Repo instructions load; branch/worktree is the student's |
 | Prompt agents | Foundry project, deployed chat model, Entra sign-in | Actual project endpoint, model deployment name, current identity, read access |
 | SDK fallback | Python and isolated environment | Use the current prompt quickstart's package versions; do not inherit the legacy root pins |
-| Function tools | A validated local fixture and function-capable model | Function schema, bounded client execution loop, result continuation |
-| MCP | Approved reachable read-only MCP endpoint | Protocol, authentication, allowlist, Foundry-side reachability |
+| MCP | Approved reachable weather and cultural-travel MCP endpoints | Protocol, authentication, allowlists, provenance, Foundry-side reachability |
 | Memory | Chat and embedding deployments, memory capability | Store permissions, identity scope, retention, update behavior |
 | Skills | Skills API and compatible client/provider | Upload/version/retrieve support; MCP resources support is distinct from tools |
 | Hosted agents | Azure Developer CLI (`azd`) and supported Foundry extensions/runtime | Current sample, runtime, project, model, deployment support, quota/cost boundary |
+| Hosted custom tools | A validated fixture and compatible hosted model/runtime | Function schema, allowlisted execution, errors, and result continuation inside the runtime |
 | Consumer access | Approved test caller identities | Endpoint invocation permission and a caller without permission for the negative test |
 
 Use the installed `microsoft-foundry` skill, including its dependency check and
@@ -50,6 +50,26 @@ Read-only checks can include current CLI versions, signed-in account summary,
 project metadata, and deployed model names. Students complete interactive sign-in
 themselves. Do not dump credential-bearing environment variables or tokens.
 Explain required installations and request approval before changing the machine.
+
+## Official installation links
+
+Install tools just in time, not all at workshop startup. On organization-managed
+devices, follow the facilitator's software-distribution policy even when an
+official public installer exists.
+
+| Tool or service | Needed | Official link |
+|-----------------|--------|---------------|
+| GitHub Copilot app | Before checkpoint 00 | [App download page](https://github.com/features/ai/github-app) and [getting-started guide](https://docs.github.com/en/copilot/get-started/quickstart-copilot-app) |
+| Git | Before checkpoint 00 | [Git downloads](https://git-scm.com/install/) |
+| Microsoft Foundry portal | Checkpoint 00 onward | [Open Microsoft Foundry](https://ai.azure.com/) |
+| Python | Only when a lesson needs the SDK or the hosted scaffold | [Python downloads](https://www.python.org/downloads/) |
+| Foundry development tooling | Before SDK-based Foundry work | [Prepare the Foundry development environment](https://learn.microsoft.com/azure/foundry/how-to/develop/install-cli-sdk) |
+| Azure CLI | Only when the selected authentication or diagnostic path requires it | [Install Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) |
+| Azure Developer CLI (`azd`) | Before hosted checkpoint 08 | [Install Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) |
+
+Do not install VS Code for the core workshop. Do not use direct installer URLs
+copied into the curriculum; the official pages select the current supported
+package and include operating-system-specific instructions.
 
 ## Choose the actual resource boundary
 
