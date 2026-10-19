@@ -22,8 +22,8 @@ configure a deployed agent.
 | Independent release | 07 | 14 | 16 releases the hosted workflow |
 | Agent collaboration | Specialists stay independently callable | Specialists stay independently callable | 15-16 coordinate both releases |
 
-The original examples remain concept references, but the live path keeps both
-prompt agents independently publishable. The Weather Research Agent and
+The learning path keeps both prompt agents independently publishable.
+The Weather Research Agent and
 Cultural Travel Agent own different tools and evidence domains. Formal
 machine-readable contracts appear only when executable orchestration needs to
 validate both results.

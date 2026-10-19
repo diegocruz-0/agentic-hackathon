@@ -39,7 +39,7 @@ it does not create a Foundry agent or grant Azure permissions.
 | Start | Copilot app access, Git, repository workspace | Repo instructions load; branch/worktree is the student's |
 | Assigned project | One dedicated participant Microsoft Foundry Project and Entra sign-in | Actual Microsoft Foundry Project Endpoint, current identity, ownership, read access; no alternate project |
 | Workshop model | Microsoft Foundry Model Catalog access and usable project quota | Participant independently selects a compatible model and deploys a named Microsoft Foundry Model Deployment after approving the project, model, deployment name, and possible cost |
-| SDK fallback | Python and isolated environment | Use the current prompt quickstart's package versions; do not inherit the legacy root pins |
+| SDK fallback | Python and isolated environment | Use the current prompt quickstart's package versions in the student implementation |
 | Weather MCP | Approved reachable read-only weather endpoint | Protocol, authentication, allowlist, upstream provenance, Foundry-side reachability |
 | Cultural Travel MCP | Facilitator-owned Cloudflare authless MCP Worker | Stateless Streamable HTTP endpoint, narrow read-only tools, dataset license/version, input bounds, logs, and Foundry-side reachability |
 | Memory | Chat and embedding deployments, memory capability | Store permissions, identity scope, retention, update behavior |
@@ -123,12 +123,11 @@ Source artifacts under `student/` can be reviewed and committed by the student.
 Keep secrets in an appropriate secret store or ignored environment files.
 Do not commit local transcripts or endpoint response dumps under `student/`.
 
-Create a separate dependency environment for each implementation. The original
-root `requirements.txt` preserves an older Agent Framework preview range; it is
-not the dependency contract for the new course. The current prompt quickstart
+Create a separate dependency environment and dependency manifest for each
+implementation under `student/`. The current prompt quickstart
 requires Azure AI Projects 2.x (currently `>=2.3.0`). Verify current requirements
-at execution time and record the versions actually used. Hosted runtimes can
-require a newer Python than the legacy examples.
+at execution time and record the versions actually used. Confirm the Python
+version required by the selected hosted runtime before installation.
 
 ## Approval and costs
 
@@ -154,8 +153,8 @@ can you request an explanation without authorizing a change?"
 ## Current references
 
 Use these before generating version-sensitive API calls or CLI syntax. Preview
-features and publishing terminology can change; do not copy stale commands
-from the original labs without checking.
+features and publishing terminology can change; verify commands against these
+references before use.
 
 - [Foundry prompt-agent quickstart](https://learn.microsoft.com/en-us/azure/foundry/agents/quickstarts/prompt-agent)
 - [Hosted agents](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/hosted-agents?view=foundry)

@@ -55,8 +55,8 @@ example prompts as instructions to deploy a student's agent.
 ## Implementation boundaries
 
 - Keep the main learning path in the Copilot app; do not require VS Code.
-- Preserve original examples unless a change specifically requires updating them.
-- Create student implementations in student/, not in the reference folders.
+- Keep this repository focused on the current Copilot app workshop.
+- Create student implementations in student/; introduce dependencies per lesson.
 - Never commit credentials, tokens, .env files, conversation transcripts, or
   student progress. Keep sanitized local evidence in .workshop/.
 - For Foundry operations, use the installed microsoft-foundry skill if available

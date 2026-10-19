@@ -88,15 +88,19 @@ Release checkpoints verify version selection and consumer access, not a separate
 endpoint publishing operation. Teams/Microsoft 365 distribution is optional;
 legacy Agent Applications are explained in the publishing guide.
 
-## Original examples
+## Repository layout
 
-| Folder | Role in this workshop |
-|--------|-----------------------|
-| [01-agent-framework](01-agent-framework/README.md) | The original six-step concept sequence and Python references |
-| [02-microsoft-foundry-agents](02-microsoft-foundry-agents/README.md) | Prompt-agent creation and conversation references |
-| [05-github-copilot](05-github-copilot/README.md) | Original VS Code tutorial; optional IT support capstone reference |
+| Location | Purpose |
+|----------|---------|
+| `workshop/` | Participant guides, lessons, coach protocol, tests, and facilitator guidance |
+| `workshop/assets/` | Supporting lesson assets |
+| `workshop/templates/` | Templates for local workshop progress |
+| `.github/` | Workshop Coach profile and repository instructions |
+| `student/` | Student implementations and reproducible agent definitions |
+| `05-github-copilot/example_app/` | Optional IT support example app and local MCP demo, separate from the core workshop |
+| `.workshop/` | Ignored local progress and sanitized evidence; never published |
 
-The root `requirements.txt` and `example.env` belong to those original examples.
-Use the [participant prerequisites](workshop/PREREQUISITES.md) for the current
-workshop. New student projects use isolated environments appropriate to current
-SDKs. Console samples are not ready-made hosted deployment servers.
+Dependencies are introduced per lesson in isolated student environments.
+The optional [IT support example app](05-github-copilot/example_app/README.md)
+is retained. The other earlier VS Code tutorials and agent scripts remain
+available in Git history.

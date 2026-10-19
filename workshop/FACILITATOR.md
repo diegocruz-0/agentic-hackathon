@@ -136,21 +136,19 @@ All required gates must pass for full completion. Review unverified student-
 supplied evidence explicitly. Keep a private, sanitized progress record; do not
 require public commits of transcripts, identities, or resource details.
 
-## Original reference material
+## Implementation sources
 
-Preserve the numbered example folders for students who want to inspect how
-individual concepts work. Their dependency versions and API conventions may
-differ from the current scaffold. In particular:
+This repository focuses on the current Copilot app workshop and retains the
+optional [IT support example app](../05-github-copilot/example_app/README.md).
+The earlier VS Code tutorials and standalone agent examples are removed.
+Use the official references in [SETUP.md](SETUP.md) and
+scaffold implementations under `student/` during the relevant checkpoint.
+Hosted lessons live in [02-hosted-agents.md](02-hosted-agents.md).
 
-- `01-agent-framework/04_memory.py` is in-process context injection, not durable
-  memory or safe multi-user state.
-- `02-microsoft-foundry-agents` contains small creation/chat scripts, not a
-  versioned release/evaluation workflow.
-- The old root README mentioned a hosted-agent folder that was not present.
-  The new hosted lessons live in [02-hosted-agents.md](02-hosted-agents.md) and
-  scaffold from official samples during the student journey.
-- The ticketing UI and MCP server have separate state. The server is an
-  unauthenticated in-memory demo; it is not the cohort's shared remote backend.
+Keep each implementation's dependencies isolated and versioned. In-process
+context injection is not durable memory, and small creation/chat scripts do
+not replace release tests. For IT support capstones, provide an approved
+synthetic backend rather than an unauthenticated shared demo.
 
 ## Maintaining the course
 
@@ -160,5 +158,4 @@ Keep the root entry point, milestone table, lesson gates, test IDs, progress
 template, and coach protocol consistent. Rehearse changed behavior in the app.
 When lesson numbering or test semantics change, update `curriculum_version` and
 review old progress by evidence rather than copying passes to new numeric IDs.
-Do not silently rewrite original examples to a new SDK while maintaining
-their old dependency contract.
+Update each implementation's dependency manifest when changing its SDK contract.

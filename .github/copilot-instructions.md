@@ -1,7 +1,7 @@
 # Agentic workshop
 
 Read AGENTS.md for repository guidance. The main experience is the GitHub
-Copilot app, not the original VS Code labs.
+Copilot app; VS Code is not required.
 
 For participant questions about how to begin, read workshop/START.md and explain
 the preferred GitHub Copilot app entry: select **Workshop Coach**, then say

@@ -2,6 +2,12 @@
 
 A demo web application for managing IT support tickets — create, edit, and close tickets with priority levels and technician assignments.
 
+**Optional example, not a workshop prerequisite.** The current learning path
+starts at [the participant guide](../../workshop/START.md). The browser UI and
+MCP server maintain separate in-memory state; changes are not synchronized.
+The unauthenticated MCP server is a local demo, not a shared Foundry backend.
+Do not expose it through a public tunnel.
+
 ## Features
 
 - **Create tickets** with title, description, priority (Low / Medium / High / Critical), and assigned technician
@@ -40,6 +46,12 @@ The app includes an MCP (Model Context Protocol) server that exposes the ticketi
 
 ### Starting the MCP server
 
+Run the following commands from this `example_app` folder in an isolated Python
+environment. Its `requirements.txt` covers the MCP server, not the optional
+`agent_with_mcp.py` client. That older client additionally imports Agent
+Framework, Azure Identity, and python-dotenv; verify compatible versions against
+the current official samples before using it. It is not a deployed Foundry agent.
+
 1. Install dependencies (one time):
 
    ```bash
@@ -69,7 +81,7 @@ Create or update `.vscode/mcp.json` in your workspace root:
   "servers": {
     "ticketing": {
       "command": "${workspaceFolder}/.venv/Scripts/python.exe",
-      "args": ["${workspaceFolder}/05-github-copilot/app/mcp_server.py"],
+      "args": ["${workspaceFolder}/05-github-copilot/example_app/mcp_server.py"],
       "env": {}
     }
   }
@@ -83,7 +95,7 @@ Then restart VS Code or reload the window. The ticketing tools will be available
 ## Project Structure
 
 ```
-app/
+example_app/
 ├── index.html       # Markup (semantic HTML5)
 ├── styles.css       # Styling (modern CSS, responsive)
 ├── script.js        # Application logic (vanilla JS)

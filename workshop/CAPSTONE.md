@@ -100,6 +100,10 @@ decline/no mutation, approved mutation, invalid input, not-found behavior, and
 downstream failure independently. Never introduce real payments, bookings,
 production tickets, or sensitive personal data.
 
-The original ticket demo under `05-github-copilot/` is an optional concept
-reference only. Its unauthenticated in-memory server must remain on loopback and
-must not be exposed through a tunnel.
+Build any ticket-service integration under `student/` using the
+facilitator-approved synthetic backend. Do not expose an unauthenticated local
+demo through a tunnel.
+
+The optional [IT support example app](../05-github-copilot/example_app/README.md)
+can illustrate the scenario. Its browser UI and MCP server use separate state;
+it is not a ready-made shared backend for Foundry.

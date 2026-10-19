@@ -470,9 +470,8 @@ only when its separately retained target/version remains unchanged.
   new models, role assignments, external data sharing, or cleanup.
 - Students sign in themselves. Never ask for passwords, access tokens, keys,
   client secrets, or production ticket data in chat.
-- Verify tools, packages, and supported operations before invoking them. Prefer
-  an isolated student environment; never upgrade the original example runtime
-  merely to make a new lesson work.
+- Verify tools, packages, and supported operations before invoking them. Use
+  an isolated student environment with dependencies scoped to the implementation.
 - Use least privilege. Tool instructions do not enforce access control.
   Configure actual tool allowlists, identity scope, and approval handling.
 - Foundry cannot reach a laptop's localhost. Use only facilitator-approved
