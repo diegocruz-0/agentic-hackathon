@@ -1,7 +1,9 @@
 # 00: Connect the Copilot app to the workshop environment
 
-**Outcome:** know where the coach runs, where the student's agents run, and
-which capabilities can actually be used. Do not create an agent at this step.
+**Outcome:** verify the participant's dedicated Microsoft Foundry Project,
+select and deploy their own Microsoft Foundry Model Deployment after a simple
+explicit approval, know where the coach and agents run, and inventory which
+capabilities can actually be used. Do not create an agent at this step.
 
 ## Student experience
 
@@ -16,10 +18,13 @@ The facilitator confirms organizational access and any managed-install policy.
 Use the official links below rather than copied installers or guessed commands.
 Verify that the app can read the repository and use its execution environment.
 
-The first question is whether the student has an existing Foundry project, not
-which business scenario they want. Prompt exercises cover baseline behavior,
-instructions, conversations, MCP, skills, and memory. Custom executable tools
-and workflows begin in the hosted phase. Capstone choice comes later.
+Every participant arrives with one dedicated, pre-provisioned Microsoft Foundry
+Project.
+The first question asks them to confirm the assigned project and locate its
+endpoint; it does not ask whether a project exists and must not provision a
+second one. The shared story creates and enhances the Weather Research Agent,
+repeats the evidence loop for the Cultural Travel Agent, then introduces hosted
+workflow code. Capstone choice comes later.
 
 **App practice:** ask the coach to explain repository context without making
 changes, then compare that read-only request with asking it to perform a
@@ -32,13 +37,14 @@ it does not create a Foundry agent or grant Azure permissions.
 | When | Needed | What the coach verifies |
 |------|--------|------------------------|
 | Start | Copilot app access, Git, repository workspace | Repo instructions load; branch/worktree is the student's |
-| Prompt agents | Foundry project, deployed chat model, Entra sign-in | Actual project endpoint, model deployment name, current identity, read access |
+| Assigned project | One dedicated participant Microsoft Foundry Project and Entra sign-in | Actual Microsoft Foundry Project Endpoint, current identity, ownership, read access; no alternate project |
+| Workshop model | Microsoft Foundry Model Catalog access and usable project quota | Participant independently selects a compatible model and deploys a named Microsoft Foundry Model Deployment after approving the project, model, deployment name, and possible cost |
 | SDK fallback | Python and isolated environment | Use the current prompt quickstart's package versions; do not inherit the legacy root pins |
-| MCP | Approved reachable weather and cultural-travel MCP endpoints | Protocol, authentication, allowlists, provenance, Foundry-side reachability |
+| Weather MCP | Approved reachable read-only weather endpoint | Protocol, authentication, allowlist, upstream provenance, Foundry-side reachability |
+| Cultural Travel MCP | Facilitator-owned Cloudflare authless MCP Worker | Stateless Streamable HTTP endpoint, narrow read-only tools, dataset license/version, input bounds, logs, and Foundry-side reachability |
 | Memory | Chat and embedding deployments, memory capability | Store permissions, identity scope, retention, update behavior |
 | Skills | Skills API and compatible client/provider | Upload/version/retrieve support; MCP resources support is distinct from tools |
-| Hosted agents | Azure Developer CLI (`azd`) and supported Foundry extensions/runtime | Current sample, runtime, project, model, deployment support, quota/cost boundary |
-| Hosted custom tools | A validated fixture and compatible hosted model/runtime | Function schema, allowlisted execution, errors, and result continuation inside the runtime |
+| Hosted workflow | Azure Developer CLI (`azd`), Agent Framework, supported Foundry extensions/runtime, and tracing | Current sample, runtime, both downstream endpoints/contracts, deployment support, quota/cost boundary |
 | Consumer access | Approved test caller identities | Endpoint invocation permission and a caller without permission for the negative test |
 
 Use the installed `microsoft-foundry` skill, including its dependency check and
@@ -47,9 +53,19 @@ below using available tools. Do not claim an integration exists just because
 this repository mentions it.
 
 Read-only checks can include current CLI versions, signed-in account summary,
-project metadata, and deployed model names. Students complete interactive sign-in
-themselves. Do not dump credential-bearing environment variables or tokens.
-Explain required installations and request approval before changing the machine.
+project metadata, available catalog models, and quota. Students
+complete interactive sign-in themselves. Do not dump credential-bearing
+environment variables or tokens. The participant chooses independently from the
+Microsoft Foundry Model Catalog. The coach may recommend considering a
+compatible mini-class model to reduce cost and quota use, but must not make the
+choice or imply that the facilitator provides the model.
+
+Before deployment, confirm only the assigned Microsoft Foundry Project, selected
+model, Microsoft Foundry Model Deployment name, and acknowledgment that the
+operation may incur cost. Detailed region, SKU, capacity, quota, and pricing
+review is not a required core lesson. Use those details only when the selected
+model requires them or a deployment problem must be diagnosed. Deploy only
+inside the assigned project, then inspect the resulting Model Deployment.
 
 ## Official installation links
 
@@ -65,7 +81,7 @@ official public installer exists.
 | Python | Only when a lesson needs the SDK or the hosted scaffold | [Python downloads](https://www.python.org/downloads/) |
 | Foundry development tooling | Before SDK-based Foundry work | [Prepare the Foundry development environment](https://learn.microsoft.com/azure/foundry/how-to/develop/install-cli-sdk) |
 | Azure CLI | Only when the selected authentication or diagnostic path requires it | [Install Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) |
-| Azure Developer CLI (`azd`) | Before hosted checkpoint 08 | [Install Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) |
+| Azure Developer CLI (`azd`) | Before hosted checkpoint 15 | [Install Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) |
 
 Do not install VS Code for the core workshop. Do not use direct installer URLs
 copied into the curriculum; the official pages select the current supported
@@ -73,10 +89,11 @@ package and include operating-system-specific instructions.
 
 ## Choose the actual resource boundary
 
-Prefer facilitator-prepared projects. Record the confirmed subscription,
-project endpoint, ownership, model deployment, and a unique student prefix in
-`.workshop/progress.json`. Also record exact resource IDs when resources are
-created later, with `owned_by_student` and `cleanup_approved` flags.
+Use only the participant's facilitator-assigned project. Record the confirmed
+subscription, project endpoint, ownership, participant-created model deployment,
+and a unique student prefix in `.workshop/progress.json`. Also record exact
+resource IDs when resources are created later, with `owned_by_student` and
+`cleanup_approved` flags.
 
 An existing project endpoint is not an ARM resource ID. Resolve resource IDs
 through supported discovery; do not reconstruct them from guessed names.
@@ -93,10 +110,10 @@ The coach creates only files needed for the current lesson:
 
 ```text
 student/
-  prompt-agent/       Agent instructions, definition, tests, isolated dependencies
+  prompt-agents/      Both agent definitions, tests, isolated dependencies
   skills/            Student-authored SKILL.md packages
-  hosted-agent/      Current official scaffold, added at checkpoint 08
-  capstone/          Chosen final project, added at checkpoint 15
+  hosted-agent/      Trip Planning Workflow and result contracts, added at checkpoint 15
+  capstone/          Chosen final project, added at checkpoint 17
 .workshop/
   progress.json      Local progress, never committed
   evidence/          Sanitized test observations, never committed
@@ -125,9 +142,11 @@ relax network restrictions to get through a workshop.
 
 ## Checkpoint
 
-**Pass evidence:** repository access; student-selected project; successful
-read-only Foundry access and model lookup; recorded capability inventory;
-confirmed distinction between shared and student-owned resources.
+**Pass evidence:** repository access; assigned project identity and ownership;
+successful read-only Microsoft Foundry access; participant-selected and
+explicitly approved Microsoft Foundry Model Deployment observed in the project;
+recorded capability inventory; confirmed
+distinction between facilitator-provided and participant-owned resources.
 
 **Teach-back:** "Which agent is coaching you, which will run in Azure, and how
 can you request an explanation without authorizing a change?"
@@ -142,6 +161,8 @@ from the original labs without checking.
 - [Hosted agents](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/hosted-agents?view=foundry)
 - [Official Foundry samples](https://github.com/microsoft-foundry/foundry-samples)
 - [MCP tools](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/model-context-protocol)
+- [Cloudflare authless remote MCP template](https://developers.cloudflare.com/agents/model-context-protocol/guides/remote-mcp-server/)
+- [Cloudflare Workers limits](https://developers.cloudflare.com/workers/platform/limits/)
 - [Memory stores](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/memory-usage)
 - [Skills](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/skills)
 - [Current agent model and stable endpoints](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/migrate-agent-applications)

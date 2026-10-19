@@ -1,144 +1,93 @@
-# Hosted agents: repeat the concepts with custom execution
+# Hosted agents: orchestrate the two prompt specialists
 
-Keep the tested prompt release. Build a separate hosted practice agent, adding
-one capability at a time. Do not port every capability in the scaffold. Hosted
-code adds custom execution and operational responsibilities; tools and memory
-alone are not reasons that every agent must be hosted.
+Keep both tested prompt-agent releases. Build a Microsoft Agent Framework
+workflow that invokes them, validates their results, and produces a sourced
+itinerary. Do not port their MCP tools, memories, skills, or specialist
+instructions into the hosted runtime.
 
 Use [TESTS.md](TESTS.md) and [APP-GUIDE.md](APP-GUIDE.md). Use a current official
-hosting sample and the installed Foundry skill workflow, not an old console
-script as a server entry point.
+hosting sample and the installed Microsoft Foundry skill workflow, not an old
+console script as a server entry point.
 
-## 08: Hosted hello agent
+## 15: Build and test the Trip Planning Workflow
 
-Verify hosting support, CLI/extensions, runtime, project, and cost boundary.
+**Concept:** executable workflow code coordinates released specialists and is
+the first place formal machine-readable result contracts are required.
+
+Start with a workflow orientation:
+
+- both prompt agents already work through separate Stable Agent Endpoints;
+- each agent owns its tested domain reasoning and skill-guided MCP tool use;
+- workflow code owns request validation, agent invocation, result validation,
+  partial-failure policy, aggregation, and correlation;
+- the retiring visual Microsoft Foundry Workflow designer and Prompt Flow are
+  not used.
+
 After approval, scaffold the smallest appropriate
-[official sample](https://github.com/microsoft-foundry/foundry-samples) in
-`student/hosted-agent/`, with its own dependency environment. Record sample
-source/revision and dependency versions. Preserve the hosting protocol and
-health behavior. Add only the neutral baseline instructions from 01.
+[official sample](https://github.com/microsoft-foundry/foundry-samples) under
+`student/hosted-agent/`. Record its source revision and dependency versions.
 
-Run the local server and B01-B03. Pause to explain those results. Then request
-approval for the specific remote deployment, deploy into the agreed project,
-inspect running/healthy state, and run B01-B03 remotely. A console response or
-successful build is not proof of a hosted endpoint.
+Define versioned weather-result and cultural-result contracts based on observed
+specialist outputs. Each contract should require the owning agent/version,
+destination and relevant constraints, findings, source/tool provenance,
+timestamps where applicable, uncertainty, missing information, and explicit
+failure status. Contracts validate structure; correlated traces and release
+evidence remain the proof of execution.
 
-**App practice:** inspect the generated entry point and configuration before
-running them; identify the files responsible for hosting.
-**Alternative:** a supported hosted-agent operation can use Foundry Canvas when
-available and applicable under the app's routing rules. Chat remains the path
-for explanation, mixed tasks, and troubleshooting. Resume the learning gate
-after any Canvas handoff.
-**Teach-back:** "What does local success prove, and what does remote success add?"
+If a released specialist cannot produce a contract-compatible result, create a
+new specialist candidate, fully retest it, and promote it before continuing.
+Do not silently reinterpret incompatible output inside the workflow.
 
-## 09: Hosted tools
+Implement a code-first Agent Framework workflow:
 
-Introduce the deterministic weather fixture as a validated, allowlisted
-function in the hosted runtime. Reference
-[add tools](../01-agent-framework/02_add_tools.py) for the idea, adapting to the
-current SDK. Keep the fixture labeled as synthetic. This is the first required
-custom executable function in the workshop; unlike a prompt-agent function-call
-schema, its implementation is packaged with the hosted runtime.
+1. normalize and validate the trip request;
+2. invoke the released Weather Research Agent;
+3. validate the weather result contract;
+4. invoke the released Cultural Travel Agent;
+5. validate the cultural result contract;
+6. aggregate only validated evidence into an itinerary;
+7. expose missing, failed, or invalid specialist evidence without fabrication.
 
-Run T01-T03 directly and through the local agent, then deploy the approved
-change and run them remotely. Explain why consumers no longer execute this
-function themselves. Keep errors visible and never execute arbitrary code
-returned by the model.
+The two specialist calls may run independently after request validation when
+the participant explains the tradeoff. Bound retries and timeouts. Preserve
+correlation identifiers without exposing credentials.
 
-**App practice:** request a change to just the function and its tests; review
-the diff before deployment.
-**Alternative:** ask for a hint or explanation before asking Copilot to implement.
-**Teach-back:** "What moved from the client into the hosted runtime?"
+Run G01-G03 and W01-W03 locally with recorded fixtures, then with approved live
+Stable Agent Endpoints. Inspect workflow, executor, agent-call, validation, and
+aggregation spans when supported. Two manual agent calls followed by a manually
+written itinerary do not prove the workflow ran.
 
-## 10: Hosted conversations, then memory
+**App practice:** review the workflow plan, contracts, generated entry point, and tests.
+**Alternative:** use Plan mode when available, then return to Chat for evidence review.
+**Teach-back:** "Why do formal contracts appear here rather than in the first skill lesson?"
 
-Teach these as two substeps, each with its own test and pause.
+## 16: Hosted release
 
-**First, conversations:** implement supported per-conversation session handling.
-Run D01-D02 before connecting persistent memory, locally and remotely. Inspect
-the IDs and state boundaries. A global shared session is not a valid solution.
+**Concept:** deploy the fully passing workflow as a Microsoft Foundry Hosted
+Agent and prove its end-to-end behavior through nested traces.
 
-**Then, memory:** connect a dedicated store with the same narrow preference
-policy as 06. Use a trusted identity-to-scope mapping and the documented write/
-read paths. Do not assume prompt-agent automatic memory behavior exists in the
-hosted SDK. Reuse the prompt store only with explicit approval and compatible
-scope/ownership boundaries.
+Before deployment, require passing local G01-G03 and W01-W03, compatible
+specialist releases, approved runtime configuration, an identifiable code and
+contract revision, and explicit cost/change approval. A known-failing hosted
+candidate is not deployed or promoted.
 
-Run M01-M03. Restart locally and repeat recall without replaying history. After
-approved deployment, repeat remotely across a controlled restart/redeployment.
-Neither a global dictionary nor the container filesystem proves persistence.
-If identity isolation cannot be implemented, block multi-user release.
+Deploy the workflow as a Microsoft Foundry Hosted Agent. Inspect its running
+version, Stable Agent Endpoint, identity, configuration, and nested trace. The
+workflow trace should show request validation, both agent invocations, both
+contract validations, and aggregation. Correlated specialist traces remain the
+detailed proof of `get_forecast`, `get_attractions`, and other MCP tool calls.
 
-**App practice:** compare the coach session, runtime session, and memory scope.
-**Alternative:** use a fresh app session for independent work only when useful;
-pass relevant artifact paths and do not assume prior chat context transfers.
-**Teach-back:** "Which state survives a restart, and how are users separated?"
+Run W01-W03 and P01-P04 remotely. Demonstrate a successful itinerary, each
+single-specialist failure, structurally invalid specialist data, timeout or
+authorization failure, and no fabricated replacement evidence.
 
-## 11: Hosted workflow
+Promote only a fully passing hosted candidate. Rollback is an emergency response
+for an unforeseen issue discovered after promotion, not a substitute for
+pre-release testing. Retain the failed post-release version and traces for
+diagnosis while restoring the previous known-good release.
 
-Introduce the deterministic uppercase -> reverse graph in the hosted request
-path. Keep the stages observable. Reference
-[first workflow](../01-agent-framework/05_first_workflow.py) for graph concepts.
-Use the model only to explain the computed output, not to impersonate execution.
+**App practice:** compare the release handoff with live endpoint/version and nested-trace evidence.
+**Alternative:** use applicable hosted Canvas controls when available, then return to Chat for validation.
+**Teach-back:** "How can you prove which workflow and specialist versions produced the itinerary?"
 
-Run W01-W02 locally and remotely. A controlled intermediate failure must stop
-the graph and reach the caller explicitly, without a fabricated final result.
-Contrast this executable workflow with the prompt release, which contains no
-custom workflow code.
-
-**App practice:** present a reproducible input, observed failure, and expected
-result when requesting diagnosis. Ask for a focused fix.
-**Alternative:** inspect sanitized logs in an available terminal or via Chat;
-do not require a particular debugging UI.
-**Teach-back:** "Where does this workflow execute now, and why is its order reliable?"
-
-## 12: Hosted remote MCP
-
-Connect the same two approved read-only MCP services from 04, with explicit
-tools, authentication, provenance, and approval handling. Run C01-C03 locally
-and remotely. Confirm the deployed identity and network path rather than
-assuming developer access transfers.
-
-Keep the core exercise read-only. The old ticketing MCP demo is an optional
-capstone reference, not a required shared service for this lesson. Foundry cannot
-reach a laptop's localhost. Never tunnel the unauthenticated demo onto the
-internet to avoid arranging a supported endpoint.
-
-**App practice:** inspect connection configuration and execution location.
-**Alternative:** compare direct MCP configuration with a supported Foundry
-Toolbox when useful; do not add a Toolbox merely to demonstrate another UI.
-**Teach-back:** "Which permissions and network path changed when we deployed?"
-
-## 13: Hosted runtime skills
-
-Reuse the versioned `explain-results` skill from 05. Integrate a current supported
-skills provider: approved skill download or compatible Toolbox MCP resources.
-Show discovery and loading, not merely a Markdown file in the image.
-
-Configure the runtime identity's access, pin a skill version for the controlled
-release, and record provider cache behavior. Run I01 and S01-S02. Test one skill
-change, deliberately activate it, observe the result, and roll back. Restart or
-redeploy when the provider requires it.
-
-Keep authorization outside the skill. A skill asking permission is not an
-approval mechanism. Contrast runtime loading with prompt static composition.
-
-**App practice:** review the skill-only diff and loaded version before changing
-the active configuration.
-**Alternative:** use a separate branch/worktree for a larger experiment, but
-first verify which source and local evidence it contains.
-**Teach-back:** "How do you know which skill content this process loaded?"
-
-## 14: Hosted release
-
-Follow [PUBLISHING.md](PUBLISHING.md) and run P01-P04. Demonstrate the same
-consumer endpoint across upgrade and rollback. Record what remains running.
-
-**App practice:** request a precise release handoff and compare it with live
-endpoint/version evidence.
-**Alternative:** use applicable supported Canvas controls when available,
-without treating the handoff itself as success.
-**Teach-back:** "Which responsibilities belong to your hosted code rather than Foundry?"
-
-Then proceed to [capstone selection](CAPSTONE.md). Students now have the concepts
-needed to choose an architecture for their own scenario.
+Then proceed to [capstone selection](CAPSTONE.md).

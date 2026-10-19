@@ -1,111 +1,75 @@
 # Participant start guide
 
-**Select Workshop Coach in the GitHub Copilot app, then say "Start the workshop."**
-This is the preferred live entry. VS Code and its extensions are not required.
-Normal repository Chat is a fallback only when the app has no agent selector.
+Build two AI agents and a coordinating workflow in Microsoft Foundry, guided
+by Workshop Coach in the GitHub Copilot app. Complete the
+[prerequisites](PREREQUISITES.md) before attending. VS Code is not required.
 
-## Before opening the app
+## 1. Start the GitHub Copilot app
 
-Use only organization-approved installers. On a managed computer, ask the
-facilitator or IT administrator before installing anything.
+Open the app, select **Sign in to GitHub** if prompted, and sign in with your
+workshop-approved account. You should see **Projects** in the sidebar.
 
-| Needed now | Official source |
-|------------|-----------------|
-| GitHub Copilot app | [Download the GitHub Copilot app](https://github.com/features/ai/github-app) and follow the [official app quickstart](https://docs.github.com/en/copilot/get-started/quickstart-copilot-app) |
-| Git | [Download Git](https://git-scm.com/install/) |
-| Workshop repository | Use the repository URL and `haforsbe-agentic-workshop` revision supplied by the facilitator |
+## 2. Clone the workshop repository
 
-The GitHub Copilot app requires an eligible GitHub account/Copilot entitlement
-or the access arrangement documented by your organization. Your facilitator
-must provide the repository link and confirm the revision. You do not need
-Python, Azure CLI, Azure Developer CLI, VS Code, or newly provisioned Azure
-resources merely to open the workshop and receive checkpoint 00 guidance.
+Cloning downloads the workshop files to your computer.
 
-Later lessons introduce additional tools only when they become necessary. Their
-official installation links are listed in [Setup](SETUP.md#official-installation-links).
+1. Click **+** beside **Projects**, then **GitHub repository**.
+2. Find **`haforsbe/agentic-hackathon`** and follow the prompts to clone it:
+   https://github.com/haforsbe/agentic-hackathon
+3. Use the facilitator-confirmed **`haforsbe-agentic-workshop`** branch
+   (the named workshop revision), not an unconfirmed default branch.
 
-## Open the workshop
+If branch selection is unavailable, ask your facilitator for help, or run this
+in a terminal from a folder where you keep projects:
 
-1. Open the GitHub Copilot app and open/add the workshop repository as a project
-   using the controls available in your app build. If the repository is already
-   listed as a project, use that project.
-2. Start a session **inside that project**, rather than an unrelated general
-   chat. In the app's agent selector, select the agent named exactly
-   **Workshop Coach**.
-3. With Workshop Coach selected, type:
+```text
+git clone --branch haforsbe-agentic-workshop https://github.com/haforsbe/agentic-hackathon.git
+```
+
+Then choose **Projects → + → Local folder or repository** and select the newly
+created `agentic-hackathon` folder. If you already have the correct checkout,
+add that folder instead of cloning again.
+
+## 3. Open the workshop
+
+Under **Projects**, find **`agentic-hackathon`** and click **+** beside it to
+start a session. Choose a local execution location unless your facilitator
+specifies otherwise. Use this repository session, not the general **Chats** area.
+
+## 4. Select Workshop Coach and start
+
+1. Below the prompt field, set the session mode to **Interactive** so you stay
+   involved in decisions.
+2. In the agent selector, choose **Workshop Coach**, the teaching profile.
+3. Send:
 
    > Start the workshop.
 
-That is the entire starter prompt. The repository defines Workshop Coach in
-`.github/agents/workshop-coach.agent.md`; its teaching protocol is shared with
-the fallback. If your app has no agent selector, start normal repository Chat
-and send the same message. Selecting the profile alone does not start the lesson.
+If there is **no agent selector**, use the repository session's normal Chat
+and send the same message. If a selector exists but **Workshop Coach** is
+missing, ask your facilitator; do not select an unrelated agent.
 
-Controls vary by app build. If you cannot open the project or start its session,
-tell the facilitator what you see. Do not follow guessed menu paths or switch
-to VS Code to complete this course.
+**Expected result:** the coach welcomes you, explains the workshop, and guides
+you through confirming your assigned Foundry Project and choosing a model.
+Nothing is deployed without your approval. You can say **"Explain without
+editing"**, **"Give me a hint"**, or **"Pause the workshop"** at any time.
 
-## What should happen next
+## If something looks different
 
-The coach should welcome you and explain:
-
-- You will first build small prompt-agent exercises, then hosted agents, and
-  finally choose your own capstone.
-- Each lesson makes one small change, runs a test, and checks your understanding
-  before continuing. You also learn an app technique and an alternative.
-- Copilot is your coach here; your application agents run separately in Foundry.
-  You remain in control of file changes, cloud operations, and resource costs.
-
-It checks the workshop files and any saved progress before guiding you through
-checkpoint 00. For a fresh start, its first setup question is whether you have
-an existing Foundry project. "No" or "I'm not sure" is fine: it explains what is
-needed and helps you coordinate with the facilitator, not silently provision it.
-
-After starting, you should not be asked to choose IT support, install all
-future dependencies, or deploy a complete solution at this point.
-
-## Your first app controls are plain-language requests
-
-| Say | What it does |
-|-----|--------------|
-| "How do I start this workshop?" | Explains the entry steps without starting cloud work |
-| "Explain this without editing anything." | Keeps the interaction read-only |
-| "Give me a hint." | Helps with the current concept without solving future lessons |
-| "Show me another way." | Compares a useful alternative; does not automatically run it |
-| "Pause the workshop." | Saves local progress; does not stop or delete Azure resources |
-| "Resume the workshop." | Checks saved progress and the target before continuing |
-
-## If the profile or welcome does not appear
-
-Picker visibility has not yet been verified in a fresh participant session.
-The supported profile file is not proof that your app build discovers it.
-If you have a selector but Workshop Coach is absent, check that this checkout
-contains `.github/agents/workshop-coach.agent.md` and the current curriculum.
-Have the facilitator verify discovery in a fresh session using that revision.
-Do not switch to VS Code, invent a refresh command, or select an unrelated agent.
-If the app has no selector at all, use the normal repository Chat fallback.
-
-First verify that this is a repository session containing `AGENTS.md` and
-`workshop/COACH.md`. If the selected coach (or no-selector fallback) gives a
-generic answer despite those files being present, send:
+Show your facilitator what you see rather than guessing controls. If the coach
+gives a generic answer, first confirm the repository contains `AGENTS.md` and
+`workshop/COACH.md`, then send:
 
 > Read AGENTS.md and workshop/COACH.md from this repository and start the
 > guided workshop at checkpoint 00. Ask one question at a time.
 
-This is a recovery prompt, not a requirement to memorize file paths. If those
-files are missing, ask your facilitator for the workshop-enabled revision.
-Never ask Copilot to invent the missing curriculum.
+If those files are missing, request the correct workshop revision. Do not delete
+old progress to restart; let the coach explain safe recovery.
 
-If you see old progress, the coach should explain whether it can resume or needs
-your permission to migrate it. Do not delete progress to force a fresh start.
-Progress lives in the current checkout; a different worktree will not
-automatically contain it.
+**Facilitators:** distribute a committed/pushed revision or prepared checkout;
+fresh clones do not include uncommitted edits. Verify Workshop Coach discovery
+in the participant app build. See [facilitator guidance](FACILITATOR.md).
 
-## For facilitators testing local changes
-
-Give participants a committed/pushed revision or a prepared checkout containing
-the complete materials. A new worktree from an older commit does not inherit
-uncommitted edits. Check that the participant can read the start guide before
-asking them to troubleshoot coaching behavior.
-
-The startup acceptance scenarios are in [FACILITATOR.md](FACILITATOR.md).
+App navigation follows the official
+[quickstart](https://docs.github.com/en/copilot/get-started/quickstart-copilot-app)
+and [session guide](https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions).

@@ -1,11 +1,14 @@
 # Agentic Workshop in the GitHub Copilot App
 
 Learn to build and test Microsoft Foundry agents with **GitHub Copilot as your
-coach**. Start with a publishable **prompt agent**: baseline behavior,
-instruction refinement, managed conversations, one remote MCP then two, skills,
-persistent memory, and endpoint release. Then build a **hosted agent** to add
-custom executable functions and workflows before applying the concepts to a
-capstone of your choice.
+coach**. Create a **Weather Research Agent**, test it, add managed conversations,
+a remote Weather MCP, skills, and memory, then release it. Next create and
+enhance a separate **Cultural Travel Agent** backed by a facilitator-owned
+Cloudflare authless MCP. After both agents pass independently, deploy a hosted
+**Trip Planning Workflow** that invokes them and assembles a sourced itinerary.
+Each participant uses one dedicated Microsoft Foundry Project, independently
+selects a compatible model from the Microsoft Foundry Model Catalog, and deploys
+their own Microsoft Foundry Model Deployment after acknowledging possible cost.
 
 Alongside agent development, learn to use the **Copilot app itself**: asking for
 explanations or implementation, reviewing changes, inspecting tool calls,
@@ -32,7 +35,8 @@ the discovery troubleshooting in the start guide rather than choosing another
 agent. Fresh-session picker visibility still needs validation for your app build.
 
 **New to the app or not sure what to open?** Follow the
-[participant start guide](workshop/START.md). You can also ask "How do I start
+[participant prerequisites](workshop/PREREQUISITES.md) and
+[start guide](workshop/START.md). You can also ask "How do I start
 this workshop?" in the repository chat to get orientation before beginning.
 
 The facilitator supplies the app-access instructions and the workshop repository
@@ -43,11 +47,11 @@ the starter message does not authorize creating paid resources.
 
 | Stage | Agent concepts | Copilot app practice |
 |-------|----------------|----------------------|
-| 00 | Setup and resource ownership | Read repository context; understand approvals |
-| 01-07 | Prompt baseline, instructions, conversations, two MCPs, skills, memory, release | Explain vs implement; inspect evidence; resume sessions; compare connections |
-| 08-12 | Hosted hello agent, custom tools, conversations/memory, workflows, MCP | Inspect generated files; compare local/remote evidence; troubleshoot precisely |
-| 13-14 | Hosted runtime skills, release, rollback | Compare versions; use supported Canvas workflows when available |
-| 15-17 | Choose, implement, and release a capstone | Write a scoped brief; review changes; demonstrate and hand off |
+| 00 | Verify assigned project and deploy participant-owned workshop model | Read repository context; understand approvals and cost boundaries |
+| 01-07 | Weather Research Agent: create, test, add conversations, Weather MCP, skills, memory, and release | Explain vs implement; inspect evidence; resume sessions; compare connections |
+| 08-14 | Cultural Travel Agent: repeat baseline, instructions, conversations, MCP, skill, memory, and release | Reinforce the full lifecycle with separate evidence |
+| 15-16 | Hosted Trip Planning Workflow: define contracts, orchestrate, trace, release, update, and roll back | Inspect generated files and nested traces; compare local/remote evidence |
+| 17-19 | Choose, implement, and release a two-specialist capstone | Write a scoped brief; review changes; demonstrate and hand off |
 
 Every capability follows **predict -> change -> test -> explain -> checkpoint**.
 The coach teaches one small change at a time and introduces one app technique
@@ -55,10 +59,10 @@ plus a useful alternative. Students do not have to complete the lesson twice.
 
 ## Capstone choices
 
-The early exercises use small neutral examples. Prompt agents focus on managed
-and remote capabilities; synthetic weather functions and deterministic text
-workflows appear only after students reach hosted executable code. They are not
-a semester-long IT support project.
+The early exercises use a shared fictional travel-planning story: one prompt
+agent researches weather, another researches curated cultural evidence, and a
+hosted workflow validates their versioned results and combines them into an itinerary. This
+teaches boundaries and orchestration without selecting the student's capstone.
 
 At the end, choose **IT support**, **a documentation research assistant**,
 **a fictional travel-planning assistant**, or **your own approved scenario**.
@@ -68,7 +72,8 @@ equivalent acceptance criteria and what extra infrastructure each choice needs.
 ## Workshop material
 
 - [Checkpoint map and student controls](workshop/README.md)
-- [Setup](workshop/SETUP.md) and [Copilot app techniques](workshop/APP-GUIDE.md)
+- [Participant prerequisites](workshop/PREREQUISITES.md), [setup](workshop/SETUP.md),
+  and [Copilot app techniques](workshop/APP-GUIDE.md)
 - [Prompt-agent lessons](workshop/01-prompt-agents.md)
 - [Hosted-agent lessons](workshop/02-hosted-agents.md)
 - [Tests](workshop/TESTS.md) and [stable-endpoint release](workshop/PUBLISHING.md)
@@ -91,6 +96,7 @@ legacy Agent Applications are explained in the publishing guide.
 | [02-microsoft-foundry-agents](02-microsoft-foundry-agents/README.md) | Prompt-agent creation and conversation references |
 | [05-github-copilot](05-github-copilot/README.md) | Original VS Code tutorial; optional IT support capstone reference |
 
-The root `requirements.txt`, `example.env`, and `Prereqs*.md` belong to those
-original examples. New student projects use isolated environments appropriate
-to current SDKs. Console samples are not ready-made hosted deployment servers.
+The root `requirements.txt` and `example.env` belong to those original examples.
+Use the [participant prerequisites](workshop/PREREQUISITES.md) for the current
+workshop. New student projects use isolated environments appropriate to current
+SDKs. Console samples are not ready-made hosted deployment servers.

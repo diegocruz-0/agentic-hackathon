@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "curriculum_version": "publishable-prompt-v3",
+  "schema_version": 3,
+  "curriculum_version": "two-specialists-workflow-v6",
   "paused": false,
   "scenario": null,
   "student_project_root": "student",
@@ -9,8 +9,15 @@
   "context": {
     "subscription_id": null,
     "project_endpoint": null,
-    "prompt_agent_name": null,
-    "hosted_agent_name": null,
+    "model_deployment_name": null,
+    "model_name": null,
+    "model_version": null,
+    "weather_agent_name": null,
+    "weather_agent_version": null,
+    "cultural_agent_name": null,
+    "cultural_agent_version": null,
+    "hosted_workflow_name": null,
+    "hosted_workflow_version": null,
     "capstone_agent_name": null,
     "publishing_model": null
   },
@@ -34,6 +41,8 @@
     {"id": "14", "status": "not_started", "attempts": []},
     {"id": "15", "status": "not_started", "attempts": []},
     {"id": "16", "status": "not_started", "attempts": []},
-    {"id": "17", "status": "not_started", "attempts": []}
+    {"id": "17", "status": "not_started", "attempts": []},
+    {"id": "18", "status": "not_started", "attempts": []},
+    {"id": "19", "status": "not_started", "attempts": []}
   ]
 }

@@ -1,116 +1,105 @@
-# Apply the concepts to a scenario of your choice
+# Apply the architecture to a scenario of your choice
 
-Choose a capstone only after the foundational prompt and hosted lessons.
-**IT support is one option, not the default journey.** The coach helps scope
-the work; it does not generate a complete solution before the student makes
-design choices and predicts behavior.
+Choose a capstone only after releasing both guided specialists and the hosted
+Trip Planning Workflow. The capstone proves transfer by applying the same
+architecture to a different problem: two complementary prompt-agent
+specialists coordinated by a hosted Agent Framework workflow.
 
-## 15: Choose and scope
+## 17: Choose and scope
 
-| Option | Possible outcome | Boundaries and additional prerequisites |
-|--------|------------------|----------------------------------------|
-| IT support assistant | Explain incidents, retrieve documentation, and manage synthetic tickets | An authenticated, Foundry-reachable, student-isolated test service for writes; no production incidents |
-| Documentation research assistant | Search approved public sources and produce an evidence-backed brief | Approved read-only MCP source; cite retrieved evidence and expose uncertainty |
-| Fictional travel-planning assistant | Compare synthetic itineraries using tools and remember style preferences | Synthetic fixture data only; no real booking, payment, or live-weather claims |
-| Student-proposed scenario | A narrowly scoped useful agent | Facilitator-approved data/tools/costs and the same acceptance criteria |
+| Scenario | Specialist 1 | Specialist 2 | Workflow result |
+|----------|--------------|--------------|-----------------|
+| Learning plan | Curriculum research | Learner-support resources | Validated study plan |
+| Community event | Venue research | Accessibility and transit research | Evidence-backed event plan |
+| Developer onboarding | Repository guidance | Microsoft Learn documentation | Sourced onboarding path |
+| Student-proposed scenario | One bounded evidence domain | A complementary evidence domain | A validated combined result |
 
-Ask one question at a time: scenario, user/task, desired output, non-goals, then
-architecture. Leave `scenario` null until the student chooses here. If a student
-mentions an idea earlier, record it as a candidate, not a committed course theme.
+Ask one question at a time: scenario, user need, specialist 1 responsibility,
+specialist 2 responsibility, workflow result, non-goals, then evidence sources.
+Leave `scenario` null until the participant chooses here.
 
 Create a short source-controlled brief under `student/capstone/` containing:
-the user need, expected behavior, exclusions, prompt or hosted choice and why,
-approved MCP sources, conversation behavior, memory scope and retention,
-reusable skill and delivery strategy, tests, cost boundary, and release target.
-For a hosted architecture, also define the custom function and workflow
-contracts. Use public/synthetic fixtures.
 
-A prompt implementation uses Foundry-managed or remote capabilities and does
-not claim to package custom Python functions or code workflows. A hosted
-implementation can own custom executable functions and workflows in its runtime.
-Neither choice automatically implies better quality.
-Keep the two practice releases unchanged for comparison.
+- the user need and expected workflow result;
+- two genuinely distinct specialist responsibilities;
+- approved MCP servers and exact tools, or another approved evidence mechanism;
+- conversation boundaries and any justified persistent-memory facts;
+- skill responsibilities and delivery strategy;
+- safety, privacy, authorization, cost, and data boundaries;
+- proposed workflow result contracts and partial-failure policy;
+- concrete specialist and workflow tests;
+- independent specialist releases and hosted release target.
 
-Run K01: the student explains the design and every resource/data boundary is
-explicit. Agree on concrete tests before implementation.
+Persistent memory is optional when it provides no clear cross-conversation value
+or creates unnecessary privacy risk. Custom executable functions are optional
+unless the scenario requires them. Use public or synthetic fixtures.
 
-**App practice:** ask for a plan with non-goals and acceptance criteria, without
-authorizing execution.
-**Alternative:** select a preset scenario to reduce design decisions or bring a
-custom idea with equivalent tests.
-**Teach-back:** "Why is this agent type appropriate, and what will you not build?"
+Run K01 before implementation. Keep the guided Weather, Cultural Travel, and
+Trip Planning releases unchanged for comparison.
 
-## 16: Build and test
+**App practice:** ask for a plan with non-goals and acceptance criteria without authorizing execution.
+**Alternative:** select a preset scenario or propose an equivalent bounded design.
+**Teach-back:** "Why are these specialists complementary rather than duplicate?"
 
-Apply the concepts appropriate to the selected architecture. Every capstone
-must cover baseline behavior, instruction refinement, conversation boundaries,
-scoped memory, approved remote MCP integrations, skill delivery, and release
-evidence. A hosted capstone must additionally cover a custom function and an
-explicit executable workflow. Reuse reviewed components, not old progress
-passes. Pause and test at every addition.
+## 18: Build and release the specialists
 
-The prompt architecture is not failed for omitting custom executable code it
-cannot package. The hosted architecture must prove that its function and
-workflow execute inside the deployed runtime. Both architectures require two
-approved MCP connections unless the facilitator records why one is unavailable
-and explicitly approves a partial route. A read-only capstone is fully valid.
-Do not introduce writes just to make the project look more advanced.
+Build each capstone Microsoft Foundry Prompt Agent using the practiced sequence:
 
-For each concept, adapt the corresponding test inputs in TESTS.md and record
-the exact inputs/expected results in the capstone brief. Preserve test IDs for
-traceability. Choose deterministic fixtures and do not compare exact prose
-unless the requirement specifies a format.
+1. tool-free baseline and evidence boundary;
+2. one controlled instruction refinement;
+3. managed Conversation continuity and isolation;
+4. one approved MCP server tool with grounded trace evidence;
+5. a skill guiding any justified multi-tool selection and sequencing;
+6. optional consented persistent memory when genuinely useful;
+7. full regressions and promotion of only a fully passing candidate.
 
-Any mutation requires an enforced authorization/approval mechanism, not just
-instructions. Demonstrate decline/no mutation and approved mutation, plus
-invalid input and not-found behavior. Verify state independently. Run A01-A02
-only for capstones with writes; record the reviewed non-applicability for
-read-only designs. Never silently skip a test for an implemented capability.
+Each specialist needs separate names, versions, Stable Agent Endpoints, MCP
+server/tool allowlists, skills, memory scopes when configured, tests, and release
+evidence. One specialist's success never substitutes for the other's.
 
-Run K02 after all required capability tests pass on the actual selected target.
-Keep failures visible and regression-test each integration.
+Run K02 and the adapted B, I, D, C, S, M, and P tests appropriate to each
+specialist. A known-failing candidate remains outside stable routing.
 
-**App practice:** give Copilot one bounded task, inspect its diff and evidence,
-then ask a focused debugging question if it fails.
-**Alternative:** use an isolated experiment branch for a risky design change,
-not an autonomous parallel build of the whole capstone.
-**Teach-back:** "What did this capability add, and which test proves it?"
+**App practice:** give Copilot one bounded change, inspect its diff and evidence, then debug narrowly.
+**Alternative:** use an isolated experiment branch for one risky design change.
+**Teach-back:** "What did this capability add, and which observed test proves it?"
 
-## 17: Release and demonstrate
+## 19: Build, release, and demonstrate the workflow
 
-Use [PUBLISHING.md](PUBLISHING.md) for the capstone's selected architecture.
-Run P01-P04 on its stable endpoint with the approved consumer client, including
-rollback. Demonstrate K03: normal case, ambiguous input, both MCP boundaries,
-memory recall/isolation/forget, skill version behavior, and endpoint invocation.
-For a hosted capstone, also demonstrate its custom function and workflow failure.
-Include rejected action evidence if the capstone writes data.
+Define versioned result contracts for both capstone specialists. Implement a
+Microsoft Agent Framework workflow that invokes their Stable Agent Endpoints,
+validates each result, and combines only supported evidence.
 
-Hand off the endpoint, selected version, consumer responsibilities, limitations,
-sanitized evidence locations, rollback target, and still-running owned resources.
-Review cleanup separately; a source commit or successful deployment command is
-not proof of behavior.
+Run G01-G03 and W01-W03 locally, including:
 
-**App practice:** request an evidence-backed handoff and review the actual
-changes and resource list.
-**Alternative:** demonstrate the same cases interactively rather than relying
-only on a written report; neither method excuses missing evidence.
-**Teach-back:** "What did Copilot help you do, what did you verify independently,
-and what would you change before production use?"
+- both specialists succeed;
+- each specialist fails while the other remains valid;
+- a specialist returns structurally invalid data;
+- a dependency times out or rejects authorization;
+- no missing evidence is fabricated;
+- repeated runs preserve contract and release compatibility.
 
-## IT support reference notes
+After explicit approval, deploy only a fully passing workflow candidate as a
+Microsoft Foundry Hosted Agent. Run P01-P04 and K03 through its Stable Agent
+Endpoint. Inspect the nested workflow trace and correlated specialist traces,
+including contract validation and aggregation decisions.
 
-Use [the original ticket demo](../05-github-copilot/example_app/README.md) and
-[MCP server](../05-github-copilot/example_app/mcp_server.py) only for this option.
-The [support-triage skill](assets/support-triage/SKILL.md) is an optional example,
-not a required skill for other students.
+Hand off the three exact released versions, endpoint responsibilities,
+limitations, sanitized evidence locations, recovery target, and all owned
+resources still running. Review cleanup separately.
 
-The server is unauthenticated and in-memory; run it only on loopback for local
-experiments. Before remote testing, arrange an authenticated reachable test
-service with a per-student namespace. Do not expose the demo through a tunnel.
-Discovery reveals an extra mutation alias, `close_vlads_ticket`; use explicit
-allowlists, not the assumption that its README enumerates every tool.
+**App practice:** request an evidence-backed handoff and compare it with live metadata and traces.
+**Alternative:** demonstrate the same cases interactively; neither method excuses missing evidence.
+**Teach-back:** "What did Copilot help create, and what runtime evidence did you verify independently?"
 
-The browser UI and MCP server keep separate state. The browser is not evidence
-that a tool changed the server's tickets. Verify mutations through independent
-server reads. A remote service unavailable to the student blocks this capstone,
-not the earlier read-only MCP lessons or other capstone choices.
+## Optional write actions
+
+Read-only capstones are fully valid. If a scenario performs writes, require an
+authenticated, participant-isolated synthetic service and run A01-A02. Verify
+decline/no mutation, approved mutation, invalid input, not-found behavior, and
+downstream failure independently. Never introduce real payments, bookings,
+production tickets, or sensitive personal data.
+
+The original ticket demo under `05-github-copilot/` is an optional concept
+reference only. Its unauthenticated in-memory server must remain on loopback and
+must not be exposed through a tunnel.

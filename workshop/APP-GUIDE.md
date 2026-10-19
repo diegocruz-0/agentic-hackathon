@@ -17,18 +17,17 @@ alternatives later in the lessons.
 | Checkpoints | Primary approach to practice | Useful alternative and tradeoff |
 |-------------|-----------------------------|--------------------------------|
 | 00 | Select Workshop Coach in the GitHub Copilot app, send "Start the workshop", then try "Explain without editing." | If the app has no selector, use normal repository Chat with the same prompt and protocol |
-| 01, 08 | "Explain this agent definition before editing it." Then explicitly request the small change | Ask for a proposed diff first to retain more control; direct implementation is faster for a clear, bounded task |
-| 02 | Review the focused instruction diff and compare the same test before and after | Ask for an instruction proposal without applying it; this keeps analysis separate from version creation |
-| 03, 10 | Keep this coaching session; create a separate runtime conversation for the agent test | Use a new app session for an independent task, but supply the relevant files/brief; do not assume it inherits chat history |
-| 04, 12 | Inspect the actual registered tools, MCP server, and caller/runtime for each result | Compare MCP configured for Copilot with MCP configured for Foundry; the former helps the developer, the latter helps the application |
-| 05, 13 | Review the skill diff and exact version/delivery strategy before changing the active agent | Use a file/editor panel if available, or ask Chat to show a focused diff; reading an artifact is not evidence it was deployed |
-| 06, 10 | "Pause and save my progress." Then "Resume and recheck my target." | A new app session can read progress in the same checkout; a new worktree needs an approved progress import |
-| 07, 14 | "Show the endpoint, selected version, and actual test results; don't infer success." | Use supported Foundry Canvas controls for hosted operations when available; return to Chat for teaching and failure diagnosis |
-| 09 | "Show the tool name, validated arguments, result, and which hosted process executed it." | Read raw sanitized tool output or a test result when the app has no visual trace view |
-| 11 | "Propose a two-step workflow and its tests. Do not implement yet." | Use Plan mode if exposed; a planning-only Chat request teaches the same separation without it |
-| 15 | Write a brief with scope, non-goals, tests, and cost boundaries before building | Choose a preset capstone to reduce design decisions, or propose a custom scenario with equivalent criteria |
-| 16 | "Change only this function and run these tests." Review the resulting diff | Use an isolated branch/worktree for a larger experiment; first verify which source and local evidence it contains |
-| 17 | Ask for a handoff with verified endpoints, versions, limitations, and owned resources | Compare that handoff with a live demonstration; neither a commit nor a deployment command's exit code proves behavior |
+| 01, 08 | "Explain this agent definition before editing it." Then explicitly request the small change | Ask for a proposed definition diff first to retain more control |
+| 02, 09 | Review the focused instruction diff and compare the same test before and after | Ask for an instruction proposal without applying it |
+| 03, 10 | Keep this coaching session; create separate runtime Conversations for each agent test | Use a new app session for an independent task; do not assume it inherits runtime history |
+| 04, 11 | Inspect the MCP Server Endpoint, one-tool allowlist, and caller; at 04 inspect the first tool trace in detail | Compare a Copilot MCP registration with a Microsoft Foundry agent connection |
+| 05, 12 | Review each skill diff, tool allowlist, exact version, and delivery strategy | Use a file/editor panel if available; reading an artifact is not deployment evidence |
+| 06, 13 | "Pause and save my progress." Then "Resume and recheck my target." | A new worktree needs an approved progress import and does not share agent memory |
+| 07, 14, 16 | "Show the endpoint, selected version, and actual test results; don't infer success." | Use supported hosted controls when available; return to Chat for evidence review |
+| 15 | "Show both agent versions, result contracts, workflow spans, and validation decisions." | Read sanitized trace/log evidence when no visual trace view is available |
+| 17 | Write a two-specialist brief with scope, non-goals, tests, and cost boundaries | Choose a preset capstone or propose an equivalent custom scenario |
+| 18 | "Change only this specialist capability and run these tests." Review the diff | Use an isolated branch/worktree for one risky experiment |
+| 19 | Ask for a handoff with verified endpoints, versions, limitations, traces, and owned resources | Compare the handoff with a live demonstration |
 
 ## Teach control, not just prompting
 

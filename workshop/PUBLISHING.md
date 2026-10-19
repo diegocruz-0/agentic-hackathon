@@ -1,8 +1,9 @@
 # Release through stable Foundry endpoints
 
-Use this guide at **07 for the prompt practice agent**, **14 for the hosted
-practice agent**, and **17 for the chosen capstone**. Keep separate names and
-endpoints so students can compare implementations without overwriting evidence.
+Use this guide at **07 for the Weather Research Agent**, **14 for the Cultural
+Travel Agent**, **16 for the hosted Trip Planning Workflow**, and **19 for the
+chosen capstone**. Keep separate names and endpoints so students can compare
+both specialists and the orchestrator without overwriting evidence.
 Tests and evidence requirements are in [TESTS.md](TESTS.md).
 
 ## Current model versus legacy publishing
@@ -23,12 +24,15 @@ the student's environment supports. Do not guess an endpoint URL, assume the
 latest-created version is selected, or treat a project endpoint as the stable
 agent endpoint.
 
-## Release one tested version
+## Release one fully tested version
 
-1. **Review the candidate.** Record agent name/version, instructions, model,
+1. **Review the candidate.** Run every required pre-release test. Record agent name/version, instructions, model,
    tools/allowlist, memory store/scoping, skill version/delivery strategy, and
-   the passing test evidence. For hosted agents, verify the running deployment
-   and its source/configuration revision.
+   the passing test evidence. For a hosted update, identify the current
+   known-good running deployment and the separately tested candidate source/
+   configuration revision.
+   A known-failing candidate is not promoted to stable routing and a known-failing
+   hosted candidate is not deployed.
 2. **Inspect endpoint metadata.** Read the service-returned stable endpoint,
    protocol configuration, version selector, and agent identity. Use current
    official APIs or the installed Foundry workflow. Resolve unsupported API
@@ -50,27 +54,38 @@ agent endpoint.
    access configuration, test evidence, and rollback target in local progress.
    Never copy access tokens into a shareable handoff.
 
-For the prompt practice agent, verify its managed conversation behavior, memory,
-two remote MCP connections, instructions, and skill-delivery strategy through
-the released endpoint. It does not rely on a local custom-function executor or
-client-side code workflow.
+For the Weather Research Agent, verify its managed conversation behavior,
+memory, Weather MCP server and forecast tool connection, instructions,
+evidence-aware weather output and skill-guided tool behavior through the released
+endpoint. It does not rely on a
+local custom-function executor or client-side workflow.
 
 Prompt checkpoint 07 stops here, after a teach-back. Preserve the prompt release
-while the hosted implementation is developed.
+while the Cultural Travel Agent is developed.
+
+At checkpoint 14, release the Cultural Travel Agent through its own stable
+endpoint. Verify its instructions, conversation isolation, Cloudflare MCP,
+skill-guided multi-tool behavior, and memory. Record both specialist versions
+and prove neither claims the other's
+tools or evidence domain.
 
 ## Hosted update and rollback
 
-At checkpoint 14, first pass the same release checks for the hosted target.
+At checkpoint 16, first pass the same release checks for the hosted workflow.
 Then make one small visible instruction change as a separate candidate version,
 run the relevant regressions, and perform P04 after approval.
 
 Route the existing endpoint to the tested new version. Inspect metadata and
 invoke it; do not infer selection from creation order or an unverified answer.
-Restore the previous selection and repeat the invocation. Retain the known-good
-code, configuration, and skill versions needed for rollback.
+Verify that the previous known-good code, configuration, contract, and
+specialist versions remain available as the documented recovery target. Do not
+route traffic back merely as a demonstration. Execute rollback only when an
+unforeseen problem is discovered after promotion, then inspect metadata and
+invoke the restored version.
 
-At 17, repeat release and P04 for the capstone's chosen architecture. Preserve
-the two practice releases; do not make the capstone silently replace them.
+At 19, repeat release and P04 for the capstone workflow. Preserve
+both prompt-agent releases and the hosted workflow release; do not make the
+capstone silently replace them.
 
 **App practice:** compare the proposed routing change, the resulting metadata,
 and an actual invocation. Discuss a raw-response inspection as an alternative
@@ -117,8 +132,9 @@ requiring its own approval and tests, not a side effect of creating an agent.
 
 ## End of workshop
 
-Show the two practice endpoints and capstone endpoint, their verified versions,
-evidence locations, and every workshop-owned resource still running.
+Show the two prompt-agent endpoints, hosted workflow endpoint, and capstone
+endpoint, their verified versions, evidence locations, and every workshop-owned
+resource still running.
 Ask before stopping or deleting specific
 resources. Keep shared projects/models and other students' resources untouched.
 If cleanup removes an endpoint, label it retired in the release record rather

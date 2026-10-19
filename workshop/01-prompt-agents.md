@@ -1,190 +1,297 @@
-# Prompt agents: managed capabilities first
+# Prompt agents: build two complementary specialists
 
-Build a publishable Foundry prompt agent using capabilities that Foundry can
-manage or reach after release. Custom executable Python functions and explicit
-code workflows are reserved for the hosted-agent phase. Do not choose a business
-scenario yet. Use [TESTS.md](TESTS.md) and introduce the related
-[app technique](APP-GUIDE.md) at each checkpoint.
+Build two independently publishable Microsoft Foundry Prompt Agents. The
+**Weather Research Agent** owns weather evidence. The **Cultural Travel Agent**
+owns curated destination, cultural, attraction, and accessibility evidence.
+Each follows the same seven-step learning progression so the second agent
+reinforces the method rather than introducing a compressed shortcut.
 
-Keep a reproducible definition and test client in `student/prompt-agent/`.
+Keep reproducible definitions and test clients under `student/prompt-agents/`.
 Use current supported APIs and isolated dependencies, not the old root pins.
 The coach pauses after each change and asks for a teach-back before advancing.
+Use [TESTS.md](TESTS.md) and introduce the related
+[app technique](APP-GUIDE.md) at each checkpoint.
 
-## 01: Hello agent
+## 01: Create the Weather Research Agent
 
-**Concept:** a deployed model plus instructions creates a prompt agent.
-Reference [hello agent](../01-agent-framework/01_hello_agent.py) for the idea
-and [create-agent](../02-microsoft-foundry-agents/02-quickstart-create-agent.py)
-for the prompt-agent pattern.
+**Concept:** a Microsoft Foundry Model Deployment plus instructions creates a
+Microsoft Foundry Prompt Agent.
 
-Ask the student to predict a minimal friendly assistant's answer to "What is
-the capital of France?" Draft brief instructions: answer clearly, ask when
-context is missing, and do not claim capabilities or access you do not have.
-No tools, persistent memory, or scenario-specific policy yet.
+Create a minimal Weather Research Agent without tools, persistent memory, or a
+skill. It can explain stable weather concepts from trained model knowledge, but
+it must not claim current weather without an external source. Ask when location
+or time context is missing and do not claim access the agent does not have.
 
-After approval, create a uniquely named Foundry prompt agent using the installed
-skill or the [current quickstart](https://learn.microsoft.com/en-us/azure/foundry/agents/quickstarts/prompt-agent).
-Record its actual name/version. Invoke without creating another version just
-to chat. Run B01-B03. Compare one complete response with streaming output if
-supported, explaining that output delivery does not change the agent's abilities.
+After approval, create a uniquely named agent using the installed skill or the
+[current quickstart](https://learn.microsoft.com/en-us/azure/foundry/agents/quickstarts/prompt-agent).
+Record its actual name/version and run B01-B03 with weather-appropriate inputs.
 
 **App practice:** ask "Explain, don't edit," then separately request the change.
-**Alternative:** ask for a proposed diff before accepting implementation.
+**Alternative:** ask for a proposed definition diff before implementation.
 **Teach-back:** "What defines this agent, and what has not been added yet?"
 
-## 02: Refine instructions
+## 02: Refine Weather instructions
 
-**Concept:** improve a prompt agent through one evidence-driven instruction
-change while holding the model and capabilities constant.
+**Concept:** improve one measurable behavior while holding the model and
+capabilities constant.
 
-Review the baseline responses from 01. Add a small, measurable response contract,
-such as the headings `Answer`, `Source`, and `Uncertainty`. Explain what belongs
-under each heading and prohibit invented sources or capabilities. Create a new
-agent version rather than silently changing the tested version.
+Add headings such as `Answer`, `Source`, and `Uncertainty`. Require general
+knowledge to be labeled accurately and prohibit invented sources, current
+weather claims, or unsupported capabilities. Create a candidate version rather
+than silently changing the tested version.
 
-Run I01 with the same inputs before and after the instruction change. Inspect
-the actual version metadata and responses. Do not change the model, add tools,
-or introduce a business scenario at the same time; otherwise the student cannot
-attribute the observed difference to the instructions.
+Run I01 with the same inputs before and after the change. Inspect the actual
+version metadata and responses. Do not change the Microsoft Foundry Model
+Deployment or add tools at the same time.
 
 **App practice:** review the focused instruction diff before creating the version.
-**Alternative:** ask the coach to propose the instruction change without applying it.
-**Teach-back:** "Which observed behavior changed, and what evidence ties it to the instructions?"
+**Alternative:** request an instruction proposal without applying it.
+**Teach-back:** "Which behavior changed, and what evidence ties it to the instructions?"
 
-## 03: Observe and test managed conversations
+## 03: Test Weather managed Conversations
 
-**Concept:** Foundry automatically maintains history inside a conversation.
-The student highlights and tests that managed behavior rather than implementing
-conversation storage. The application still decides when to continue an
-authorized conversation and when to start a new one.
-Reference [multi-turn](../01-agent-framework/03_multi_turn.py) and the
-[Foundry chat example](../02-microsoft-foundry-agents/03-quickstart-chat-with-agent.py).
+**Concept:** Microsoft Foundry automatically maintains history within one
+Conversation identifier. Persistent memory is a separate capability.
 
-First use the Foundry playground. Say "My name is Alice and I love hiking",
-then ask what the agent remembers in the same playground conversation. Explain
-that Foundry created and maintained this conversation automatically; no student
-conversation-store implementation is required.
+In one Conversation, provide a destination and weather interest, then ask a
+follow-up that relies on that context. In a new Conversation, ask the follow-up
+again. In the Playground, open the trace window for each relevant response and
+inspect its details for the Conversation ID (`conv_`). Explain that the Response
+ID (`resp_`) identifies one reply, not the conversation. Use a supported client
+to verify the identifier linkage when available.
+Do not build a custom history store or manually replay messages.
 
-Start a fresh playground conversation and ask the same follow-up. It should not
-know Alice's facts. Then use the supported SDK/API only to make the boundary
-observable: capture conversation A's identifier, reuse it for the two related
-turns, and create conversation B for the clean-context test. Do not build a
-custom history store, manually replay messages, or add persistent memory here.
+Run D01-D02 with weather-appropriate prompts. The application remains
+responsible for mapping an authorized user/session to the correct Conversation
+identifier. A GitHub Copilot app session is not a runtime Conversation.
 
-Run D01-D02 and record the actual identifiers where exposed. The UI observation
-demonstrates the experience; the identifiers prove whether the same or a fresh
-Foundry conversation was used. Persistent memory has not been configured, so
-conversation B must not know Alice's facts. Do not interpret the coach's own
-recall as evidence about the Foundry agent.
+**App practice:** contrast the coaching session with both runtime Conversations.
+**Alternative:** discuss when a separate app session helps isolate another task.
+**Teach-back:** "What did Microsoft Foundry manage, and what remains the client's responsibility?"
 
-**App practice:** contrast the current Copilot session with both runtime
-conversations, without creating a second coaching session unnecessarily.
-**Alternative:** discuss when a fresh app session helps isolate a separate task.
-**Teach-back:** "What did Foundry manage automatically, and what decision remains
-the client application's responsibility?"
+## 04: Connect the first Weather MCP tool
 
-## 04: Connect one remote MCP, then two
+**Concept:** connect one remote evidence tool, prove its execution, and learn
+the difference between a plausible answer and observed runtime evidence.
 
-**Concept:** first understand one remote tool boundary, then test selection and
-provenance when a prompt agent can use two independent MCP servers.
-Reference [remote MCP](../01-agent-framework/06_remote_mcp.py) for the concept.
+Connect the facilitator-provided, Microsoft Foundry-reachable, read-only
+**Weather MCP server** and allowlist only its verified forecast tool, such as
+`get_forecast`. Discover the actual MCP Server Endpoint, schema, upstream source,
+fixture/live-data labeling, and limits. Do not invent a tool name if the server
+exposes a different one.
 
-**First MCP:** connect the facilitator-approved, Foundry-reachable, read-only
-weather MCP with a narrow allowlist. Discover its actual schemas, data source,
-and approval requirements; do not assume it is live weather or reuse the old
-random local function. Ask one supported weather question. Run C01 and inspect
-discovery, selected tool, arguments, result, source, and the grounded response.
+Run C01 with a supported location and C03 with invalid input or an isolated
+upstream failure. For the first successful MCP call in the workshop, guide the
+participant through Microsoft Foundry trace inspection. Locate the forecast
+tool span and inspect its arguments, status, timing, returned source/timestamp,
+and relationship to the final response. The agent must report failure rather
+than invent weather.
 
-**Second MCP:** after the first integration passes, connect the approved
-read-only cultural-travel MCP. Run C02 using one weather question, one cultural
-travel question, and one request that makes the correct server choice observable.
-Evidence must identify the server and tool used for each result; similar tool
-names are not sufficient provenance. Do not turn this neutral integration
-exercise into the capstone travel scenario.
+Registering an MCP server for the GitHub Copilot app does not attach it to the
+Microsoft Foundry agent. Never disable approvals globally to make a test pass.
 
-Run C03 by declining an approval where configured or injecting a controlled
-failure in one integration. The agent must expose the limitation rather than
-claiming a successful lookup or silently treating the other MCP server as an
-equivalent source. Never disable approvals globally to make the test pass.
+**App practice:** compare Copilot's MCP registrations with the agent's runtime connection.
+**Alternative:** inspect a sanitized direct MCP response before the agent call.
+**Teach-back:** "Which trace evidence proves the forecast tool supplied the result?"
 
-Use current [Foundry MCP guidance](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/model-context-protocol).
-Attach both connections to the Foundry agent, not merely to the Copilot coach.
+## 05: Guide multiple Weather tools with a skill
 
-**App practice:** compare Copilot's MCP registrations with both agent runtime
-connections and inspect which server handled each request.
-**Alternative:** compare direct agent configuration with a supported Toolbox
-only when useful; do not add duplicate connections for demonstration.
-**Teach-back:** "How did you prove which MCP server supplied each result?"
+**Concept:** a skill can guide how an agent selects and sequences already
+available tools; it does not connect tools or grant authorization.
 
-## 05: Work with skills
+Expand the allowlist only with verified Weather MCP server tools. Example roles,
+when the live server actually supports them, include:
 
-**Concept:** package a reviewed procedure for reuse and make its delivery to the
-prompt agent explicit.
+- `resolve_location` for ambiguous place names;
+- `get_forecast` for future weather;
+- `get_current_conditions` for current observations; and
+- `get_weather_alerts` for relevant official alerts.
 
-Author `student/skills/explain-results/SKILL.md` with that procedure and a useful
-trigger description. Require clear separation of general knowledge, evidence
-retrieved from each MCP server, and uncertainty. It can also define how future
-fixture data must be labeled without claiming such a fixture exists yet.
-Upload a student-owned skill version and retrieve it
-using the [current skills guide](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/skills).
-Run S01 against the retrieved version and its resulting agent behavior.
+Author a versioned weather-research skill under `student/skills/`. It should
+guide input validation, tool selection, ordering, restraint, provenance,
+partial failures, and stopping when prerequisite evidence is missing. For
+example, resolve an ambiguous location before requesting its forecast, but do
+not call every weather tool for every question.
 
-For the portable prompt path, incorporate the reviewed skill content at build
-time into a new agent instruction version. Label this **static composition**.
-A skill uploaded to Foundry is not automatically loaded by the prompt runtime.
-Toolbox skills use MCP resources, not just tools; verify runtime support before
-claiming dynamic use. Hosted runtime loading is taught at 13.
+Use the supported prompt-agent skill-delivery mechanism. If the environment
+requires reviewed static composition, label it accurately; do not claim dynamic
+loading. Run S01 across targeted, ambiguous, general-knowledge, and controlled
+failure cases. Inspect traces to verify the chosen tool sequence, but checkpoint
+04 remains the full trace-navigation lesson.
 
-Keep trust boundaries and authorization outside skills. Record the exact source
-skill version; do not silently follow an untested shared default.
+Formal machine-readable result contracts are intentionally deferred until
+checkpoint 15, when workflow code needs to validate two agent results.
 
-**App practice:** review the instruction and skill diff and explain the scope
-of changes to the coach versus the runtime.
-**Alternative:** use an editor panel if available or request a focused Chat diff.
-**Teach-back:** "When does a skill update reach this agent, and what does it not control?"
+**App practice:** review the skill diff, exact version, delivery strategy, and allowlist change.
+**Alternative:** validate the procedure against recorded fixtures before a paid call.
+**Teach-back:** "How can a skill guide tool use without granting access?"
 
-## 06: Add and test persistent memory
+## 06: Add and test Weather memory
 
-**Concept:** injected context, conversation history, and durable memory differ.
-Memory is added after the agent has useful instructions, remote capabilities,
-and a reusable skill so the student can see what long-term personalization
-changes—and what it must not silently change.
-Reference [context provider](../01-agent-framework/04_memory.py): it keeps a
-name in a Python object, not a persistent multi-user memory store.
+**Concept:** managed Conversation history and persistent memory solve different
+problems.
 
-First return to the observation from 03: a fresh conversation did not remember
-Alice. Predict what would happen if the original Python process restarted.
-Then add a real student-owned Foundry memory store using the
+Add a student-owned persistent-memory capability using the
 [current memory guide](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/memory-usage).
-Check chat/embedding deployments, permissions, supported API, and cost approval.
-Allow only synthetic style/language preferences, with agreed retention.
+Use a low-risk, explicitly consented preference such as Celsius temperature
+units. Store only the minimum useful fact, map scope from trusted identity, and
+support inspection, correction, and deletion.
 
-Configure both retrieval and the documented write/remember path. Map memory
-scope from trusted identity, not an ID asserted in a chat message. A static test
-scope is acceptable only in an explicitly isolated synthetic harness.
-Run M01-M03: recall in a new conversation, different-user isolation, explicit
-current-request override, and forget. Confirm updates complete before checking
-recall and report a bounded timeout.
+Run M01-M03 with weather-appropriate preferences. In a new Conversation, memory
+may supply the preferred unit while Weather MCP tools still supply current
+weather evidence. A retrieval failure must not become a false claim that the
+preference was remembered.
 
-Keep the earlier D02 no-memory observation as historical evidence. After adding
-memory, use fresh empty test scopes to distinguish deliberate recall from leaks.
-Re-run one MCP and skill-formatted response to prove memory personalizes style
-without changing tool selection, provenance, authorization, or factual results.
+Re-run one MCP and skill-guided response to prove memory personalizes
+presentation without changing tool authorization, provenance, or factual data.
 
 **App practice:** save and resume workshop progress; identify where it is stored.
-**Alternative:** discuss how a new app session could read that progress in the
-same checkout, while a different worktree needs an approved import.
-**Teach-back:** "What changed across a fresh conversation, and which agent
-capabilities remained independent of memory?"
+**Alternative:** discuss progress import into another worktree without confusing it with agent memory.
+**Teach-back:** "What came from memory, and what still had to come from the Weather MCP server?"
 
-## 07: Release the prompt agent
+## 07: Release the Weather Research Agent
 
-Follow [PUBLISHING.md](PUBLISHING.md). Release the tested agent version with its
-instructions, managed conversations, two approved MCP connections, reviewed
-skill-delivery strategy, and memory configuration. No local Python function or
-client-side workflow is part of this prompt-agent release.
+**Concept:** release selects a fully tested candidate behind a Stable Agent
+Endpoint. A known-failing candidate is never promoted as the stable release.
+
+Follow [PUBLISHING.md](PUBLISHING.md). Run the complete Weather Agent regression
+suite, verify its exact agent version, skill revision, tool allowlist, memory
+configuration, and Microsoft Foundry Model Deployment, then run P01-P03 through
+the Stable Agent Endpoint.
+
+The released agent returns a consistent evidence-aware weather briefing with
+destination, dates, findings, tool/source provenance, timestamps, uncertainty,
+and missing information. It does not provide cultural recommendations or a
+complete itinerary.
+
+Retain failed candidate test evidence for diagnosis, but keep that candidate
+out of stable routing. Rollback is reserved for an unforeseen issue discovered
+after a fully passing version was promoted.
 
 **App practice:** request endpoint/version metadata and observed test evidence.
 **Alternative:** inspect sanitized raw responses instead of a narrative summary.
-**Teach-back:** "What does the released endpoint manage, and which access or
-connection responsibilities still remain?"
+**Teach-back:** "Why can only a fully passing candidate become the stable release?"
+
+## 08: Create the Cultural Travel Agent
+
+**Concept:** the second specialist repeats the same lifecycle with a different
+evidence responsibility.
+
+Create a separate Cultural Travel Agent without tools, memory, or copied Weather
+Agent state. It may answer stable, general cultural questions while labeling
+them as general knowledge. It must not claim current opening hours,
+accessibility conditions, event schedules, prices, or weather without evidence.
+Run B01-B03 with cultural-travel inputs.
+
+**App practice:** compare the two minimal agent definitions.
+**Alternative:** request a proposed definition before implementation.
+**Teach-back:** "What is independent about agent 2, and what has not been added?"
+
+## 09: Refine Cultural instructions
+
+**Concept:** improve the second specialist through the same controlled
+instruction-version comparison.
+
+Add `Guidance`, `Source`, and `Uncertainty` headings. Require respectful language,
+stereotype avoidance, missing-context questions, and clear separation between
+general knowledge and current venue-specific evidence. Keep the Microsoft
+Foundry Model Deployment and capabilities unchanged. Run I01.
+
+**App practice:** review the focused instruction diff and matched tests.
+**Alternative:** keep the change proposal-only until expectations are clear.
+**Teach-back:** "What can this tool-free version explain, and what can it not verify?"
+
+## 10: Test Cultural managed Conversations
+
+**Concept:** repeat Conversation continuity and isolation for the second agent.
+
+Within one Conversation, state a destination and interest, then ask a follow-up.
+In a new Conversation, verify that the destination is not imported
+automatically. Run D01-D02 with cultural-travel prompts.
+
+The Cultural Travel Agent has its own authorized Conversation mapping. It
+cannot read the Weather Research Agent's Conversation history.
+
+**App practice:** keep one coaching session while testing separate runtime Conversations.
+**Alternative:** use a separate app session only for a genuinely separate task.
+**Teach-back:** "Why does a new Cultural Agent Conversation ask for context again?"
+
+## 11: Connect the first Cultural Travel MCP tool
+
+**Concept:** connect one curated cultural-evidence tool before introducing
+multi-tool routing.
+
+Connect the facilitator-owned authless **Cloudflare Cultural Travel MCP server**
+and allowlist one verified tool, such as `get_attractions`. The Worker must use
+a versioned, licensed or synthetic curated dataset and expose no arbitrary URL
+fetching, writes, secrets, or unrestricted web search.
+
+Run C02 for a supported destination and C03 for unsupported or malformed input.
+Inspect the MCP Server Endpoint, tool schema, arguments, dataset version,
+result, attribution, and grounded response. Reuse the trace-inspection knowledge
+from checkpoint 04: verify the tool span and result without repeating the full
+navigation lesson unless the participant needs it.
+
+**App practice:** inspect agent 2's runtime connection and one-tool allowlist.
+**Alternative:** inspect a sanitized direct MCP response before the agent call.
+**Teach-back:** "What proves the curated dataset supplied the attraction facts?"
+
+## 12: Guide multiple Cultural tools with a skill
+
+**Concept:** repeat skill-guided tool routing in a new evidence domain.
+
+Expand the allowlist only with verified tools, such as `search_destinations`,
+`get_attractions`, `get_cultural_guidance`, and `get_accessibility_notes`.
+Create a versioned cultural-research skill that guides which tool to use, in
+what order, when not to call a tool, how to preserve dataset provenance, and
+how to expose partial failures.
+
+The skill must distinguish missing accessibility information from proof that a
+venue is accessible or inaccessible. If attraction retrieval succeeds while
+accessibility retrieval fails, preserve the grounded attraction evidence and
+state that accessibility evidence is unavailable.
+
+Run S02 across destination search, attraction, etiquette, accessibility,
+unrelated-tool restraint, and partial-failure cases.
+
+**App practice:** review the skill and allowlist diffs separately.
+**Alternative:** validate recorded tool results before live agent calls.
+**Teach-back:** "How did the skill choose only the tools needed for this request?"
+
+## 13: Add and test Cultural memory
+
+**Concept:** repeat the persistent-memory lifecycle with an independent,
+low-risk cultural preference.
+
+Use a preference such as museums over nightlife. Obtain consent, store the
+minimum fact, inspect its scope, verify retrieval in a new Conversation, correct
+it, delete it, and prove the deleted value is no longer applied. Run M01-M03
+against the Cultural Agent's separately approved memory scope.
+
+Memory supplies the preference; Cloudflare Cultural Travel MCP tools supply the
+curated attraction or guidance facts. Do not store an unnecessary reason that
+could reveal sensitive information.
+
+**App practice:** pause, resume, and recheck the exact agent and memory scope.
+**Alternative:** explain why a stateless design would be safer when memory adds no value.
+**Teach-back:** "Which evidence came from memory, and which came from the MCP tools?"
+
+## 14: Release the Cultural Travel Agent
+
+**Concept:** the second specialist must independently pass the same release
+discipline before orchestration begins.
+
+Run the complete Cultural Agent regression suite. Verify its exact version,
+skill revision, Cloudflare tool allowlist, memory configuration, and dataset
+expectations. Promote only a fully passing candidate to its own Stable Agent
+Endpoint and run P01-P03.
+
+Invoke both stable specialists independently for the same destination. The
+Weather Research Agent must not claim cultural retrieval; the Cultural Travel
+Agent must not claim weather retrieval. Record both names, versions, endpoints,
+identities, tool connections, skill revisions, memory scopes, and release
+evidence.
+
+**App practice:** request a two-agent handoff table backed by live metadata.
+**Alternative:** inspect sanitized raw responses from both endpoints.
+**Teach-back:** "Why must both agents pass independently before workflow code is added?"
