@@ -104,6 +104,6 @@ Build any ticket-service integration under `student/` using the
 facilitator-approved synthetic backend. Do not expose an unauthenticated local
 demo through a tunnel.
 
-The optional [IT support example app](../05-github-copilot/example_app/README.md)
-can illustrate the scenario. Its browser UI and MCP server use separate state;
-it is not a ready-made shared backend for Foundry.
+The optional [IT support example app](../examples/support-ticket-system/README.md)
+can illustrate the scenario. Its browser UI and MCP server share local ticket
+storage; it is not a ready-made hosted backend for Foundry.

@@ -97,10 +97,10 @@ legacy Agent Applications are explained in the publishing guide.
 | `workshop/templates/` | Templates for local workshop progress |
 | `.github/` | Workshop Coach profile and repository instructions |
 | `student/` | Student implementations and reproducible agent definitions |
-| `05-github-copilot/example_app/` | Optional IT support example app and local MCP demo, separate from the core workshop |
+| `examples/support-ticket-system/` | Optional IT support example app with shared storage, web server, and local MCP tools |
 | `.workshop/` | Ignored local progress and sanitized evidence; never published |
 
 Dependencies are introduced per lesson in isolated student environments.
-The optional [IT support example app](05-github-copilot/example_app/README.md)
+The optional [IT support example app](examples/support-ticket-system/README.md)
 is retained. The other earlier VS Code tutorials and agent scripts remain
 available in Git history.

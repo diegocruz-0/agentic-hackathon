@@ -139,7 +139,7 @@ require public commits of transcripts, identities, or resource details.
 ## Implementation sources
 
 This repository focuses on the current Copilot app workshop and retains the
-optional [IT support example app](../05-github-copilot/example_app/README.md).
+optional [IT support example app](../examples/support-ticket-system/README.md).
 The earlier VS Code tutorials and standalone agent examples are removed.
 Use the official references in [SETUP.md](SETUP.md) and
 scaffold implementations under `student/` during the relevant checkpoint.

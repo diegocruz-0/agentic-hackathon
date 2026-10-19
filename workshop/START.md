@@ -16,14 +16,14 @@ Cloning downloads the workshop files to your computer.
 1. Click **+** beside **Projects**, then **GitHub repository**.
 2. Find **`haforsbe/agentic-hackathon`** and follow the prompts to clone it:
    https://github.com/haforsbe/agentic-hackathon
-3. Use the facilitator-confirmed **`haforsbe-agentic-workshop`** branch
+3. Use the facilitator-confirmed **`FY27`** branch
    (the named workshop revision), not an unconfirmed default branch.
 
 If branch selection is unavailable, ask your facilitator for help, or run this
 in a terminal from a folder where you keep projects:
 
 ```text
-git clone --branch haforsbe-agentic-workshop https://github.com/haforsbe/agentic-hackathon.git
+git clone --branch FY27 https://github.com/haforsbe/agentic-hackathon.git
 ```
 
 Then choose **Projects → + → Local folder or repository** and select the newly
