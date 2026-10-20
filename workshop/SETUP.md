@@ -1,8 +1,8 @@
 # 00: Connect the Copilot app to the workshop environment
 
-**Outcome:** verify the participant's dedicated Microsoft Foundry Project,
-select and deploy their own Microsoft Foundry Model Deployment after a simple
-explicit approval, know where the coach and agents run, and inventory which
+**Outcome:** verify or help the participant create their dedicated Microsoft Foundry Project,
+reuse a suitable existing Model Deployment or create one after explicit
+approval, know where the coach and agents run, and inventory which
 capabilities can actually be used. Do not create an agent at this step.
 
 ## Student experience
@@ -18,11 +18,14 @@ The facilitator confirms organizational access and any managed-install policy.
 Use the official links below rather than copied installers or guessed commands.
 Verify that the app can read the repository and use its execution environment.
 
-Every participant arrives with one dedicated, pre-provisioned Microsoft Foundry
-Project.
-The first question asks them to confirm the assigned project and locate its
-endpoint; it does not ask whether a project exists and must not provision a
-second one. The shared story creates and enhances the Weather Research Agent,
+Every participant uses one dedicated Microsoft Foundry Project. They may create
+it before the workshop or create it themselves at checkpoint 00 with coach
+guidance after confirming the target and possible costs. The facilitator does
+not assign the project name or endpoint. First ask whether the participant
+already has a project to use. If so, help them safely locate its actual name
+and endpoint; otherwise, guide them as they create their own project. The coach
+does not create it on their behalf or switch projects silently. The shared story
+creates and enhances the Weather Research Agent,
 repeats the evidence loop for the Cultural Travel Agent, then introduces hosted
 workflow code. Capstone choice comes later.
 
@@ -37,8 +40,8 @@ it does not create a Foundry agent or grant Azure permissions.
 | When | Needed | What the coach verifies |
 |------|--------|------------------------|
 | Start | Copilot app access, Git, repository workspace | Repo instructions load; branch/worktree is the student's |
-| Assigned project | One dedicated participant Microsoft Foundry Project and Entra sign-in | Actual Microsoft Foundry Project Endpoint, current identity, ownership, read access; no alternate project |
-| Workshop model | Microsoft Foundry Model Catalog access and usable project quota | Participant independently selects a compatible model and deploys a named Microsoft Foundry Model Deployment after approving the project, model, deployment name, and possible cost |
+| Participant project | Participant chooses the signed-in Microsoft account to use; coach execution identity can access the exact project and has the required permission for the current approved step; participant can create a dedicated project if one is not already available | Confirm the identity actually used by the Foundry request matches the participant's choice, then directly verify project identity and operation-specific permission; no shared or silently substituted project |
+| Workshop model | Microsoft Foundry Model Catalog access, usable project quota, and model-deployment permissions | Inspect existing deployments first; participant chooses whether to reuse a suitable one or independently selects a compatible model and explicitly approves a new named deployment and possible cost |
 | SDK fallback | Python and isolated environment | Use the current prompt quickstart's package versions in the student implementation |
 | Weather MCP | Approved reachable read-only weather endpoint | Protocol, authentication, allowlist, upstream provenance, Foundry-side reachability |
 | Cultural Travel MCP | Facilitator-owned Cloudflare authless MCP Worker | Stateless Streamable HTTP endpoint, narrow read-only tools, dataset license/version, input bounds, logs, and Foundry-side reachability |
@@ -60,12 +63,63 @@ Microsoft Foundry Model Catalog. The coach may recommend considering a
 compatible mini-class model to reduce cost and quota use, but must not make the
 choice or imply that the facilitator provides the model.
 
-Before deployment, confirm only the assigned Microsoft Foundry Project, selected
-model, Microsoft Foundry Model Deployment name, and acknowledgment that the
-operation may incur cost. Detailed region, SKU, capacity, quota, and pricing
-review is not a required core lesson. Use those details only when the selected
-model requires them or a deployment problem must be diagnosed. Deploy only
-inside the assigned project, then inspect the resulting Model Deployment.
+Before creating a project, confirm the participant's intended target and
+acknowledgment that the operation may incur cost. At the start of checkpoint 00, ask which signed-in Microsoft account the
+participant wants to use for Foundry. Offer the currently signed-in account if
+it can be identified safely, an approved sign-in flow for a different account,
+and a freeform response. Do not request credentials. Verify the identity used
+by the actual Foundry request matches the participant's selection; `az account
+show` does not prove which identity Foundry MCP uses.
+
+With multiple signed-in accounts, use a separate workshop CLI profile through
+a process-scoped `AZURE_CONFIG_DIR` outside the repository. Have the participant
+sign in interactively and confirm the exact account, tenant, and subscription;
+tenant selection alone does not select a user. Run the read-only SDK check
+with explicit `AzureCliCredential` in that same profile, not an automatic
+credential chain. Do not change global profile settings or sign out unrelated
+accounts. An already-running MCP server does not automatically inherit these
+settings; verify its authentication source separately and distinguish its
+results from the selected-account SDK check.
+
+Before each Foundry resource inspection or operation, check Azure CLI
+availability and `az login` status in the execution context that will perform
+it. `az account show` confirms account context only, not access to the Foundry
+Project or permission to create resources. Immediately after receiving the
+project endpoint, make a direct authenticated request to that exact project and
+confirm its identity. Then verify the operation-specific permission required
+for the current step; read-only access alone is insufficient to create
+resources. Never probe write access by creating a throwaway resource, print or
+request credentials, broaden permissions, or switch identities without
+approval. Use the existing authenticated context for read-only discovery and
+approved operations. If sign-in, direct project access, or required permission
+is unavailable, state which check failed and pause before recommending or
+performing the operation.
+
+Once direct project connectivity and the current step's permission are
+verified, inspect its existing model deployments in Microsoft Foundry before
+asking for a model name/version or proposing reuse or a new deployment.
+
+Once the project is confirmed and directly readable, inspect its existing
+model deployments in Microsoft Foundry before asking for a model name/version
+or proposing reuse or a new deployment.
+If a suitable deployment exists, show its directly verified deployment name,
+model/version, status, and project, then ask whether the participant wants to
+reuse it. A project endpoint is not a resource ID; use supported discovery
+rather than reconstructing an ID. Do not ask the participant to inspect the
+portal in place of the coach's lookup or treat their report as independent
+verification.
+
+If no suitable deployment is selected, the participant independently chooses a
+compatible model from the Microsoft Foundry Model Catalog. After the selection,
+check once more for an existing deployment matching that model name/version
+before asking for a new deployment name. Before creating a new deployment,
+confirm the participant's project, model name/version, deployment name, and
+acknowledgment that creation may incur cost. Before reuse, confirm the exact
+target and the participant's explicit choice; explain that model usage may
+still incur cost. Detailed region, SKU, capacity, quota, and pricing review is
+not required for the core lesson unless the selection or an error makes it
+necessary. Create only the participant's dedicated project and only an
+explicitly approved new deployment inside it, then inspect the result.
 
 ## Official installation links
 
@@ -89,7 +143,8 @@ package and include operating-system-specific instructions.
 
 ## Choose the actual resource boundary
 
-Use only the participant's facilitator-assigned project. Record the confirmed
+Use only the participant's own dedicated project, whether prepared before the
+workshop or created by the participant at checkpoint 00. Record the confirmed
 subscription, project endpoint, ownership, participant-created model deployment,
 and a unique student prefix in `.workshop/progress.json`. Also record exact
 resource IDs when resources are created later, with `owned_by_student` and
@@ -141,11 +196,13 @@ relax network restrictions to get through a workshop.
 
 ## Checkpoint
 
-**Pass evidence:** repository access; assigned project identity and ownership;
-successful read-only Microsoft Foundry access; participant-selected and
-explicitly approved Microsoft Foundry Model Deployment observed in the project;
-recorded capability inventory; confirmed
-distinction between facilitator-provided and participant-owned resources.
+**Pass evidence:** repository access; participant project identity and ownership;
+direct connection to the exact Microsoft Foundry Project; verified permission
+for the current approved operation (including deployment creation if needed);
+participant-confirmed choice to reuse a suitable existing deployment or
+explicit approval for a new Model Deployment observed in the project; recorded
+capability inventory; confirmed distinction between facilitator-provided and
+participant-owned resources.
 
 **Teach-back:** "Which agent is coaching you, which will run in Azure, and how
 can you request an explanation without authorizing a change?"

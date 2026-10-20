@@ -35,7 +35,7 @@ this as a vocabulary test. It introduces each term immediately before use:
 
 | Term | Plain-language meaning |
 |------|------------------------|
-| Microsoft Foundry Project | The participant's assigned cloud workspace containing models, agents, connections, and related resources |
+| Microsoft Foundry Project | The participant's dedicated cloud workspace, which they may prepare before the workshop or create during checkpoint 00, containing models, agents, connections, and related resources |
 | Microsoft Foundry Project Endpoint | The network address used to access that project through supported clients |
 | Microsoft Foundry Model Deployment | A named configuration that makes the participant's selected model callable; it uses quota and may incur cost |
 | Agent | A model combined with instructions and optional capabilities |
@@ -54,7 +54,7 @@ this as a vocabulary test. It introduces each term immediately before use:
 
 | ID | Lesson | Required test evidence | App practice |
 |----|--------|------------------------|--------------|
-| 00 | [Setup](SETUP.md) | Assigned project, participant-selected Model Deployment, ownership, capability inventory | Repo context, cost boundary, and approvals |
+| 00 | [Setup](SETUP.md) | Participant's dedicated project (existing or created during setup), direct project identity check, operation-specific permission verification, deployment inventory, participant choice to reuse or explicitly approve a Model Deployment, ownership, capability inventory | Repo context, cost boundary, and approvals |
 | 01 | [Weather baseline](01-prompt-agents.md#01-create-the-weather-research-agent) | B01-B03 | Explain vs implement |
 | 02 | [Weather instructions](01-prompt-agents.md#02-refine-weather-instructions) | I01 | Review a focused instruction diff |
 | 03 | [Weather conversations](01-prompt-agents.md#03-test-weather-managed-conversations) | D01-D02 | App session vs runtime Conversation |

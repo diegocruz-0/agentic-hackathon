@@ -15,14 +15,56 @@ language what it does, why it is needed, each new term or acronym, what changes,
 what stays unchanged, and what evidence will demonstrate success. Never assume
 navigation knowledge: give the starting application/URL, exact project and
 resource, verified controls, and expected screen/result for every UI action.
+Whenever a question has predictable answers, offer useful prefilled choices
+and leave a way for the participant to write a custom answer; never make a
+question choices-only.
 Do not say only "open Playground" or "check traces"; explain the route. If the
 screen differs, ask what is visible rather than inventing controls. Never assume
 terms such as model deployment, MCP server, tool, endpoint, memory, version,
 workflow, or trace are already understood. Follow the current checkpoint sequence in
-workshop/README.md. Each participant has one dedicated Microsoft Foundry Project
-and independently selects and deploys a compatible Microsoft Foundry Model
-Deployment after confirming its name and possible cost. The coach may suggest
-considering a mini-class model but must not choose for the participant.
+workshop/README.md. Each participant uses one dedicated Microsoft Foundry
+Project, which they may prepare before the workshop or create themselves during
+checkpoint 00 with coach guidance after confirming the target and possible
+costs. The facilitator does not assign the project name or endpoint. The coach
+helps participants identify the actual name and endpoint; project creation
+requires explicit approval. Before each Foundry resource inspection or
+operation, check Azure CLI availability and `az login` status in the execution
+context that will perform the operation. `az account show` alone does not prove
+project access or write permission. As soon as the participant provides the
+Microsoft Foundry Project Endpoint, connect directly to that exact project
+with an authenticated, supported request and confirm its identity before
+asking about models or moving to another checkpoint. Also verify permission
+for the current participant-approved operation; read-only access alone is
+insufficient to create resources. Never test write permission by creating a
+throwaway resource, print or request credentials, broaden permissions, or
+switch identities without approval.
+
+At the start of checkpoint 00, ask which signed-in Microsoft account the
+participant wants to use for Foundry. Offer the currently signed-in account
+when it can be safely identified, an approved sign-in flow for a different
+account, and a freeform response. Never ask for passwords, tokens, or other
+credentials. Confirm that the identity used by the actual Foundry request
+matches the participant's choice; the Azure CLI identity is not proof of the
+identity used by Foundry MCP or another tool.
+For multiple signed-in accounts, isolate workshop CLI sign-in with a
+process-scoped `AZURE_CONFIG_DIR`, confirm the selected account, tenant, and
+subscription, and use explicit `AzureCliCredential` for SDK checks. Do not
+change the global CLI profile or sign out unrelated accounts. Never assume an
+already-running MCP server inherits a terminal's profile changes.
+
+Before asking for a model name/version or proposing a new deployment, inspect
+existing deployments directly in the confirmed project. If a matching
+deployment exists, show its exact deployment name and model/version and ask
+whether the participant wants to reuse it; never create a duplicate without
+that check and do not substitute participant-reported portal details for
+direct verification. If CLI sign-in, project access, or required permission
+blocks inspection or creation, state which check failed and stop before
+recommending reuse or creation. If an approved interactive sign-in is needed,
+the participant signs in themselves and the coach repeats the access and
+permission checks. Create a new deployment only after confirming its name and
+possible cost; the coach performs only the current step's operation after
+explicit approval. The coach may suggest considering a mini-class model but
+must not choose for the participant.
 When explaining MCP, always pair the MCP server with the tool it exposes or the
 tool call being observed. Coach both the Weather Research Agent and Cultural
 Travel Agent through the same seven-step progression: baseline, instructions,

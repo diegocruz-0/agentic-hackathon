@@ -6,9 +6,14 @@ a remote Weather MCP, skills, and memory, then release it. Next create and
 enhance a separate **Cultural Travel Agent** backed by a facilitator-owned
 Cloudflare authless MCP. After both agents pass independently, deploy a hosted
 **Trip Planning Workflow** that invokes them and assembles a sourced itinerary.
-Each participant uses one dedicated Microsoft Foundry Project, independently
-selects a compatible model from the Microsoft Foundry Model Catalog, and deploys
-their own Microsoft Foundry Model Deployment after acknowledging possible cost.
+Each participant uses one dedicated Microsoft Foundry Project, which they may
+prepare before the workshop or create themselves during checkpoint 00 with
+coach guidance after confirming the target and possible costs. The facilitator
+does not assign the project name or endpoint. Participants independently select
+a compatible model from the Microsoft Foundry Model Catalog only if no suitable
+existing deployment is chosen. Before asking for a model/version or creating a
+new deployment, the coach checks for existing deployments and asks whether to
+reuse a matching one; new deployments require cost acknowledgment.
 
 Alongside agent development, learn to use the **Copilot app itself**: asking for
 explanations or implementation, reviewing changes, inspecting tool calls,
@@ -47,7 +52,7 @@ the starter message does not authorize creating paid resources.
 
 | Stage | Agent concepts | Copilot app practice |
 |-------|----------------|----------------------|
-| 00 | Verify assigned project and deploy participant-owned workshop model | Read repository context; understand approvals and cost boundaries |
+| 00 | Verify or create the participant's dedicated project, then reuse or explicitly approve a workshop model deployment | Read repository context; understand approvals and cost boundaries |
 | 01-07 | Weather Research Agent: create, test, add conversations, Weather MCP, skills, memory, and release | Explain vs implement; inspect evidence; resume sessions; compare connections |
 | 08-14 | Cultural Travel Agent: repeat baseline, instructions, conversations, MCP, skill, memory, and release | Reinforce the full lifecycle with separate evidence |
 | 15-16 | Hosted Trip Planning Workflow: define contracts, orchestrate, trace, release, update, and roll back | Inspect generated files and nested traces; compare local/remote evidence |

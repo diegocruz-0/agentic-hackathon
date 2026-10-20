@@ -14,10 +14,12 @@ development experience is required.
    not required.
 3. **Get the workshop repository link and revision from your facilitator.**
    Open that revision as a project in the GitHub Copilot app.
-4. **Verify your assigned [Microsoft Foundry Project](https://ai.azure.com/).**
-   Sign in with the account specified by your facilitator and confirm you can
-   access your dedicated project. If it is missing or inaccessible, contact
-   the facilitator; do not create another project.
+4. **Get ready to use [Microsoft Foundry](https://ai.azure.com/).**
+   Sign in with your workshop account. You may create your own dedicated
+   project before attending, or create it with coach guidance during checkpoint
+   00. The facilitator does not assign the project name or endpoint. If you
+   cannot access Foundry or lack permission to create a project, ask your
+   facilitator for access help.
 
 **No upfront Python, Foundry packages, Azure CLI, Azure Developer CLI, or
 VS Code installation is required.** The coach introduces additional tools when

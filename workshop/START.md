@@ -49,10 +49,20 @@ If there is **no agent selector**, use the repository session's normal Chat
 and send the same message. If a selector exists but **Workshop Coach** is
 missing, ask your facilitator; do not select an unrelated agent.
 
-**Expected result:** the coach welcomes you, explains the workshop, and guides
-you through confirming your assigned Foundry Project and choosing a model.
-Nothing is deployed without your approval. You can say **"Explain without
-editing"**, **"Give me a hint"**, or **"Pause the workshop"** at any time.
+**Expected result:** the coach warmly welcomes you, explains the workshop, and
+asks which signed-in Microsoft account you want to use for Foundry before
+guiding you to identify or create your own dedicated project. The coach
+confirms the account used by its Foundry request, connects to that exact
+project, and verifies the permission needed for the current approved step.
+Read-only access is not enough when a resource must be created. The coach
+checks for an existing model deployment before proposing one and pauses if
+identity, project access, or required permission cannot be verified. The
+facilitator does not assign the project name or endpoint. Never share
+passwords or tokens. No resource is created or deployed without your explicit
+approval for that step.
+You can say
+**"Explain without editing"**, **"Give me a hint"**, or **"Pause the workshop"**
+at any time.
 
 ## If something looks different
 

@@ -39,7 +39,7 @@ tunnel. Foundry cannot directly call a server on your laptop's localhost.
 For the optional local agent, install Azure CLI following the
 [official instructions](https://learn.microsoft.com/cli/azure/install-azure-cli)
 and sign in with `az login`. Create an ignored `.env` file in this example
-folder with your assigned project endpoint and selected deployment:
+folder with your project endpoint and selected deployment:
 
 ```dotenv
 AZURE_AI_PROJECT_ENDPOINT=https://<resource>.services.ai.azure.com/api/projects/<project>
