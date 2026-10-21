@@ -21,11 +21,12 @@ Verify that the app can read the repository and use its execution environment.
 Every participant uses one dedicated Microsoft Foundry Project. They may create
 it before the workshop or create it themselves at checkpoint 00 with coach
 guidance after confirming the target and possible costs. The facilitator does
-not assign the project name or endpoint. First ask whether the participant
-already has a project to use. If so, help them safely locate its actual name
-and endpoint; otherwise, guide them as they create their own project. The coach
-does not create it on their behalf or switch projects silently. The shared story
-creates and enhances the Weather Research Agent,
+not assign the project name or endpoint. Follow this opening order: welcome and
+explain the workshop, confirm which Microsoft account the participant wants to
+use, then ask for the actual Project Endpoint. If they do not know the endpoint
+or do not yet have a project, help them safely locate or create their own
+project. The coach does not create it on their behalf or switch projects
+silently. The shared story creates and enhances the Weather Research Agent,
 repeats the evidence loop for the Cultural Travel Agent, then introduces hosted
 workflow code. Capstone choice comes later.
 
@@ -64,12 +65,15 @@ compatible mini-class model to reduce cost and quota use, but must not make the
 choice or imply that the facilitator provides the model.
 
 Before creating a project, confirm the participant's intended target and
-acknowledgment that the operation may incur cost. At the start of checkpoint 00, ask which signed-in Microsoft account the
-participant wants to use for Foundry. Offer the currently signed-in account if
-it can be identified safely, an approved sign-in flow for a different account,
-and a freeform response. Do not request credentials. Verify the identity used
-by the actual Foundry request matches the participant's selection; `az account
-show` does not prove which identity Foundry MCP uses.
+acknowledgment that the operation may incur cost. At the start of checkpoint
+00, after the welcome and workshop overview, ask which signed-in Microsoft
+account the participant wants to use for Foundry. Offer the currently signed-in
+account if it can be identified safely, an approved sign-in flow for a different
+account, and freeform input. Do not request credentials. After account
+confirmation, ask for the exact Project Endpoint; do not ask whether the
+participant already has a project first. Verify the identity used by the actual
+Foundry request matches the participant's selection; `az account show` does not
+prove which identity Foundry MCP uses.
 
 With multiple signed-in accounts, use a separate workshop CLI profile through
 a process-scoped `AZURE_CONFIG_DIR` outside the repository. Have the participant

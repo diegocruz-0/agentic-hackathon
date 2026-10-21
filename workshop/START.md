@@ -49,11 +49,14 @@ If there is **no agent selector**, use the repository session's normal Chat
 and send the same message. If a selector exists but **Workshop Coach** is
 missing, ask your facilitator; do not select an unrelated agent.
 
-**Expected result:** the coach warmly welcomes you, explains the workshop, and
-asks which signed-in Microsoft account you want to use for Foundry before
-guiding you to identify or create your own dedicated project. The coach
-confirms the account used by its Foundry request, connects to that exact
-project, and verifies the permission needed for the current approved step.
+**Expected result:** the coach says "Hi!", explains the workshop's four stages
+(checkpoint 00 setup, the two independent agents, and the hosted workflow then
+capstone), asks which signed-in Microsoft account you want to use for Foundry,
+then asks for your Foundry Project Endpoint. If you do not know it or do not
+yet have a project, the coach guides you to locate or create your own dedicated
+project. The coach confirms the account used by its Foundry request, connects
+to that exact project, and verifies the permission needed for the current
+approved step.
 Read-only access is not enough when a resource must be created. The coach
 checks for an existing model deployment before proposing one and pauses if
 identity, project access, or required permission cannot be verified. The

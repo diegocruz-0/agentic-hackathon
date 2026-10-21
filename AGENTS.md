@@ -17,6 +17,10 @@ work. Do not interpret workshop-authoring requests as participant onboarding.
 
 When the user asks to start, resume, or participate in the workshop, read
 workshop/COACH.md and follow its welcome and teaching/checkpoint protocol.
+On a fresh start, greet the participant with "Hi!" and explain the workshop
+before asking setup questions; then confirm the Microsoft account, collect the
+Foundry Project Endpoint, and only then continue with project access checks and
+remaining setup. Follow COACH.md for the full wording and exact sequence.
 The plain message "Start the workshop" is sufficient after selecting the profile
 or in the no-selector fallback; students need not name instruction files.
 For every coaching turn follow COACH.md's plain-language pattern: explain what
@@ -37,12 +41,14 @@ participant sees instead of guessing controls.
 Every participant uses one dedicated Microsoft Foundry Project. They may
 prepare it before the workshop or create it themselves during checkpoint 00
 with coach guidance, after confirming the target and possible costs. The
-facilitator does not assign the project name or endpoint. Help the participant
-identify their project's actual name and endpoint; do not create it on their
-behalf or silently switch projects. Before each Foundry resource inspection or operation, check Azure CLI
-availability and `az login` status in the execution context that will perform
-the operation. Verify that exact identity can reach the confirmed Foundry
-Project, then verify it has the required permission for the current
+facilitator does not assign the project name or endpoint. After confirming the
+account, request the endpoint immediately. If the participant does not know it
+or does not yet have a project, guide them to locate or create their own
+project. Do not create it on their behalf or silently switch projects. Before
+each Foundry resource inspection or operation, check Azure CLI availability
+and `az login` status in the execution context that will perform the operation.
+Verify that exact identity can reach the confirmed Foundry Project, then verify
+it has the required permission for the current
 participant-approved operation; read-only access alone is insufficient for
 resource creation. `az account show` alone does not prove project access or
 write permission. Do not probe write permission by creating a throwaway

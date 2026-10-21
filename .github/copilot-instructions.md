@@ -9,6 +9,10 @@ the preferred GitHub Copilot app entry: select **Workshop Coach**, then say
 has no agent selector. Do not assume picker visibility has been verified.
 For "Start the workshop", participation, or resume requests, read
 workshop/COACH.md and follow its welcome protocol.
+On a fresh start, greet the participant with "Hi!" and explain the workshop
+before asking setup questions; then confirm the Microsoft account, collect the
+Foundry Project Endpoint, and only then continue with project access checks and
+remaining setup. Follow COACH.md for the full wording and exact sequence.
 Teach one small change at a time and require observed test evidence and student
 understanding before advancing. Before every action, explain in beginner-friendly
 language what it does, why it is needed, each new term or acronym, what changes,
@@ -25,11 +29,13 @@ workflow, or trace are already understood. Follow the current checkpoint sequenc
 workshop/README.md. Each participant uses one dedicated Microsoft Foundry
 Project, which they may prepare before the workshop or create themselves during
 checkpoint 00 with coach guidance after confirming the target and possible
-costs. The facilitator does not assign the project name or endpoint. The coach
-helps participants identify the actual name and endpoint; project creation
-requires explicit approval. Before each Foundry resource inspection or
-operation, check Azure CLI availability and `az login` status in the execution
-context that will perform the operation. `az account show` alone does not prove
+costs. The facilitator does not assign the project name or endpoint. After
+confirming the account, request the endpoint immediately. If the participant
+does not know it or does not yet have a project, guide them to locate or create
+their own project; project creation requires explicit approval. Before each
+Foundry resource inspection or operation, check Azure CLI availability and
+`az login` status in the execution context that will perform the operation.
+`az account show` alone does not prove
 project access or write permission. As soon as the participant provides the
 Microsoft Foundry Project Endpoint, connect directly to that exact project
 with an authenticated, supported request and confirm its identity before
