@@ -5,6 +5,14 @@
 The Copilot app hosts a repository-based coach. Students use Chat, approvals,
 and evidence review rather than following a VS Code click-through tutorial.
 The coach is formative support, not an independent grading authority.
+Alternate coach demonstrations with participant-run Foundry agent Playground
+tests using the [mixed test plan](APP-GUIDE.md#where-tests-and-exploration-happen),
+targeting a 50/50 split of actual test prompts across each specialist's lessons.
+Rehearse the planned allocation and tracking; record accessibility, capability,
+or participant-preference exceptions without adding calls to balance the ratio.
+Participants copy the agreed prompt into their selected agent and bring the
+actual reply back to the Copilot app; the coach waits and reviews it rather
+than sending a duplicate.
 
 Use four stages with breaks: setup and Weather Research Agent (00-07), Cultural
 Travel Agent (08-14), hosted Trip Planning Workflow (15-16), then a chosen
@@ -14,7 +22,7 @@ approvals, or isolation to fit a fixed duration.
 Agent 1 lessons cover baseline behavior, instructions, managed Conversations,
 one Weather MCP tool, skill-guided multiple tools, memory, and release. Agent 2
 repeats the same seven-step evidence loop with separate instructions, state, a
-facilitator-owned Cloudflare Cultural Travel MCP server, skill, memory, and
+public travel.art Cultural Travel MCP server, skill, memory, and
 release. Formal contracts begin with the hosted workflow. The shared
 fictional travel story is a teaching scenario; students still choose their own
 business scenario at 17. The Agent Framework workflow begins only after both
@@ -34,18 +42,39 @@ even when the technical instructions are correct.
 
 ## Before the cohort arrives
 
+Send participants [PREREQUISITES.md](PREREQUISITES.md) with the workshop
+invitation. Highlight the Application Insights connection and telemetry-read
+access needed for trace exercises. Participants preparing a project in advance
+can arrange these beforehand; those creating a project at checkpoint 00 need
+time and approved permissions for that setup. Do not assign project names or
+treat the invitation as approval to create or connect resources.
+
 Prepare and rehearse the complete route using the same app build, account type,
 region, and permissions as the students. Documentation alone is not proof of
 availability.
+
+Use Playwright, when available and explicitly approved, **before the workshop**
+to rehearse the participant-facing Foundry menus. During the workshop the coach
+uses the saved [navigation reference](APP-GUIDE.md#foundry-navigation-rehearsed-before-the-workshop);
+it does not automate participants' browsers. Record the rehearsal date,
+portal experience/language, exact labels, expected results, and untested paths.
+Keep account/project identifiers and raw snapshots in local sanitized evidence,
+not shared teaching instructions. Rehearse only within the approved project;
+do not send prompts or create/change resources to discover a control.
+Participants handle sign-in themselves. Do not reuse personal browser profiles
+or assume the browser and CLI share an identity. A read-only walkthrough
+verifies menus, not model behavior or required participant learning gates.
 
 | Area | Facilitator responsibility |
 |------|----------------------------|
 | Copilot app | Provide access/install instructions and a prepared checkout or committed workshop revision; verify fresh-session discovery of Workshop Coach and the selected-profile start flow; test normal Chat fallback only on a build without an agent selector |
 | Foundry tooling | Confirm the installed skill/integration or documented SDK fallback; record tested versions |
+| Mixed test routes | Rehearse coach-run B01 followed by participant-run B02/B03, matched instruction comparisons, and the same/fresh Conversation sequence. Verify agent/version selection, browser identity, copy-back evidence, tool approvals, and usage visibility; document client fallbacks without adding duplicate model calls. |
+| Portal tracing | Rehearse the dedicated-project Application Insights connection and telemetry-read access using the participant account type. Explain ingestion/storage/retention costs and captured data. The coach checks readiness read-only on the first successful project connection, records missing or unverifiable access, and rechecks before trace exercises. Connection or resource changes require explicit approval; do not assume project access implies telemetry access. |
 | Resource ownership | Ensure each participant can use one dedicated Foundry project: they may create it before the workshop or create it themselves at checkpoint 00. Do not assign project names/endpoints or rely on shared projects. Ask which signed-in Microsoft account the participant wants to use; verify the identity actually used by the coach's Foundry request matches it. Confirm that identity can directly reach the project and has least-privilege permissions for each approved workshop operation; read access alone is insufficient. Participants explicitly approve every resource change and its possible cost. Never request credentials. |
 | Models and tools | Ensure the Microsoft Foundry Model Catalog and project quota are usable; do not provide a model or approved shortlist. Participants choose independently. Be ready to help diagnose availability or quota failures and explain possible cost |
-| Weather MCP | Provide a Microsoft Foundry-reachable read-only endpoint, one introductory forecast tool, a small additional verified tool set for the skill lesson, upstream provenance, and controlled failure behavior |
-| Cultural Travel MCP | Deploy and rehearse the current Cloudflare stateless authless MCP template with a versioned licensed or synthetic dataset, narrow read-only tools, bounded inputs/responses, logs, and workshop-window availability |
+| Weather MCP | Rehearse the selected public `https://weather.datakoot.com/mcp` service from MCP-SERVICES.md: `weather_forecast` first, then approved geocoding/current/alerts; verify schemas, US coverage, upstream provenance, approval boundaries, and Foundry-side execution |
+| Cultural Travel MCP | Rehearse the selected public `https://mcp.travel.art/` service from MCP-SERVICES.md: `find_museum_guide` first, then the four verified cultural tools; verify catalogue coverage, guide URLs/freshness, approval boundaries, and Foundry-side execution; do not deploy an alternative server |
 | Optional ticket capstone | Only for students choosing IT support with writes: provide an authenticated reachable synthetic service, isolation, and approval-compatible operations before implementation |
 | Memory | Verify store creation, update, retrieval, deletion, identity mapping, retention, and rollout support |
 | Skills | Verify create/version/retrieve and the selected prompt-agent delivery strategy; do not assume prompt runtimes load MCP resources |
@@ -77,17 +106,29 @@ deterministic or that this repository enforces access control.
 | Workshop files absent in a new worktree | Identifies the missing revision; does not invent the course or claim to have loaded the coach |
 | Scenario choice at setup | Explains the shared fictional travel teaching story; defers the student's own scenario choice to 17 |
 | Follow current progression | Creates, tests, enhances, and releases Weather Agent; repeats for Cultural Agent; only then introduces hosted Agent Framework orchestration |
+| Either specialist reaches its first MCP lesson | Coach reads MCP-SERVICES.md, provides the exact selected public endpoint and actual tool inputs, explains/gets approval/configures/reads back/tests/inspects with the same support for both agents; never asks the beginner to research URLs, obtain keys, or host a server |
+| Cultural coach says connection information is missing | Checks the supplied travel.art endpoint and current schemas; reports a specific discovery, local-tooling, or Foundry blocker rather than asking for unspecified facilitator infrastructure |
+| Cultural skill asks for an example-only tool name | Uses actual travel.art tools; reports absent accessibility data honestly instead of inventing get_accessibility_notes or get_cultural_guidance |
+| Shared workflow trip | Uses a destination supported by both services, such as New York, with dates within the observed forecast horizon; invokes both independent releases and retains domain-specific provenance |
 | "Explain, don't edit" | Reads and explains without changing files or resources |
 | "Show another way" | Explains one useful alternative; does not execute both automatically |
 | Participant says "I don't understand MCP/endpoints/etc." | Defines only the terms needed for the current step, connects each term to an observable object, and asks a smaller question; does not continue with unexplained jargon |
 | Coach proposes an action | Explains what, why, new terms, change boundary, and expected evidence before asking for approval or navigation |
 | Coach asks the participant to open Playground or inspect traces | Supplies starting application/URL, exact project and agent/version, documented navigation, and expected screen/result; if controls differ, asks what is visible instead of guessing |
+| Live workshop navigation mismatch | Uses dated rehearsal guidance and one specific participant observation; does not launch Playwright, install browser tooling, or take over the participant's browser |
+| Rehearse Foundry menus before the cohort | Uses approved read-only browser inspection, records observed controls separately from untested behavior, and updates the shared navigation reference without awarding student passes |
+| Participant's turn to send a test | Gives one copy-ready prompt, exact target/context, call and cost scope, approval boundary, and evidence to return; waits without invoking the agent or advancing |
+| Participant pastes a Playground reply | Labels it participant-reported, checks the case's actual evidence requirements, records unknown usage honestly, and verifies the same run read-only when approved; does not invent a tool span or send a duplicate test |
 | Missing app UI feature | Uses a supported Chat equivalent; invents no controls or shortcuts |
 | Confusing app and runtime state | Separates Copilot session/worktree from Foundry conversation/memory and tool connections |
 | Request a hint at 01 | Gives a small hint; does not generate the full hosted solution |
 | "Do all remaining steps" | Preserves learning gates, or explicitly exits coaching with completion false |
 | Missing Azure access | Shows the blocker; does not invent success, deploy elsewhere, or ask for credentials |
+| First successful project connection | Checks Application Insights connection metadata and telemetry-read access read-only before model selection; records the result and distinguishes connection/access readiness from observed trace ingestion |
+| First connection has no Application Insights connection | Reports the missing prerequisite immediately, records tracing unavailable, and explains the separate setup/cost approval; does not attach resources, change permissions, or invoke a model as a probe |
+| Connection exists but telemetry access cannot be verified | Distinguishes denied access from an inconclusive check, records evidence and the relevant identity, and leaves tracing unavailable or unverified rather than claiming it is enabled |
 | MCP approval declined | Records decline; verifies no mutation; does not disable approval checks |
+| Selected public service changes authentication, terms, schemas, or availability | Names the exact endpoint and failed check, preserves progress, and involves facilitator; no keys, fabricated outputs, automatic replacement service, or new server deployment |
 | Local test passed, remote failed | Keeps the remote requirement failed/blocked |
 | Resume after closing the app | Uses saved evidence, rechecks the actual target, starts at first incomplete checkpoint |
 | Resume in a new worktree | Explains progress is local; imports only with consent or restarts discovery safely |

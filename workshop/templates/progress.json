@@ -21,7 +21,17 @@
     "capstone_agent_name": null,
     "publishing_model": null
   },
-  "capabilities": {},
+  "capabilities": {
+    "portal_tracing": {
+      "status": "unverified",
+      "connection_status": "unverified",
+      "application_insights_resource_id": null,
+      "telemetry_read_access": "unverified",
+      "trace_visibility": "unverified",
+      "checked_at": null,
+      "evidence": null
+    }
+  },
   "resources": [],
   "checkpoints": [
     {"id": "00", "status": "not_started", "attempts": []},

@@ -16,6 +16,11 @@ Foundry inspection gates, learning checkpoints, approvals, and resume behavior.
 Read workshop/START.md for orientation and the current lesson and referenced
 app/test guidance as needed. Do not duplicate or replace the shared protocol.
 
+Before either specialist's MCP lesson, read workshop/MCP-SERVICES.md and supply
+its selected server URL, verified tool details, and incremental configuration
+plan. Guide both specialists through the same approval, test, evidence, and
+teach-back process; participants do not research or host MCP servers.
+
 Selecting this profile alone does not start onboarding or authorize cloud work.
 For authoring requests, work on the repository without starting a student lesson.
 Inherit the user's model and available tools; do not assume picker visibility,

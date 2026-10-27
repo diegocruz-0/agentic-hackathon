@@ -78,6 +78,15 @@ managed Conversations, one MCP tool, skill-guided multiple tools, memory, and
 release. Only after both agents pass independently should formal contracts and
 the hosted Agent Framework workflow invoke them and assemble a sourced itinerary. Teach the app techniques in
 workshop/APP-GUIDE.md alongside it. The shared travel example is a teaching
-story; students choose their own capstone scenario later. For workshop-authoring
+story; students choose their own capstone scenario later.
+For each specialist, supply the MCP connection details yourself from
+workshop/MCP-SERVICES.md: Weather at https://weather.datakoot.com/mcp with
+weather_forecast first; Cultural Travel at https://mcp.travel.art/ with
+find_museum_guide first. Use the same explain, approve, configure, test, inspect,
+and teach-back process for both. These selected public free-to-use services
+need no participant API key or MCP hosting. Verify current schemas and report
+specific blockers; do not ask participants to research server URLs or invent
+tools. Foundry authentication and costs remain separate.
+For workshop-authoring
 or maintenance requests, work normally without starting a student session or
 deploying anything.

@@ -12,6 +12,122 @@ the selected Workshop Coach session, or normal repository Chat when the app
 has no agent selector. Do not confuse that entry fallback with optional visual
 alternatives later in the lessons.
 
+## Where tests and exploration happen
+
+The coach names the route before every test or exploration:
+
+| Route | What you do | What the coach does |
+|-------|-------------|---------------------|
+| **Run from the Copilot app - coach sends** | Stay in this GitHub Copilot app session and approve the stated test. Do not enter the prompt in Foundry as well. | Send the prompt to your actual agent in Foundry, then show its reply, available token counts, and estimated cost here. |
+| **Run in the Foundry portal - participant sends** | Follow the coach's verified steps from https://ai.azure.com/ to your exact project and agent, send the agreed prompt yourself, then report the result here. | Give the exact prompt, conversation context, controls and evidence to report, then wait without sending a duplicate call. |
+| **Inspect in Foundry - no prompt sent** | Look at the agent's saved settings or the specified test trace. Do not send a message or edit settings. | Explain what to inspect and compare your observation with service-returned evidence. |
+
+Aim for **50/50 coach-sent and participant-sent test prompts** across each
+specialist's lessons, using a **coach demonstrates, participant practices**
+rhythm. Count prompts sent to the agent, not navigation, inspections, tool
+approval continuations, or coaching messages. The Copilot app remains the home for explanations,
+approvals, evidence review, and progress; the Foundry agent Playground is where
+participants practice sending messages themselves. A Playground is the browser
+test interface for the selected agent, not a separate agent or the model-only
+chat playground.
+
+| Lesson | Suggested mix of required tests |
+|--------|---------------------------------|
+| Baseline (01, 08) | Coach sends B01 to demonstrate the exchange; participant sends B02 and B03 in separate fresh Conversations and copies each result back. |
+| Instructions (02, 09) | Participant runs one matched before/after pair; coach runs the other two pairs. With the baseline allocation above, this gives five coach-sent and four participant-sent prompts. Keep both halves of each pair on the same route with fresh context. |
+| Conversations (03, 10) | Participant sends the three-message D01-D02 sequence if the interface supports the required history and identifier evidence. Otherwise use the supported client route and explain the limitation. Rebalance using later suitable tests. |
+| MCP and skills (04-05, 11-12) | Coach demonstrates the first tool request and approval boundary. Divide remaining required prompts between routes to bring the running split toward half each; participant returns the answer plus tool evidence. Keep controlled failures on the coach route when they need an isolated test client. |
+| Memory and release (06-07, 13-16) | Coach handles identity/scope, deletion, consumer-endpoint, and automated regression checks. A participant may send a required recall or normal-path test only when the interface can preserve its exact scope and target. Playground-only evidence never substitutes for a consumer-endpoint test. |
+
+Plan the split before each specialist's lessons, record the route of each
+actual prompt, and use the running counts to allocate remaining suitable tests.
+Agree on one route before each test; these are defaults, not permission to send
+anything automatically. Aim for half each, allowing a one-prompt difference
+when the total is odd. Adapt to participant preference, accessibility, and
+verified interface capabilities; explain and record any larger deviation rather
+than weakening a test or approval boundary. Never add calls, repeat completed
+tests, or split a matched pair or Conversation sequence just to balance counts.
+Portal inspection and guided trace
+exercises remain required even when the coach sent the prompt.
+
+For each participant-run test, the coach provides one copy-ready prompt, the
+exact project/agent/version, fresh-or-existing Conversation instructions, the
+documented or observed navigation and send control, and the bounded call/tool
+approval scope and possible cost. The participant sends it once, waits for the
+reply, and copies the actual reply back here, with the Response/Conversation
+identifiers and relevant tool details if available. Do not paste secrets or
+personal data; a safe excerpt can be labeled as such. If a reply fails, stalls,
+or a control differs, report that instead of retrying. The coach waits, reviews
+the returned evidence, and asks for understanding before advancing.
+
+Both test routes use the agent in Foundry and may incur Foundry charges.
+Neither route's token totals measure the Workshop Coach conversation in the
+Copilot app. Missing portal-test usage is marked unknown, not zero.
+Switching routes does not approve extra calls, changes, or a different agent.
+
+For portal navigation, the coach gives a concrete, documented route first:
+starting URL, your exact project and resource, control labels, and the expected
+result. You do not need to list sidebar labels or provide a screenshot before
+ordinary guidance. If the documented controls differ from your screen, stop
+and describe the difference; a screenshot with personal details hidden is
+optional. Missing traces do not authorize another test or telemetry setup.
+
+When first connecting to your project, and again before a portal trace exercise,
+the coach checks that your project is connected
+to **Application Insights**, Azure's service for execution telemetry, and that
+you can read the records. Saved Conversation history does not establish this
+connection. The first check reads existing settings and access; it does not
+enable tracing or send a model prompt. If it is missing, the coach explains the blocker before asking you
+to search for a trace. Connection or resource changes need separate approval
+and can incur telemetry charges beyond the displayed model-token estimates.
+
+## Foundry navigation rehearsed before the workshop
+
+**Observed on 2026-10-26:** the English **New Foundry** experience at
+https://ai.azure.com/, using Edge and an existing Prompt Agent. These controls
+were inspected read-only in a confirmed project; no message was sent, agent
+saved/published, or resource created. This is a dated navigation reference,
+not a guarantee that every tenant, role, screen size, or portal revision matches.
+No classic-portal route was verified in this rehearsal.
+
+Browser automation such as Playwright is a **facilitator preparation tool,
+not part of live workshop coaching**. During the workshop, participants follow
+these instructions themselves and copy results into the GitHub Copilot app.
+Do not launch an automated browser, request browser tooling installation, or
+take over their screen to recover a navigation mismatch. Ask one specific
+question about the differing control, then give revised documented guidance or
+involve the facilitator. Screenshots remain optional.
+
+Before giving a live instruction, substitute the participant's confirmed
+project, exact agent, and intended version for the generic descriptions below.
+Do not send participants to the rehearsal author's project.
+
+| Task | Observed route and expected result |
+|------|------------------------------------|
+| Confirm browser identity | At https://ai.azure.com/, use the website's **Sign in**, not Edge's profile **Add account**. **My profile settings** opens **Profile**, showing the signed-in account. This is separate from the coach's CLI identity. |
+| Confirm project | The header's project-name button shows the current project. On **Home**, **Get started** includes the **Project endpoint** field and **Copy project endpoint**. Do not copy an API key or substitute the Azure OpenAI endpoint. |
+| Find the agent | Select **Build** in the top navigation, then **Agents** under **Create** in the left navigation. Use **Search agents** if needed, then select the exact agent-name link. The list also contains **Routines** and **Workflows Preview**; neither is the Prompt Agent Playground. |
+| Confirm version and configuration | The agent page has a **Version:** selector, and **Playground**, **Details**, **Traces**, and other tabs. In **Playground**, verify the version and **Model:** before testing. Inspect **Instructions** and **Tools** without editing. The version menu also contains deletion controls: do not use them for inspection. |
+| Send an approved test | On the agent's **Playground** tab, use **Chat**, paste only the agreed test into **Message the agent...**, then select **Send** once. Do not paste it into **Write your prompt here to give your agent instructions.** That box changes the agent's instructions. **Save**, **Publish**, and **Improve instructions** are not test-send controls. |
+| Start fresh context | **New chat** is visible above the Chat area. It was not clicked during rehearsal, so a new Conversation identifier and isolation must still be demonstrated in the approved D01-D02 tests, not inferred from the label. |
+| Find a saved execution | From **Build → Agents → the exact agent**, select **Traces**, then **Trace view**. Use **Search by trace ID, conversation ID, or response ID** with the saved identifier. Check **Version**, **Status**, and **Date range**; the observed default was **Last Day**. The table's identifier column is **Trace ID**, not Response ID. |
+| Inspect a tool call | Select the matching **Trace ID** to open its detail dialog. In **Trajectories**, select the **Execute Tool execute_tool ...** entry in the trace tree. **Input + Output** shows arguments and returned data; duration is shown above. **Metadata** shows `start_time`, `end_time`, and `status.status_code`. A span is one recorded operation within the trace. |
+| Find the response identifier | In the inspected forecast tool span's **Metadata**, `attributes` contains `gen_ai.response.id` (`resp_...`). This identifies the response, not the trace or conversation. Do not assume every span exposes the same fields; use another relevant span or service evidence if absent. |
+| Inspect a saved Conversation | Close the trace dialog, then select **Conversation view** within **Traces**. Its table shows **Conversation ID** (`conv_...`) and its search field is **Search by conversation ID**. This view aggregates conversations; it is not the complete list of response-only executions. Use **Trace view** for a response search. |
+
+The observed forecast entry was labeled
+`Execute Tool execute_tool mcp_weather_intelligence.weather_forecast`.
+For another agent, use its actual MCP server/tool name rather than copying this
+label. The tool result's source, forecast time, and service `served_at` time
+have different meanings; a successful tool status does not prove every sentence
+in the final answer is grounded.
+
+The send button, version menu, and New chat control were located, not exercised.
+Tool-approval dialogs, post-send copy controls, memory operations, and publishing
+flows were not rehearsed. Do not invent their exact labels or treat this
+read-only walkthrough as test evidence for those behaviors. Missing telemetry
+or a different date filter does not authorize another model call or setup change.
+
 ## Techniques to introduce along the way
 
 | Checkpoints | Primary approach to practice | Useful alternative and tradeoff |

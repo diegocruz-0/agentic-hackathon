@@ -64,7 +64,7 @@ Prompt checkpoint 07 stops here, after a teach-back. Preserve the prompt release
 while the Cultural Travel Agent is developed.
 
 At checkpoint 14, release the Cultural Travel Agent through its own stable
-endpoint. Verify its instructions, conversation isolation, Cloudflare MCP,
+endpoint. Verify its instructions, conversation isolation, selected travel.art MCP,
 skill-guided multi-tool behavior, and memory. Record both specialist versions
 and prove neither claims the other's
 tools or evidence domain.

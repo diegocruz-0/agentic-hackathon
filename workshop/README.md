@@ -16,7 +16,7 @@ configure a deployed agent.
 | Minimal prompt agent | 01 | 08 | 15 scaffolds the orchestrator |
 | Instruction refinement | 02 | 09 | Reused for tested updates |
 | Managed conversations | 03 | 10 | Workflow passes explicit request/correlation state |
-| First MCP tool | 04: `get_forecast` example | 11: `get_attractions` example | Workflow invokes agents, not their tools |
+| First MCP tool | 04: `weather_forecast` | 11: `find_museum_guide` | Workflow invokes agents, not their tools |
 | Skills and multiple tools | 05: weather research procedure | 12: cultural research procedure | 15 validates formal result contracts |
 | Persistent memory | 06 | 13 | Workflow does not merge memory stores |
 | Independent release | 07 | 14 | 16 releases the hosted workflow |
@@ -27,6 +27,13 @@ The Weather Research Agent and
 Cultural Travel Agent own different tools and evidence domains. Formal
 machine-readable contracts appear only when executable orchestration needs to
 validate both results.
+
+The [selected MCP services and shared story](MCP-SERVICES.md) are fixed workshop
+inputs: Weather uses `https://weather.datakoot.com/mcp`; Cultural Travel uses
+`https://mcp.travel.art/`. Both are public free-to-use services with no API key
+or participant hosting requirement. The coach provides the connection details,
+discovers actual schemas, and guides the same approval, configuration, test,
+trace, and teach-back process for each specialist. Foundry charges still apply.
 
 ## Terms the coach introduces when needed
 
@@ -39,7 +46,7 @@ this as a vocabulary test. It introduces each term immediately before use:
 | Microsoft Foundry Project Endpoint | The network address used to access that project through supported clients |
 | Microsoft Foundry Model Deployment | A named configuration that makes the participant's selected model callable; it uses quota and may incur cost |
 | Agent | A model combined with instructions and optional capabilities |
-| MCP server and tool | The server publishes callable tools; a tool is one specific operation, such as `get_forecast` |
+| MCP server and tool | The server publishes callable tools; a tool is one specific operation, such as `weather_forecast` |
 | MCP Server Endpoint | The network address where a client reaches an MCP server |
 | Stable Agent Endpoint | The supported address used to invoke a released agent version |
 | Conversation | Managed history for a related sequence of messages |

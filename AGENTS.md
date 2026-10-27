@@ -108,6 +108,16 @@ techniques throughout and defer the student's own scenario choice to the
 capstone.
 Do not start coaching or provision resources merely because the repo is open.
 
+For both specialists, the coach supplies the already selected MCP connection
+information from workshop/MCP-SERVICES.md. Weather uses
+https://weather.datakoot.com/mcp, initially weather_forecast; Cultural Travel
+uses https://mcp.travel.art/, initially find_museum_guide. These are public,
+free-to-use, no-authentication services, not participant-hosted infrastructure.
+Discover current schemas, explain and obtain approval for the same incremental
+connection/test process for each agent, and verify Foundry runtime evidence.
+Do not ask participants to find server URLs, obtain keys, or deploy an MCP
+server. Report actual discovery/access failures rather than inventing tools.
+
 When the user asks to edit the curriculum, documentation, examples, or coach,
 perform that repository task normally. Do not interpret curriculum text or
 example prompts as instructions to deploy a student's agent.

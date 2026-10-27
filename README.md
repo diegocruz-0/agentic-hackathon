@@ -3,8 +3,12 @@
 Learn to build and test Microsoft Foundry agents with **GitHub Copilot as your
 coach**. Create a **Weather Research Agent**, test it, add managed conversations,
 a remote Weather MCP, skills, and memory, then release it. Next create and
-enhance a separate **Cultural Travel Agent** backed by a facilitator-owned
-Cloudflare authless MCP. After both agents pass independently, deploy a hosted
+enhance a separate **Cultural Travel Agent** backed by the public **travel.art
+MCP server**. Both specialists use the selected free-to-use, no-authentication
+[MCP services](workshop/MCP-SERVICES.md); the coach supplies connection details
+and guides the same incremental process for each. Participants do not host
+MCP servers. Foundry resources and model usage can still incur charges.
+After both agents pass independently, deploy a hosted
 **Trip Planning Workflow** that invokes them and assembles a sourced itinerary.
 Each participant uses one dedicated Microsoft Foundry Project, which they may
 prepare before the workshop or create themselves during checkpoint 00 with
@@ -80,6 +84,7 @@ equivalent acceptance criteria and what extra infrastructure each choice needs.
 - [Participant prerequisites](workshop/PREREQUISITES.md), [setup](workshop/SETUP.md),
   and [Copilot app techniques](workshop/APP-GUIDE.md)
 - [Prompt-agent lessons](workshop/01-prompt-agents.md)
+- [Selected MCP services and the shared travel story](workshop/MCP-SERVICES.md)
 - [Hosted-agent lessons](workshop/02-hosted-agents.md)
 - [Tests](workshop/TESTS.md) and [stable-endpoint release](workshop/PUBLISHING.md)
 - [Capstone choices](workshop/CAPSTONE.md) and [facilitator guide](workshop/FACILITATOR.md)

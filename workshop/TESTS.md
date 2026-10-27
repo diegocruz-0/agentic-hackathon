@@ -5,6 +5,28 @@ automated grading service. Never use the coach's own answer as the runtime resul
 
 ## Run and judge
 
+Before running a case, name its execution route: **Run from the Copilot app -
+coach sends** or **Run in the Foundry portal - participant sends**. Follow
+COACH.md and APP-GUIDE.md for approvals, exact agent/version, conversation
+context, navigation, and where to report results. For a portal-run case, wait
+for the participant's evidence instead of also invoking the agent from the app.
+Portal inspection alone is not a test. Both routes require actual Foundry
+runtime evidence, not the coach's predicted answer; missing usage is unknown.
+
+Distribute required cases using the
+[mixed test plan](APP-GUIDE.md#where-tests-and-exploration-happen); participant
+Playground tests are normal practice, with a 50/50 target for coach-sent and
+participant-sent prompts across each specialist's lessons. Track actual prompts
+by route, allocate remaining suitable cases to balance them, and record any
+capability or preference exception; never add duplicate calls for the ratio. For each
+handoff, give a copy-ready prompt and ask for the actual reply plus available
+identifiers and case-specific evidence. Record route and provenance:
+participant-pasted output is participant-reported until corroborated. It does
+not alone prove tool execution, Conversation linkage, memory isolation, or
+consumer-endpoint invocation. Inspect the same run read-only within approved
+scope when needed; otherwise keep that requirement incomplete. Deduplicate
+usage by response identifier and label unavailable participant-run usage unknown.
+
 Record actual target/version, configuration and skill version, input, output,
 timestamp, and relevant trace/tool/store evidence. Use live positive integration
 tests; controlled test doubles can demonstrate failures only when clearly
@@ -28,6 +50,15 @@ and `Uncertainty` for Cultural Travel.
 
 ## Microsoft Foundry-managed Conversation behavior
 
+Before running checkpoint 03 or 10 tests, verify the
+[portal trace prerequisite](SETUP.md#portal-trace-prerequisite): the exact
+project's Application Insights connection and the inspection identity's
+telemetry-read access. D01-D02 runtime evidence can pass independently of
+tracing, but a missing trace connection or access leaves the required portal
+inspection blocked and the checkpoint incomplete. Preserve those runtime
+results; do not repeat model calls or change telemetry setup without approval.
+After an approved setup change, do not assume historical traces are backfilled.
+
 | ID | Input/procedure | Pass conditions |
 |----|-----------------|-----------------|
 | D01 | Provide destination/context, then ask a dependent follow-up in the same Conversation; capture its identifier | Context is retained; the same Conversation identifier is reused; no custom history store is implemented |
@@ -49,10 +80,16 @@ Cultural Travel. Memory supplies preferences; MCP tools supply external facts.
 
 ## Remote MCP
 
+Use the exact endpoints, actual schemas, and examples in
+[MCP-SERVICES.md](MCP-SERVICES.md). The coach provides connection details for
+both specialists; participants do not select or host the services. Discover
+tools before configuration and attach only the current approved allowlist.
+Local discovery is not Foundry runtime evidence.
+
 | ID | Input/procedure | Pass conditions |
 |----|-----------------|-----------------|
 | C01 | With only the verified Weather MCP forecast tool allowlisted, ask one supported weather question | Runtime tool call, validated arguments, result, upstream provenance/timestamp, grounded answer, and a guided Microsoft Foundry trace inspection of the tool span |
-| C02 | With only the verified Cloudflare Cultural Travel MCP introductory tool allowlisted, ask one supported attraction question | Runtime tool call, validated arguments, dataset version/attribution, grounded answer, and corresponding tool span; no weather claim |
+| C02 | With only travel.art `find_museum_guide` allowlisted, ask one supported museum question, such as the Metropolitan Museum of Art in New York | Runtime tool call, validated arguments, returned guide attribution/URL, available verification date, grounded answer, and corresponding tool span; no weather claim or invented dataset version |
 | C03 | For each specialist, try malformed/unsupported input and an isolated controlled MCP/upstream failure | Failure is attributed and reported; no invented result, unrelated-tool substitution, or blanket approval bypass |
 
 The checkpoint 04 C01 run is the full trace-navigation lesson: inspect tool name,
@@ -65,7 +102,7 @@ needed. A direct MCP client call does not prove the agent used the tool.
 | ID | Input/procedure | Pass conditions |
 |----|-----------------|-----------------|
 | S01 | Apply the Weather research skill; test ambiguous location, forecast/current/alert needs where supported, general knowledge, unnecessary-tool restraint, and partial failure | Exact skill version/delivery strategy recorded; verified tool selection and ordering; no unnecessary calls; provenance and failures remain explicit |
-| S02 | Apply the Cultural research skill; test destination search, attractions, cultural guidance, accessibility notes, unnecessary-tool restraint, and partial failure | Exact skill version/delivery strategy recorded; verified tool selection and ordering; missing accessibility data is not converted into a false claim |
+| S02 | Apply the Cultural research skill; test museum guides, art events, covered layovers, cultural recommendations, missing accessibility data, unnecessary-tool restraint, and partial failure | Exact skill version/delivery strategy recorded; only verified travel.art tools used appropriately; guide URLs/freshness preserved; empty results and failures explicit; missing accessibility data not converted into a false claim |
 
 A skill guides use of already available tools. It does not connect an MCP server,
 grant permission, or prove execution. Traces provide runtime proof.

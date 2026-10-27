@@ -23,6 +23,14 @@ Start with a workflow orientation:
 - the retiring visual Microsoft Foundry Workflow designer and Prompt Flow are
   not used.
 
+Continue the [shared story](MCP-SERVICES.md) with a fictional New York art trip.
+Use dates inside the actual weather forecast horizon and museum/event coverage
+returned by travel.art. Each specialist keeps its own MCP connection, skill,
+memory scope, and release. The coach supplies both existing agent release
+details and guides their connection into workflow code; the participant does
+not need another MCP server. A travel.art `recommend_art_trip` result alone is
+not the final workflow, because it does not invoke our Weather Research Agent.
+
 After approval, scaffold the smallest appropriate
 [official sample](https://github.com/microsoft-foundry/foundry-samples) under
 `student/hosted-agent/`. Record its source revision and dependency versions.
@@ -75,7 +83,11 @@ Deploy the workflow as a Microsoft Foundry Hosted Agent. Inspect its running
 version, Stable Agent Endpoint, identity, configuration, and nested trace. The
 workflow trace should show request validation, both agent invocations, both
 contract validations, and aggregation. Correlated specialist traces remain the
-detailed proof of `get_forecast`, `get_attractions`, and other MCP tool calls.
+detailed proof of `weather_forecast`, `find_museum_guide`, and other approved
+MCP tool calls. The hosted workflow must invoke both released specialists
+rather than attaching their tools directly or replacing either with model
+knowledge. If forecast dates or catalogue coverage are unavailable, preserve
+the usable evidence and explicitly report the missing part.
 
 Run W01-W03 and P01-P04 remotely. Demonstrate a successful itinerary, each
 single-specialist failure, structurally invalid specialist data, timeout or

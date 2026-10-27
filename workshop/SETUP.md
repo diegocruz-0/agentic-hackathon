@@ -30,6 +30,12 @@ silently. The shared story creates and enhances the Weather Research Agent,
 repeats the evidence loop for the Cultural Travel Agent, then introduces hosted
 workflow code. Capstone choice comes later.
 
+The core MCP services are already selected in [MCP-SERVICES.md](MCP-SERVICES.md).
+The coach supplies their URLs and tool information at the relevant lessons.
+Participants need no MCP service account, API key, Cloudflare account, or MCP
+hosting setup. This does not replace Foundry authentication or remove Azure
+costs.
+
 **App practice:** ask the coach to explain repository context without making
 changes, then compare that read-only request with asking it to perform a
 specific change. Starting the workshop does not grant blanket permission to
@@ -44,8 +50,9 @@ it does not create a Foundry agent or grant Azure permissions.
 | Participant project | Participant chooses the signed-in Microsoft account to use; coach execution identity can access the exact project and has the required permission for the current approved step; participant can create a dedicated project if one is not already available | Confirm the identity actually used by the Foundry request matches the participant's choice, then directly verify project identity and operation-specific permission; no shared or silently substituted project |
 | Workshop model | Microsoft Foundry Model Catalog access, usable project quota, and model-deployment permissions | Inspect existing deployments first; participant chooses whether to reuse a suitable one or independently selects a compatible model and explicitly approves a new named deployment and possible cost |
 | SDK fallback | Python and isolated environment | Use the current prompt quickstart's package versions in the student implementation |
-| Weather MCP | Approved reachable read-only weather endpoint | Protocol, authentication, allowlist, upstream provenance, Foundry-side reachability |
-| Cultural Travel MCP | Facilitator-owned Cloudflare authless MCP Worker | Stateless Streamable HTTP endpoint, narrow read-only tools, dataset license/version, input bounds, logs, and Foundry-side reachability |
+| First successful project connection at checkpoint 00; recheck before checkpoint 03 tests and portal trace inspection | Application Insights connected to the participant's Foundry Project, with telemetry-read access | Check connection metadata and telemetry-read access read-only; record readiness or the specific blocker; obtain separate approval for any connection, new resource, or new test |
+| Weather MCP | Selected public endpoint `https://weather.datakoot.com/mcp`; no authentication | Current Streamable HTTP schemas; `weather_forecast` first, approved four-tool expansion later; US coverage, upstream provenance, and Foundry runtime evidence |
+| Cultural Travel MCP | Selected public endpoint `https://mcp.travel.art/`; no authentication | Current Streamable HTTP schemas; `find_museum_guide` first, approved four-tool expansion later; actual catalogue coverage, guide attribution/freshness, and Foundry runtime evidence |
 | Memory | Chat and embedding deployments, memory capability | Store permissions, identity scope, retention, update behavior |
 | Skills | Skills API and compatible client/provider | Upload/version/retrieve support; MCP resources support is distinct from tools |
 | Hosted workflow | Azure Developer CLI (`azd`), Agent Framework, supported Foundry extensions/runtime, and tracing | Current sample, runtime, both downstream endpoints/contracts, deployment support, quota/cost boundary |
@@ -92,7 +99,10 @@ Project or permission to create resources. Immediately after receiving the
 project endpoint, make a direct authenticated request to that exact project and
 confirm its identity. Then verify the operation-specific permission required
 for the current step; read-only access alone is insufficient to create
-resources. Never probe write access by creating a throwaway resource, print or
+resources. On this first successful project connection, also perform the
+[read-only portal tracing readiness check](#portal-trace-prerequisite) and
+report the result before moving to model selection. Never probe write access
+by creating a throwaway resource, print or
 request credentials, broaden permissions, or switch identities without
 approval. Use the existing authenticated context for read-only discovery and
 approved operations. If sign-in, direct project access, or required permission
@@ -120,9 +130,22 @@ before asking for a new deployment name. Before creating a new deployment,
 confirm the participant's project, model name/version, deployment name, and
 acknowledgment that creation may incur cost. Before reuse, confirm the exact
 target and the participant's explicit choice; explain that model usage may
-still incur cost. Detailed region, SKU, capacity, quota, and pricing review is
-not required for the core lesson unless the selection or an error makes it
-necessary. Create only the participant's dedicated project and only an
+still incur cost. Before the reuse choice or new-deployment creation approval,
+follow COACH.md's model-selection pricing display: explain tokens and show
+verified input, cached-input (if supported), and output prices per token and per
+million tokens for the actual model, deployment type, region, and currency.
+Before the first prices or paid-call approval, explain that these counts and
+estimates cover the agents built and tested in Foundry and their model setup
+tests, not the Workshop Coach conversation in the Copilot app. Copilot usage
+and billing are separate and excluded; do not imply the coach is free.
+Label subsequent summaries **Foundry agent/model usage**.
+Include the source and date, distinguish estimated retail cost from the final
+bill, and state explicitly when pricing cannot be verified. Do not hardcode
+example prices or force token rates onto a different billing model.
+Save the verified pricing basis locally for later usage estimates.
+Detailed capacity, quota, and pricing comparisons beyond those rates are not
+required unless the selection or an error makes them necessary.
+Create only the participant's dedicated project and only an
 explicitly approved new deployment inside it, then inspect the result.
 
 ## Official installation links
@@ -162,6 +185,53 @@ The facilitator must preflight all later capabilities. At checkpoint 00, mark
 each capability `available`, `unavailable`, or `unverified`, with evidence.
 Initial prompt access must work to pass 00. Later capabilities can be unverified
 at this point, but their own checkpoints cannot pass until verified.
+
+### Portal trace prerequisite
+
+**Application Insights** is Azure's telemetry service for storing execution
+records such as agent traces. A **trace** records the calls and steps of an
+execution. Foundry-managed Conversation history and portal trace visibility
+are separate capabilities: a successful model reply or saved Conversation does
+not prove tracing is configured.
+
+Check portal tracing at the first successful authenticated project connection
+in checkpoint 00, before model selection; do not wait until checkpoint 03 to
+discover a missing prerequisite. Repeat the check before checkpoint 03's tests
+and required portal inspection, and when the project or inspection identity
+changes. Use read-only metadata to identify the Application Insights resource
+connected to the exact Foundry Project, then verify telemetry-read access using
+a supported read-only request under the inspection identity. Do not request
+connection secrets, generate agent traffic, or create resources as a probe.
+If the coach cannot verify the participant's portal identity's access, record
+that access as unverified rather than inferring it from the coach's identity.
+Project or model access alone is not proof of telemetry access. Follow the current
+[Foundry tracing prerequisites and setup](https://learn.microsoft.com/azure/foundry/observability/how-to/trace-agent-setup).
+
+Save the result in `capabilities.portal_tracing` in local progress: readiness
+`status` (`available`, `unavailable`, or `unverified`), connection status,
+discovered Application Insights resource ID, telemetry-read access,
+trace visibility, check time, and sanitized evidence naming the checked
+identity and any blocker. A confirmed missing connection or denied read is
+unavailable; an unsupported or inconclusive check is unverified. Report the
+result in plain language immediately. A configured connection and confirmed
+read access establish readiness, not proof that a particular trace was
+ingested; leave trace visibility unverified until an actual trace is observed.
+Missing tracing does not invalidate a successful project connection or model
+test, but must remain an explicit blocker for the required trace exercises.
+
+If the connection or access is missing, explain the specific blocker before
+directing the participant to search for a trace. Connecting an existing
+Application Insights resource is a project change; creating one is an
+additional resource change. Confirm the exact targets, permissions, possible
+ingestion/storage/retention costs, and data captured before either action.
+Do not create resources or change permissions without separate approval.
+Telemetry charges are not included in model-token cost estimates.
+
+Preserve successful Conversation tests and service-returned identifiers if
+tracing is blocked, but leave the required portal exercise incomplete.
+Do not assume enabling tracing backfills earlier executions. If a new
+invocation is needed after setup, obtain explicit approval for that bounded
+test and its model cost; do not automatically repeat previous tests.
 
 ## Student workspace
 
@@ -221,8 +291,9 @@ references before use.
 - [Hosted agents](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/hosted-agents?view=foundry)
 - [Official Foundry samples](https://github.com/microsoft-foundry/foundry-samples)
 - [MCP tools](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/model-context-protocol)
-- [Cloudflare authless remote MCP template](https://developers.cloudflare.com/agents/model-context-protocol/guides/remote-mcp-server/)
-- [Cloudflare Workers limits](https://developers.cloudflare.com/workers/platform/limits/)
+- [Selected workshop MCP services, configuration, and story](MCP-SERVICES.md)
+- [Weather MCP provider](https://datakoot.com/weather-geo)
+- [travel.art MCP provider](https://mcp.travel.art/)
 - [Memory stores](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/memory-usage)
 - [Skills](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/skills)
 - [Current agent model and stable endpoints](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/migrate-agent-applications)
