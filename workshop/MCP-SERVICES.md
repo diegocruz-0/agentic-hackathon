@@ -9,6 +9,11 @@ not the MCP servers directly.
 
 An MCP server is a remote service exposing callable operations called tools.
 Connecting a server to Copilot does not connect it to a Foundry agent.
+The core now teaches [reusable Foundry tools and Toolboxes](TOOLS-AND-TOOLBOXES.md):
+save Weather's project tool connection and use it in a forecast-only
+Weather Toolbox at 04, expand at 05 and verify the binding at 07, then deepen Toolbox practice
+with Cultural at 11. No planned Weather migration is needed at 14.
+Registration, attachment and actual execution are separate evidence boundaries.
 
 ## Selected services
 
@@ -95,10 +100,21 @@ prove that our hosted workflow invoked the Weather Agent.
 
 ## First-tool configuration
 
-These are tool definition fragments, not complete agent definitions or
+These are **upstream direct-MCP reference fragments**, not the complete
+reusable-connection/Toolbox configuration for the core route. They document
+the selected public endpoints, tool names and approval policy, and remain
+useful for historical direct-path evidence. At 04 and 11 reference the
+saved upstream connection inside the domain Toolbox and attach its verified
+version-specific endpoint through a separate authenticated connection,
+not the direct fragment below. Retain `server_url`; the connection reference
+does not replace it. Use discovered qualified names. Do not append a guessed connection
+field or use a public upstream URL in place of a Toolbox endpoint.
+
+These fragments are not complete agent definitions or
 permission to create versions. After project access, current API support, live
 schema discovery, and participant approval, attach only the fragment for the
-current specialist to its own candidate. Keep the chosen model and existing
+current specialist on an explicitly agreed direct/partial route, or use its
+upstream settings in the rehearsed core integration. Keep the chosen model and existing
 versions unchanged. Do not attach both servers to one specialist.
 
 Weather checkpoint 04:
@@ -160,6 +176,11 @@ story, not authorization to skip steps or run the whole workshop at once.
 Keep the planned 50/50 coach/participant test mix, exact navigation, copy-ready
 prompts, cost boundaries, approval stops, actual evidence, and teach-backs.
 Students choose their own capstone only after this shared workflow.
+
+Follow the five-to-six-hour core agenda: teach the method with Weather and
+use shorter reminders for Cultural Travel. Supply MCP details and require
+independent evidence for both without repeating the full explanation or trace
+tour. The student-chosen capstone is an optional separate follow-on.
 
 ## Coach recovery when connection details appear missing
 

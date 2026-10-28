@@ -22,8 +22,11 @@ Every participant uses one dedicated Microsoft Foundry Project. They may create
 it before the workshop or create it themselves at checkpoint 00 with coach
 guidance after confirming the target and possible costs. The facilitator does
 not assign the project name or endpoint. Follow this opening order: welcome and
-explain the workshop, confirm which Microsoft account the participant wants to
-use, then ask for the actual Project Endpoint. If they do not know the endpoint
+explain the workshop, ask the two quick product-specific experience questions
+from COACH.md, then begin setup by confirming which Microsoft account the
+participant wants to use and immediately asking for the actual Project
+Endpoint. Save experience preferences locally and reuse them; no second start
+command or proficiency test is needed. If they do not know the endpoint
 or do not yet have a project, help them safely locate or create their own
 project. The coach does not create it on their behalf or switch projects
 silently. The shared story creates and enhances the Weather Research Agent,
@@ -53,6 +56,8 @@ it does not create a Foundry agent or grant Azure permissions.
 | First successful project connection at checkpoint 00; recheck before checkpoint 03 tests and portal trace inspection | Application Insights connected to the participant's Foundry Project, with telemetry-read access | Check connection metadata and telemetry-read access read-only; record readiness or the specific blocker; obtain separate approval for any connection, new resource, or new test |
 | Weather MCP | Selected public endpoint `https://weather.datakoot.com/mcp`; no authentication | Current Streamable HTTP schemas; `weather_forecast` first, approved four-tool expansion later; US coverage, upstream provenance, and Foundry runtime evidence |
 | Cultural Travel MCP | Selected public endpoint `https://mcp.travel.art/`; no authentication | Current Streamable HTTP schemas; `find_museum_guide` first, approved four-tool expansion later; actual catalogue coverage, guide attribution/freshness, and Foundry runtime evidence |
+| Foundry reusable tools (04/05) | Supported upstream connection registration and reuse inside a domain Toolbox | Exact schema/reference semantics, management permissions, read-back and same-ID reuse; anonymous upstream needs no secret; a separate authenticated connection targets the Foundry Toolbox |
+| Toolboxes (04/05, 11/12; verification at 07/14) | Supported Toolbox API/client and prompt-agent consumption in the project's region | Weather starts with one tool at 04, expands at 05, and verifies its binding at release; Cultural deepens the pattern; caller/runtime access, pinned endpoints, retained routing URL, verified connection names and actual discovered tool names, effective restrictions and approval/denial; see TOOLS-AND-TOOLBOXES.md |
 | Memory | Chat and embedding deployments, memory capability | Store permissions, identity scope, retention, update behavior |
 | Skills | Skills API and compatible client/provider | Upload/version/retrieve support; MCP resources support is distinct from tools |
 | Hosted workflow | Azure Developer CLI (`azd`), Agent Framework, supported Foundry extensions/runtime, and tracing | Current sample, runtime, both downstream endpoints/contracts, deployment support, quota/cost boundary |
@@ -109,10 +114,6 @@ approved operations. If sign-in, direct project access, or required permission
 is unavailable, state which check failed and pause before recommending or
 performing the operation.
 
-Once direct project connectivity and the current step's permission are
-verified, inspect its existing model deployments in Microsoft Foundry before
-asking for a model name/version or proposing reuse or a new deployment.
-
 Once the project is confirmed and directly readable, inspect its existing
 model deployments in Microsoft Foundry before asking for a model name/version
 or proposing reuse or a new deployment.
@@ -161,12 +162,35 @@ official public installer exists.
 | Microsoft Foundry portal | Checkpoint 00 onward | [Open Microsoft Foundry](https://ai.azure.com/) |
 | Python | Only when a lesson needs the SDK or the hosted scaffold | [Python downloads](https://www.python.org/downloads/) |
 | Foundry development tooling | Before SDK-based Foundry work | [Prepare the Foundry development environment](https://learn.microsoft.com/azure/foundry/how-to/develop/install-cli-sdk) |
-| Azure CLI | Only when the selected authentication or diagnostic path requires it | [Install Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) |
+| Azure CLI | Required before the first Foundry check: the coach verifies CLI availability and sign-in in the actual execution process | [Install Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) |
 | Azure Developer CLI (`azd`) | Before hosted checkpoint 15 | [Install Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) |
 
 Do not install VS Code for the core workshop. Do not use direct installer URLs
 copied into the curriculum; the official pages select the current supported
 package and include operating-system-specific instructions.
+
+### Optional advance readiness, same live approval boundaries
+
+Offer a facilitator-assisted preparation slot before the workshop. Run
+`python workshop\runner\workshop_runner.py readiness` in the coach's actual
+execution environment. This offline inventory checks tools and package
+versions without installing, authenticating, reading Azure resources or
+generating model usage. See [runner scope and setup](runner/README.md).
+
+Arrange tools in an isolated environment before the cohort when possible;
+otherwise install only when a prerequisite check identifies a missing tool.
+Then, with participant-confirmed account/project and agreed read-only scope,
+verify direct access, telemetry readiness and later memory/skill, consumer
+identity and hosted-runtime prerequisites. Mark each available, unavailable
+or unverified; metadata alone does not demonstrate runtime behavior.
+No project/model creation, memory-store write, deployment, paid test or role
+change is authorized by advance readiness. The live coach still confirms the
+account, immediately collects the endpoint and revalidates the actual context.
+
+The shared helper is deliberately narrow: creation/readback, bounded prompt
+tests, managed Conversation creation, exact tool approval/denial continuation,
+and response retrieval. It does not replace the installed skill, current
+permission guidance, memory/release helpers, or the hosted scaffold.
 
 ## Choose the actual resource boundary
 
@@ -292,6 +316,7 @@ references before use.
 - [Official Foundry samples](https://github.com/microsoft-foundry/foundry-samples)
 - [MCP tools](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/model-context-protocol)
 - [Selected workshop MCP services, configuration, and story](MCP-SERVICES.md)
+- [Reusable Foundry tools and Toolboxes](TOOLS-AND-TOOLBOXES.md)
 - [Weather MCP provider](https://datakoot.com/weather-geo)
 - [travel.art MCP provider](https://mcp.travel.art/)
 - [Memory stores](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/memory-usage)

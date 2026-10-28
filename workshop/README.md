@@ -9,6 +9,20 @@ The coach runs in the **GitHub Copilot app**; the student's agents run in
 coach's instructions, memory, skills, or MCP server/tool connections does not
 configure a deployed agent.
 
+**Plan for 5-6 hours** for the core workshop, ending at checkpoint 16 with two
+working specialists connected through the hosted workflow. The first agent
+teaches the method; the second applies it with shorter reminders, not repeated
+lectures. Required tests and approvals stay in place. See the
+[5.5-hour planning agenda](FACILITATOR.md#five-to-six-hour-core-agenda).
+The capstone at 17-19 is a separate optional extension.
+
+To keep that time for learning, the coach uses the
+[checkpoint execution matrix](TESTS.md#checkpoint-execution-matrix) and
+[shared execution helper](runner/README.md), captures evidence during tests,
+and reuses already learned navigation. These automate plumbing, not the
+participant's approvals, hands-on tests or understanding. Facilitators can
+offer the [optional advance readiness check](SETUP.md#optional-advance-readiness-same-live-approval-boundaries).
+
 ## Learning sequence
 
 | Concept/reference | Weather Research Agent | Cultural Travel Agent | Hosted workflow |
@@ -23,6 +37,16 @@ configure a deployed agent.
 | Agent collaboration | Specialists stay independently callable | Specialists stay independently callable | 15-16 coordinate both releases |
 
 The learning path keeps both prompt agents independently publishable.
+It also teaches [Foundry tools and Toolboxes](TOOLS-AND-TOOLBOXES.md):
+register Weather's reusable tool connection and forecast-only Toolbox at 04,
+expand that Toolbox at 05, verify its existing binding at 07, and deepen independent Toolbox
+practice with Cultural at 11. At 14 verify both releases, without migrating
+and re-releasing Weather.
+Tools supply operations, Toolboxes manage collections, and skills guide use.
+Each specialist retains only its own tools. This replaces connection plumbing
+within the existing checkpoints; changed bindings still require regressions.
+The current curriculum is `two-specialists-workflow-v8`; earlier progress
+requires an agreed migration, not automatic new passes.
 The Weather Research Agent and
 Cultural Travel Agent own different tools and evidence domains. Formal
 machine-readable contracts appear only when executable orchestration needs to
@@ -65,17 +89,17 @@ this as a vocabulary test. It introduces each term immediately before use:
 | 01 | [Weather baseline](01-prompt-agents.md#01-create-the-weather-research-agent) | B01-B03 | Explain vs implement |
 | 02 | [Weather instructions](01-prompt-agents.md#02-refine-weather-instructions) | I01 | Review a focused instruction diff |
 | 03 | [Weather conversations](01-prompt-agents.md#03-test-weather-managed-conversations) | D01-D02 | App session vs runtime Conversation |
-| 04 | [First Weather MCP tool](01-prompt-agents.md#04-connect-the-first-weather-mcp-tool) | C01, C03 and guided trace inspection | Compare coach and agent MCP connections |
-| 05 | [Weather skill and multiple tools](01-prompt-agents.md#05-guide-multiple-weather-tools-with-a-skill) | S01 | Review skill delivery and tool routing |
+| 04 | [First Weather MCP tool](01-prompt-agents.md#04-connect-the-first-weather-mcp-tool) | T01 reusable tool, T03 forecast-only Toolbox, C01, C03 and guided trace inspection | Inspect upstream connection, Toolbox authentication and agent binding |
+| 05 | [Weather skill and multiple tools](01-prompt-agents.md#05-guide-multiple-weather-tools-with-a-skill) | T03 four-tool Toolbox expansion, S01 | Review skill delivery, pinned binding and tool routing |
 | 06 | [Weather memory](01-prompt-agents.md#06-add-and-test-weather-memory) | M01-M03 | Save/resume vs agent memory |
-| 07 | [Release Weather Research Agent](01-prompt-agents.md#07-release-the-weather-research-agent) | P01-P03 | Ask for evidence, not a completion claim |
+| 07 | [Release Weather Research Agent](01-prompt-agents.md#07-release-the-weather-research-agent) | T03 existing Toolbox verification, final-path regressions and P01-P03 | Verify unchanged binding; ask for release evidence |
 | 08 | [Cultural baseline](01-prompt-agents.md#08-create-the-cultural-travel-agent) | B01-B03 | Compare independent agent definitions |
 | 09 | [Cultural instructions](01-prompt-agents.md#09-refine-cultural-instructions) | I01 | Review a focused instruction diff |
 | 10 | [Cultural conversations](01-prompt-agents.md#10-test-cultural-managed-conversations) | D01-D02 | Verify isolated runtime state |
-| 11 | [First Cultural Travel MCP tool](01-prompt-agents.md#11-connect-the-first-cultural-travel-mcp-tool) | C02, C03 | Inspect endpoint, allowlist, trace, and dataset provenance |
+| 11 | [First Cultural Travel MCP tool](01-prompt-agents.md#11-connect-the-first-cultural-travel-mcp-tool) | T01/T02 reusable tool and Cultural Toolbox, C02, C03 | Inspect Toolbox version, agent binding, effective allowlist and provenance |
 | 12 | [Cultural skill and multiple tools](01-prompt-agents.md#12-guide-multiple-cultural-tools-with-a-skill) | S02 | Review skill delivery and tool routing |
 | 13 | [Cultural memory](01-prompt-agents.md#13-add-and-test-cultural-memory) | M01-M03 | Verify separate memory scope |
-| 14 | [Release Cultural Travel Agent](01-prompt-agents.md#14-release-the-cultural-travel-agent) | P01-P03 plus two-agent comparison | Review two releases without conflating them |
+| 14 | [Release Cultural Travel Agent](01-prompt-agents.md#14-release-the-cultural-travel-agent) | Cultural final-path regressions/P01-P03, unchanged Weather release/dependency verification, T03 isolation and two-agent comparison | Review two independent Toolbox-backed releases without a planned Weather migration |
 | 15 | [Build Trip Planning Workflow](02-hosted-agents.md#15-build-and-test-the-trip-planning-workflow) | G01-G03 and W01-W03 locally | Review contracts, scaffold, and traces |
 | 16 | [Deploy and release workflow](02-hosted-agents.md#16-hosted-release) | W01-W03 remotely, P01-P04 | Review nested versions, routing, and rollback |
 | 17 | [Choose a capstone](CAPSTONE.md#17-choose-and-scope) | K01 | Turn an idea into a bounded two-specialist plan |
@@ -85,7 +109,8 @@ this as a vocabulary test. It introduces each term immediately before use:
 Each checkpoint depends on the preceding checkpoint. Both prompt agents must
 pass and be released independently before checkpoint 15 introduces executable
 orchestration. Where a checkpoint has substeps, test and pause between them.
-Capstone selection happens at 17, not during setup.
+Capstone selection happens at 17 if the participant chooses that follow-on,
+not during setup or as extra work inside the core time budget.
 
 Each lesson also has an **App practice** and **Alternative**. Try the primary
 approach and explain when the alternative is useful; repeating the whole lesson
@@ -108,8 +133,10 @@ is unnecessary. See [APP-GUIDE.md](APP-GUIDE.md) for examples and UI fallbacks.
 
 ## Completion
 
-All required checkpoints must pass, with observed test evidence and student
-teach-back. A compatible alternative app interaction can satisfy app practice;
+Core completion requires checkpoints 00-16; an explicitly chosen capstone
+extension also requires 17-19. Leave unchosen capstone checkpoints not started,
+not passed. All checkpoints required for the agreed route must pass, with
+observed test evidence and student teach-back. A compatible alternative app interaction can satisfy app practice;
 an unavailable UI control must not block the course. An unavailable required
 Microsoft Foundry capability does block its integration checkpoint.
 

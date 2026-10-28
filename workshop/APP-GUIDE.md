@@ -5,6 +5,13 @@ app technique when it becomes useful. The coach should show a primary approach,
 briefly compare an alternative, and let the student choose. Do not introduce
 several new UI concepts while also debugging an agent.
 
+Use the [core workshop time budget](FACILITATOR.md#five-to-six-hour-core-agenda).
+Demonstrate an app technique when first introduced, then use it naturally
+while building agent 2 rather than repeating the full tour. Keep the 50/50
+test-prompt mix and required hands-on evidence. Ask for deeper exploration only
+at a natural checkpoint when time allows or the participant requests it; do
+not add two optional prompts after every result.
+
 App features depend on build, policy, and available tools. Inspect what is
 actually exposed. Never invent buttons, keyboard shortcuts, slash commands,
 custom-agent selectors, or Canvas actions. The example prompts below work in
@@ -34,7 +41,7 @@ chat playground.
 | Lesson | Suggested mix of required tests |
 |--------|---------------------------------|
 | Baseline (01, 08) | Coach sends B01 to demonstrate the exchange; participant sends B02 and B03 in separate fresh Conversations and copies each result back. |
-| Instructions (02, 09) | Participant runs one matched before/after pair; coach runs the other two pairs. With the baseline allocation above, this gives five coach-sent and four participant-sent prompts. Keep both halves of each pair on the same route with fresh context. |
+| Instructions (02, 09) | Reuse the saved baseline replies as the before side; send each exact input once to the new instruction version on the same route as its baseline. With the allocation above this yields two coach-sent and four participant-sent prompts across baseline/instructions. Balance later suitable cases, not extra before-change calls. |
 | Conversations (03, 10) | Participant sends the three-message D01-D02 sequence if the interface supports the required history and identifier evidence. Otherwise use the supported client route and explain the limitation. Rebalance using later suitable tests. |
 | MCP and skills (04-05, 11-12) | Coach demonstrates the first tool request and approval boundary. Divide remaining required prompts between routes to bring the running split toward half each; participant returns the answer plus tool evidence. Keep controlled failures on the coach route when they need an isolated test client. |
 | Memory and release (06-07, 13-16) | Coach handles identity/scope, deletion, consumer-endpoint, and automated regression checks. A participant may send a required recall or normal-path test only when the interface can preserve its exact scope and target. Playground-only evidence never substitutes for a consumer-endpoint test. |
@@ -58,7 +65,34 @@ reply, and copies the actual reply back here, with the Response/Conversation
 identifiers and relevant tool details if available. Do not paste secrets or
 personal data; a safe excerpt can be labeled as such. If a reply fails, stalls,
 or a control differs, report that instead of retrying. The coach waits, reviews
-the returned evidence, and asks for understanding before advancing.
+the returned evidence, and uses one demonstrated understanding check for the
+checkpoint, not another quiz after every reply.
+
+### Capture evidence before leaving the test
+
+Before **Send**, confirm the exact **Version:**, model, intended Conversation
+context and test case. Selecting "latest" is not a version check. Keep the
+same selected version for the approved exchange and any matching tool
+approval; do not switch versions in the middle.
+
+Return this short public/synthetic record in one message:
+
+```text
+Case:
+Selected agent / version:
+Actual answer (or labeled safe excerpt):
+Response ID, if exposed:
+Conversation ID, when relevant:
+Tool name / arguments / result or error, when relevant:
+Usage, if exposed:
+```
+
+Missing fields are **unknown**, not an invitation to guess or to repeat the
+request. The coach checks required linkage read-only on the same run within
+scope. For coach-sent tests, the [runner](runner/README.md) captures those
+fields automatically; the participant still practices the required portal
+tests and trace inspection. Confirm which answer a trace belongs to before
+copying its ID: a denial reply is not the successful forecast.
 
 Both test routes use the agent in Foundry and may incur Foundry charges.
 Neither route's token totals measure the Workshop Coach conversation in the
@@ -136,7 +170,7 @@ or a different date filter does not authorize another model call or setup change
 | 01, 08 | "Explain this agent definition before editing it." Then explicitly request the small change | Ask for a proposed definition diff first to retain more control |
 | 02, 09 | Review the focused instruction diff and compare the same test before and after | Ask for an instruction proposal without applying it |
 | 03, 10 | Keep this coaching session; create separate runtime Conversations for each agent test | Use a new app session for an independent task; do not assume it inherits runtime history |
-| 04, 11 | Inspect the MCP Server Endpoint, one-tool allowlist, and caller; at 04 inspect the first tool trace in detail | Compare a Copilot MCP registration with a Microsoft Foundry agent connection |
+| 04, 11 | For each specialist inspect the upstream connection, Toolbox version/endpoint, separate authentication connection, agent binding, one-tool effective allowlist and runtime identity; 04 includes the first full tool-trace walkthrough | Compare Copilot registration, reusable Foundry connection, Toolbox and authenticated agent binding |
 | 05, 12 | Review each skill diff, tool allowlist, exact version, and delivery strategy | Use a file/editor panel if available; reading an artifact is not deployment evidence |
 | 06, 13 | "Pause and save my progress." Then "Resume and recheck my target." | A new worktree needs an approved progress import and does not share agent memory |
 | 07, 14, 16 | "Show the endpoint, selected version, and actual test results; don't infer success." | Use supported hosted controls when available; return to Chat for evidence review |

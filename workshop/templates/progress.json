@@ -1,11 +1,17 @@
 {
   "schema_version": 3,
-  "curriculum_version": "two-specialists-workflow-v6",
+  "curriculum_version": "two-specialists-workflow-v8",
   "paused": false,
   "scenario": null,
   "student_project_root": "student",
   "current_checkpoint": "00",
   "completed": false,
+  "coaching_preferences": {
+    "experience": {
+      "foundry": null,
+      "copilot_app": null
+    }
+  },
   "context": {
     "subscription_id": null,
     "project_endpoint": null,
@@ -22,6 +28,19 @@
     "publishing_model": null
   },
   "capabilities": {
+    "foundry_tool_connections": {
+      "status": "unverified",
+      "checked_at": null,
+      "evidence": null
+    },
+    "toolboxes": {
+      "status": "unverified",
+      "runtime_identity_access": "unverified",
+      "effective_tool_restrictions": "unverified",
+      "per_call_approval": "unverified",
+      "checked_at": null,
+      "evidence": null
+    },
     "portal_tracing": {
       "status": "unverified",
       "connection_status": "unverified",
@@ -30,6 +49,48 @@
       "trace_visibility": "unverified",
       "checked_at": null,
       "evidence": null
+    }
+  },
+  "tool_assets": {
+    "weather": {
+      "connection_id": null,
+      "upstream_endpoint": null,
+      "toolbox_auth_connection_id": null,
+      "toolbox_auth_type": null,
+      "toolbox_auth_audience": null,
+      "runtime_principal_id": null,
+      "runtime_access_evidence": null,
+      "toolbox_name": null,
+      "toolbox_version": null,
+      "toolbox_endpoint": null,
+      "agent_version": null,
+      "binding_evidence": null,
+      "discovery_evidence": null,
+      "runtime_execution_evidence": null,
+      "approval_denial_evidence": null,
+      "portal_visibility": "unverified",
+      "selected_upstream_tools": [],
+      "exposed_tool_names": []
+    },
+    "cultural": {
+      "connection_id": null,
+      "upstream_endpoint": null,
+      "toolbox_auth_connection_id": null,
+      "toolbox_auth_type": null,
+      "toolbox_auth_audience": null,
+      "runtime_principal_id": null,
+      "runtime_access_evidence": null,
+      "toolbox_name": null,
+      "toolbox_version": null,
+      "toolbox_endpoint": null,
+      "agent_version": null,
+      "binding_evidence": null,
+      "discovery_evidence": null,
+      "runtime_execution_evidence": null,
+      "approval_denial_evidence": null,
+      "portal_visibility": "unverified",
+      "selected_upstream_tools": [],
+      "exposed_tool_names": []
     }
   },
   "resources": [],

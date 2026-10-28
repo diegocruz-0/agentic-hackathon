@@ -32,9 +32,76 @@ timestamp, and relevant trace/tool/store evidence. Use live positive integration
 tests; controlled test doubles can demonstrate failures only when clearly
 labeled. Do not break shared services for testing.
 
-Run all previously applicable cases after a capability change. A known-failing
+Run previously applicable cases using the stage-aware matrix below after a
+capability change. A known-failing
 candidate must remain outside Stable Agent Endpoint routing. A successful build,
 deployment command, or plausible answer is not a pass.
+
+Keep the [core agenda](FACILITATOR.md#five-to-six-hour-core-agenda) by reducing
+repeated teaching, not test coverage. Group coach-side regression checks within
+an explicitly approved current-step call/cost budget and summarize their
+meaningful results together. Reuse valid unchanged evidence for the same
+retained target/version rather than rerunning it just for a demonstration.
+Agent 2 still needs its own actual tests, but not a second full tutorial or a
+new quiz after each result. One demonstrated understanding check per checkpoint
+is sufficient; do not waive required runtime or release evidence.
+
+## Checkpoint execution matrix
+
+Plan the following required coverage before asking for the step's approval.
+A case may satisfy several assertions in one exchange: label each assertion
+and its evidence rather than send duplicate prompts. A batch is an explicitly
+approved collection of checks on the **current candidate**, not authorization
+for future lessons, tool approvals or retries. Use the
+[shared runner](runner/README.md) for its supported operations.
+
+| Checkpoints | Required new behavior | Regression on the current candidate |
+|-------------|-----------------------|-------------------------------------|
+| 01, 08 | B01-B03, one fresh context per input | None; save exact baseline prompts, replies, target, version and route |
+| 02, 09 | I01: same three inputs, required headings | These same three after-change exchanges also satisfy B01-B03; compare with saved baseline evidence, not three new before-change calls |
+| 03, 10 | D01 two turns in Conversation A; D02 dependent follow-up in new Conversation B | B01-B03/I01 in an approved batch; missing-context B02 can share the D02 exchange if its exact input and assertions match |
+| 04, 11 | T01 reusable connection; T03 Weather Toolbox-at-04 or T02 Cultural Toolbox-at-11; C01 or C02 first-tool success and trace; C03a/C03b | B01-B03/I01 and D01-D02; no memory or later skill tests yet |
+| 05, 12 | T01 connection reuse and T03 Weather Toolbox expansion at 05 / T02 Cultural Toolbox expansion at 12; S01 or S02 routing/provenance and partial failure | B01-B03/I01, D01-D02, C01R or C02R, C03a/C03b; a skill scenario may also satisfy a matching forecast/museum regression |
+| 06, 13 | M01-M03, consented synthetic preference, trusted-scope isolation/correction/deletion | Previous applicable coverage, using C01R/C02R and the post-memory D variant below; the required skill/MCP personalization run may satisfy overlapping assertions |
+| 07, 14 | T03 existing Weather Toolbox/dependency verification at 07; P01-P03 for each specialist at its release; two-specialist comparison at 14 | Full applicable B/I/D/C/S/M coverage on each final Toolbox-backed candidate/path, counted once; at 14 verify unchanged Weather metadata and reuse its valid evidence, not a second full Weather suite |
+| 15 | G01-G03 and W01-W03: local fixtures for validation/failure branches and approved live calls to both released specialists | Specialist release evidence must match the versions invoked; no specialist rewrite or full rerun merely to scaffold the workflow |
+| 16 | W01-W03 and P01-P04 remotely; retain pre-release evidence and a known-good recovery target | Full applicable G/W behavior on the final hosted version and consumer path; one exchange can satisfy both W01 and P01 |
+
+Prior results can be reused only for the **same retained version, configuration,
+execution path and relevant identity/scope**. A new version needs its applicable
+regressions; an older pass is not a pass for the new version. Release checks
+through a different consumer path cannot reuse project-Playground results as
+consumer evidence. Do not duplicate an exact final-version/path test just
+because it appears under both feature and release headings.
+
+Stage variants resolve capability changes without dropping assertions:
+
+- **C01/C02 first-tool milestone:** the single-tool allowlist is required at
+  04/11. Preserve that historical evidence on its retained version.
+  **C01R/C02R later regression:** verify the current reviewed allowlist, then
+  prove the relevant forecast/museum tool executes with valid inputs, returns
+  grounded evidence, and has corresponding trace linkage. Do not shrink a
+  four-tool configuration back to one tool merely to repeat the first lesson.
+  Supplied forecast coordinates should not trigger unnecessary geocoding.
+- **D01/D02 after memory:** use an authorized synthetic scope with no stored
+  destination/referent, verified through the supported memory API. Retain the
+  same-versus-fresh Conversation and no-history-replay assertions. A consented
+  unit/activity preference is not destination context. Do not disable shared
+  memory, erase real preferences, or let a prompt choose its security scope.
+  If a clean scope cannot be established, keep the test blocked.
+- **C03a:** unsupported/malformed input with no invented result.
+  **C03b:** controlled failure with explicit attribution and no invented result.
+  Declining a matching MCP approval is a valid **permission-denial** variant,
+  not proof of an upstream outage. A provider-error variant or isolated fixture
+  must be labeled as such. Skill partial-failure coverage still needs a
+  partial-failure case; denial alone does not establish every failure mode.
+
+Use the lesson's exact saved inputs for B/I comparisons. For S01/S02, list
+the chosen supported location/date, tool needs, ambiguous input, no-tool case
+and controlled partial failure before execution. Use approved fixed inputs
+and service schemas; do not invent output or call counts before observing
+the tool requests. Budget the initial model requests separately from exact
+tool approvals/continuations. Never batch past a pending approval.
 
 ## Baseline and instructions
 
@@ -85,6 +152,45 @@ Use the exact endpoints, actual schemas, and examples in
 both specialists; participants do not select or host the services. Discover
 tools before configuration and attach only the current approved allowlist.
 Local discovery is not Foundry runtime evidence.
+
+## Foundry tool management
+
+Follow [Tools and Toolboxes](TOOLS-AND-TOOLBOXES.md) for the current supported
+route, approval boundaries, identity checks and dependency versioning.
+These assertions supplement C/S/P, not replace them. Use the same approved
+runtime exchanges for overlapping assertions; read-back and discovery checks
+do not require extra model prompts.
+Judge only the assertions for the current stage: record T01-at-04 and
+T01-at-05 reuse separately, and T02-at-11 before its T02-at-12 expansion.
+Future-stage assertions do not block the earlier milestone, and an earlier
+milestone does not automatically pass the later expansion.
+
+| ID | Input/procedure | Pass conditions |
+|----|-----------------|-----------------|
+| T01 | At 04 register/read the Weather project tool connection and reference it inside the Weather Toolbox; at 05 reuse it; repeat registration/read-back for travel.art at 11 | Exact owned connection ID, target and anonymous upstream settings verified; same Weather ID reused rather than duplicated; separate authenticated Toolbox connection identified; effective current-stage tool selection and actual runtime linkage verified; saving an unused connection beside a direct URL is not reuse |
+| T02 | At 11 attach Cultural's version-specific Toolbox endpoint; at 12 expand only its reviewed Toolbox version | Exact connection, Toolbox version/endpoint and agent binding read back; developer and runtime access verified separately; only the one/four intended cultural tools are discoverable/callable at that stage, including dispatch/search; actual upstream arguments visible and per-call approval plus denial demonstrated; C02/C03/S02 evidence linked through Toolbox; no Weather tools or direct bypass |
+| T03 | At 04 attach the forecast-only Weather Toolbox; at 05 expand to four tools; at 07 verify the existing final binding; at 14 verify unchanged release/dependencies and two-domain isolation | Same upstream connection reused; separate Toolbox authentication, exact version/binding and caller/runtime access verified; correct routing URL and discovered names at both layers; no direct bypass; actual approval/denial and current-stage forecast/skill behavior work; later skill/memory/release assertions do not block 04; full final regressions/P01-P03 cover the release once; each specialist can discover/call only its own approved tools; no planned migration/re-release |
+
+Toolbox discovery may qualify or rename upstream tools. Record the actual
+mapping, selected connection and version, upstream arguments/results, runtime
+identity and response/trace linkage. An outer `call_tool` span or a successful
+tool listing alone does not prove which upstream operation executed.
+Record a negative excluded-tool check using supported discovery/authorization
+inspection and an isolated denied invocation when needed; never perform an
+unauthorized upstream action as the negative test. Instructions saying
+"ignore other tools" are not access control.
+
+Changing a Toolbox binding/version or its referenced connection settings
+invalidates affected current-path evidence even if the agent instructions
+are unchanged. Unsupported approval propagation, unrestricted dispatch,
+missing runtime permission or unavailable connection/Toolbox APIs block the
+affected gate. Do not mark a direct-MCP fallback as a T01/T02/T03 pass.
+Toolbox `require_approval` is metadata for the consuming runtime, not an
+endpoint-enforced block on `tools/call`. Read-back of `"always"` alone does
+not pass the approval assertion; observe actual pending approval and denial
+without upstream execution in the selected runtime.
+
+### MCP behavior cases
 
 | ID | Input/procedure | Pass conditions |
 |----|-----------------|-----------------|
@@ -140,8 +246,10 @@ Two manual specialist calls followed by a manually written itinerary do not pass
 | P03 | Run all applicable feature tests through the consumer path | Tools, Conversations, memory, skill delivery, errors, identity, and downstream access still behave as tested |
 | P04 | Promote a fully passing update, invoke it, and verify the previous known-good version remains an available documented recovery target | Stable endpoint remains unchanged; metadata and behavior prove the update; recovery target and procedure are verified without routing traffic to a known-failing version |
 
-At 07, P03 covers Weather B, I, D, C01/C03, S01, and M tests. At 14,
-repeat Cultural B, I, D, C02/C03, S02, and M tests. At 16 add G and W tests.
+At 07, P03 covers Weather B, I, post-memory D, C01R/C03, S01, and M tests.
+At 14, repeat Cultural B, I, post-memory D, C02R/C03, S02, and M tests.
+Retain the original single-tool C01/C02 milestone evidence separately.
+At 16 add G and W tests.
 At 19 use the capstone equivalents.
 
 Failed candidate tests are retained for diagnosis, but a known-failing candidate

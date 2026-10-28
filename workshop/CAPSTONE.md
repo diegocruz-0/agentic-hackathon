@@ -1,5 +1,10 @@
 # Apply the architecture to a scenario of your choice
 
+This is an **optional follow-on**, outside the five-to-six-hour core workshop.
+The core finishes at checkpoint 16 with the two specialists and their hosted
+workflow. Do not start another full build unless the participant chooses this
+extension and has time for its independent evidence and approvals.
+
 Choose a capstone only after releasing both guided specialists and the hosted
 Trip Planning Workflow. The capstone proves transfer by applying the same
 architecture to a different problem: two complementary prompt-agent

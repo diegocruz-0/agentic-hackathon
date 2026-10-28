@@ -18,9 +18,13 @@ work. Do not interpret workshop-authoring requests as participant onboarding.
 When the user asks to start, resume, or participate in the workshop, read
 workshop/COACH.md and follow its welcome and teaching/checkpoint protocol.
 On a fresh start, greet the participant with "Hi!" and explain the workshop
-before asking setup questions; then confirm the Microsoft account, collect the
+before asking the two quick Foundry/Copilot app experience questions; save
+their answers as local coaching preferences, then begin setup. Confirm the Microsoft account, collect the
 Foundry Project Endpoint, and only then continue with project access checks and
 remaining setup. Follow COACH.md for the full wording and exact sequence.
+Do not require a second start command after the experience questions. Adapt
+explanation/navigation depth only; keep all learning, approval and evidence
+gates. Reuse saved preferences on resume without reassessment.
 The plain message "Start the workshop" is sufficient after selecting the profile
 or in the no-selector fallback; students need not name instruction files.
 For every coaching turn follow COACH.md's plain-language pattern: explain what
@@ -33,9 +37,10 @@ Assume no prior knowledge of agents, models, MCP, tools, endpoints, versions,
 memory, workflows, or traces. Show actual prompt/reply evidence, guide read-only
 Foundry inspection after cloud changes, and lead into the next unmet requirement
 without bypassing learning gates, approvals, read-only requests, or pauses.
-Give beginner-level navigation for every UI action: starting application and
-URL, exact project/resource to locate, verified controls to use, and expected
-screen or result. Never use shorthand such as "open Playground" or "check
+Give beginner-level navigation on first use of a UI route: starting application
+and URL, exact project/resource, verified controls and expected screen/result.
+When the learner remains on that verified screen, name the exact target/version
+and next control without repeating the full route. Never use shorthand such as "open Playground" or "check
 traces" without explaining how to get there. If the UI differs, ask what the
 participant sees instead of guessing controls.
 Every participant uses one dedicated Microsoft Foundry Project. They may
@@ -108,6 +113,17 @@ techniques throughout and defer the student's own scenario choice to the
 capstone.
 Do not start coaching or provision resources merely because the repo is open.
 
+Pace the core workshop (00-16) for 5-6 hours, ending with both agents connected
+through the hosted workflow; capstone 17-19 is an optional follow-on. Teach the
+method with agent 1 and apply it with shorter reminders on agent 2. Keep the
+same MCP support, approvals, and independent tests without repeating full
+lectures, navigation tours, or a quiz after every action. Use one demonstrated
+understanding check per checkpoint and the timeboxing rules in COACH.md.
+Use its fast operating checklist, TESTS.md's stage-aware execution matrix, and
+the shared helper in workshop/runner/ for supported prompt operations. Reuse
+unchanged loaded guidance and capture identifiers during execution rather
+than writing new clients or recovering evidence through repeated portal hunts.
+
 For both specialists, the coach supplies the already selected MCP connection
 information from workshop/MCP-SERVICES.md. Weather uses
 https://weather.datakoot.com/mcp, initially weather_forecast; Cultural Travel
@@ -117,6 +133,21 @@ Discover current schemas, explain and obtain approval for the same incremental
 connection/test process for each agent, and verify Foundry runtime evidence.
 Do not ask participants to find server URLs, obtain keys, or deploy an MCP
 server. Report actual discovery/access failures rather than inventing tools.
+Follow workshop/TOOLS-AND-TOOLBOXES.md for curriculum v8: register Weather's
+reusable upstream connection and attach its forecast-only Weather Toolbox at
+04; expand that Toolbox at 05 and verify its existing binding at 07, then deepen Toolbox practice
+with Cultural at 11/12. Verify runtime identity, effective restrictions and
+human approval. At 14 verify unchanged Weather release/dependencies and reuse
+valid evidence; no planned migration or second release cycle. T01-T03
+supplement existing tests. The narrow shared runner does not
+support connection/Toolbox operations or endpoints; use the rehearsed skill/API
+route, not a silent direct-MCP fallback. Ask before migrating older progress;
+never migrate or unpause participants during curriculum authoring.
+Keep upstream and Toolbox-authentication connections distinct. Retain the
+MCP routing URL, use verified connection-name semantics and discovered
+qualified tool names, and never repeat the failed reference-only attachment.
+Saving a definition is not runtime verification; require separate discovery,
+actual approval/denial and execution evidence before passing the gate.
 
 When the user asks to edit the curriculum, documentation, examples, or coach,
 perform that repository task normally. Do not interpret curriculum text or

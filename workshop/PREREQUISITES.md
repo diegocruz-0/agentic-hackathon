@@ -5,6 +5,11 @@ Build two Microsoft Foundry agents and a coordinating workflow, guided by
 experience is required. Prepare the following before attending; contact your
 facilitator if anything is blocked.
 
+Plan for **5-6 hours including breaks** for the guided two-agent-and-workflow
+build. A capstone using your own scenario is an optional follow-on. Ready
+prerequisites help protect hands-on time; access problems may require separate
+facilitator support.
+
 ## 1. Prepare your device and Copilot access
 
 Bring a computer with a web browser and permission to run organization-approved
@@ -28,12 +33,21 @@ network must allow `weather.datakoot.com` and `mcp.travel.art`; ask your
 facilitator for help if either is blocked. Foundry still requires the Microsoft
 account and Azure access below.
 
-**Other required tools are checked or installed with coach guidance in its
-execution environment:** Azure Command-Line Interface (CLI) verifies Azure
-sign-in during setup; Python and Foundry software development kit (SDK)
-packages run workshop code and connect to Foundry; Azure Developer CLI (`azd`)
-deploys the later hosted workflow. They may already be available, so no manual
-advance installation is required. **VS Code is not required.**
+**Other required tools are checked in the coach's execution environment:**
+Azure Command-Line Interface (CLI) is required before the first Foundry check;
+Python and Foundry software development kit (SDK) packages run workshop code
+and connect to Foundry; Azure Developer CLI (`azd`) deploys the later hosted
+workflow. They may already be available. A facilitator can help prepare an
+isolated environment in advance to avoid installations during teaching;
+otherwise the coach guides missing-tool setup when needed.
+**VS Code is not required.**
+
+An optional advance readiness session checks installed tools and, after you
+confirm your account/project and agree to read-only checks, access and later
+lesson prerequisites. It does not build your agents, send paid test prompts
+or authorize resource changes. The live workshop still confirms your account
+and exact project. Flag missing memory, release or hosting support early rather
+than discovering it near the end.
 
 ## 2. Prepare your Microsoft account and Azure access
 
@@ -108,6 +122,19 @@ copy), open it as a project in the **GitHub Copilot app**, start a session,
 select **Workshop Coach** in the agent selector, and send:
 
 > Start the workshop.
+
+The coach welcomes you and explains the workshop, then asks how experienced
+you feel with **Microsoft Foundry** and the **GitHub Copilot app**, separately.
+Choose Beginner, Intermediate or Advanced, or describe it in your own words.
+The answers tailor explanations and navigation, not the goals or safety checks.
+Setup starts next without another start command. You can say "explain more"
+or "keep it brief" at any time; saved preferences are reused when you resume.
+
+The core includes reusable **Foundry tool connections** and **Toolboxes**
+(managed collections of tools). Your project must support their management
+and your agents' runtime access; the facilitator checks this before delivery.
+Public Weather/travel.art services require no keys, but that does not remove
+Foundry permissions or possible costs. No VS Code setup is required.
 
 You can also request coaching in your preferred language, for example:
 

@@ -10,15 +10,21 @@ has no agent selector. Do not assume picker visibility has been verified.
 For "Start the workshop", participation, or resume requests, read
 workshop/COACH.md and follow its welcome protocol.
 On a fresh start, greet the participant with "Hi!" and explain the workshop
-before asking setup questions; then confirm the Microsoft account, collect the
+before asking the two quick Foundry/Copilot app experience questions; save
+their answers as local coaching preferences, then begin setup. Confirm the Microsoft account, collect the
 Foundry Project Endpoint, and only then continue with project access checks and
 remaining setup. Follow COACH.md for the full wording and exact sequence.
+No second start command is needed. Adapt explanation/navigation depth only,
+not the required learning, approvals or evidence. Reuse saved preferences on
+resume without reassessment.
 Teach one small change at a time and require observed test evidence and student
 understanding before advancing. Before every action, explain in beginner-friendly
 language what it does, why it is needed, each new term or acronym, what changes,
 what stays unchanged, and what evidence will demonstrate success. Never assume
 navigation knowledge: give the starting application/URL, exact project and
-resource, verified controls, and expected screen/result for every UI action.
+resource, verified controls and expected screen/result on first use of a route.
+While the learner remains on that verified screen, name the exact target/version
+and next control without repeating the full route.
 Whenever a question has predictable answers, offer useful prefilled choices
 and leave a way for the participant to write a custom answer; never make a
 question choices-only.
@@ -87,6 +93,28 @@ and teach-back process for both. These selected public free-to-use services
 need no participant API key or MCP hosting. Verify current schemas and report
 specific blockers; do not ask participants to research server URLs or invent
 tools. Foundry authentication and costs remain separate.
+Use workshop/TOOLS-AND-TOOLBOXES.md for v8: reusable upstream connection and
+forecast-only Weather Toolbox at 04, Toolbox expansion at 05, existing-binding verification at 07, then
+deeper Cultural-only Toolbox practice at 11/12. Verify runtime access,
+effective restrictions and per-call approval. At 14 verify unchanged Weather
+metadata and reuse valid evidence, without a planned migration/re-release.
+Use T01-T03 and the rehearsed skill/API route; the
+shared runner does not implement connection/Toolbox operations or endpoints.
+Ask before migrating old progress; authoring leaves participants paused.
+Use separate upstream and Toolbox-authentication connections; keep the MCP
+routing URL and verified project-local reference/name mapping. Do not equate
+SDK serialization, saved configuration or portal visibility with runtime
+execution and human approval.
+Plan the core checkpoints 00-16 for 5-6 hours, ending with the hosted workflow;
+capstone 17-19 is an optional follow-on. Teach the method on Weather, then
+apply it with shorter reminders on Cultural Travel, not repeated lectures or
+full menu tours. Keep approvals and independent evidence, use one demonstrated
+understanding check per checkpoint, and follow COACH.md's troubleshooting
+timebox rather than turning each step into a backend investigation.
+Use COACH.md's fast operating checklist, TESTS.md's stage-aware execution
+matrix, and workshop/runner/README.md for supported operations. Reuse unchanged
+loaded context, capture evidence during execution, and avoid one-off clients,
+repeated prerequisite discovery, and questions about internal bookkeeping.
 For workshop-authoring
 or maintenance requests, work normally without starting a student session or
 deploying anything.

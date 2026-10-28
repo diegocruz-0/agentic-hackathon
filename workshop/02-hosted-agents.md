@@ -30,10 +30,26 @@ memory scope, and release. The coach supplies both existing agent release
 details and guides their connection into workflow code; the participant does
 not need another MCP server. A travel.art `recommend_art_trip` result alone is
 not the final workflow, because it does not invoke our Weather Research Agent.
+Confirm the checkpoint 14 handoff includes both tested Toolbox-backed releases,
+their pinned dependency versions and T01-T03 evidence. The workflow invokes
+the specialists, not a combined Toolbox; do not give it direct weather or
+cultural tool access as a shortcut around specialist execution.
 
 After approval, scaffold the smallest appropriate
 [official sample](https://github.com/microsoft-foundry/foundry-samples) under
 `student/hosted-agent/`. Record its source revision and dependency versions.
+
+The facilitator rehearses and records the exact suitable sample revision and
+dependency set before the cohort, with a runnable validation/failure-fixture
+test path and deployment prerequisites. Reuse that recorded source when it
+remains supported; do not search the entire sample catalogue or design a new
+hosting stack during the lesson. If it is incompatible, timebox the blocker
+instead of substituting an unverified scaffold.
+
+The prepared scaffold supplies hosting plumbing, not completed specialists or
+itinerary logic. Participants still review the entry point, implement and
+explain agent invocation/validation/aggregation, run the actual workflow and
+inspect its correlated traces. No future code is deployed by preparation.
 
 Define versioned weather-result and cultural-result contracts based on observed
 specialist outputs. Each contract should require the owning agent/version,
@@ -45,6 +61,12 @@ evidence remain the proof of execution.
 If a released specialist cannot produce a contract-compatible result, create a
 new specialist candidate, fully retest it, and promote it before continuing.
 Do not silently reinterpret incompatible output inside the workflow.
+
+Use the pre-release content checklist from 07/14 to avoid discovering missing
+source fields for the first time here. That checklist is not a schema pass:
+the formal contracts are introduced, implemented and tested now. A genuine
+incompatibility still requires an explicitly approved specialist candidate
+and its applicable regressions/release; do not hide the resulting time cost.
 
 Implement a code-first Agent Framework workflow:
 
@@ -64,6 +86,12 @@ Run G01-G03 and W01-W03 locally with recorded fixtures, then with approved live
 Stable Agent Endpoints. Inspect workflow, executor, agent-call, validation, and
 aggregation spans when supported. Two manual agent calls followed by a manually
 written itinerary do not prove the workflow ran.
+
+Group deterministic contract/failure fixtures in one local test command.
+Keep live happy-path calls and correlated evidence mandatory; do not use
+fixtures to claim live specialist success. An isolated injected failure at
+the workflow boundary tests the workflow's failure policy, not an outage in
+the provider. Record which variant and execution path each case exercised.
 
 **App practice:** review the workflow plan, contracts, generated entry point, and tests.
 **Alternative:** use Plan mode when available, then return to Chat for evidence review.
@@ -102,4 +130,5 @@ diagnosis while restoring the previous known-good release.
 **Alternative:** use applicable hosted Canvas controls when available, then return to Chat for validation.
 **Teach-back:** "How can you prove which workflow and specialist versions produced the itinerary?"
 
-Then proceed to [capstone selection](CAPSTONE.md).
+This completes the core route. Proceed to [capstone selection](CAPSTONE.md)
+only if the participant chooses the optional follow-on.

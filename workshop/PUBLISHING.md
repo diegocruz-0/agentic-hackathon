@@ -6,6 +6,31 @@ chosen capstone**. Keep separate names and endpoints so students can compare
 both specialists and the orchestrator without overwriting evidence.
 Tests and evidence requirements are in [TESTS.md](TESTS.md).
 
+## Tool dependencies are part of the release
+
+Follow [Tools and Toolboxes](TOOLS-AND-TOOLBOXES.md). Record the reusable
+connection ID/target, Toolbox version-specific endpoint, actual exposed
+tool names and effective allowlist alongside the agent/skill versions.
+At 07 verify the Weather Toolbox introduced at 04 and expanded at 05 before
+running the already-required full final-path regressions and P01-P03. Record
+both the upstream connection and Toolbox-authentication connection. Its first release is
+Toolbox-backed; do not release direct MCP first and migrate later. At 14
+Cultural has its own Toolbox and independent final-path tests; verify Weather's
+unchanged release/dependencies and reuse valid evidence rather than repeating
+its full suite. Real changes still require affected regressions.
+No shared mixed Toolbox or direct-MCP bypass is left in the final candidates.
+
+Verify the **agent runtime identity**, not just the developer, can invoke its
+Toolbox and only the permitted upstream tools. Keep human approval observable
+for the actual tool/arguments. Do not copy documentation examples that disable
+approval. If access or approval propagation cannot be verified, block release.
+
+Pin tested dependency versions rather than consuming an unreviewed Toolbox
+default. Agent-version rollback cannot undo a separately mutated connection
+or default Toolbox. Retain the tested versions/bindings, review affected
+consumers before dependency changes, and obtain separate approval for any
+promotion or role change.
+
 ## Current model versus legacy publishing
 
 The [current Foundry model](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/migrate-agent-applications)
@@ -33,6 +58,10 @@ agent endpoint.
    configuration revision.
    A known-failing candidate is not promoted to stable routing and a known-failing
    hosted candidate is not deployed.
+   Use TESTS.md's stage-aware execution matrix: C01R/C02R preserve live
+   forecast/museum assertions with the final allowlist; post-memory D tests
+   use a verified clean synthetic referent scope. Do not remove capabilities
+   to recreate an earlier lesson's configuration.
 2. **Inspect endpoint metadata.** Read the service-returned stable endpoint,
    protocol configuration, version selector, and agent identity. Use current
    official APIs or the installed Foundry workflow. Resolve unsupported API
@@ -54,6 +83,12 @@ agent endpoint.
    access configuration, test evidence, and rollback target in local progress.
    Never copy access tokens into a shareable handoff.
 
+Use one approved consumer-path regression batch where supported. The same
+exact final-version/path exchange can satisfy feature and P03 assertions;
+record those assertions separately, not duplicate model calls. Project-path
+results are not consumer-path passes. Keep model usage/cost and unavailable
+usage clearly labeled. Helpers do not approve operations or grade results.
+
 For the Weather Research Agent, verify its managed conversation behavior,
 memory, Weather MCP server and forecast tool connection, instructions,
 evidence-aware weather output and skill-guided tool behavior through the released
@@ -61,7 +96,8 @@ endpoint. It does not rely on a
 local custom-function executor or client-side workflow.
 
 Prompt checkpoint 07 stops here, after a teach-back. Preserve the prompt release
-while the Cultural Travel Agent is developed.
+and its pinned Toolbox dependencies unchanged while Cultural is developed.
+Checkpoint 14 does not plan a Weather migration or routing change.
 
 At checkpoint 14, release the Cultural Travel Agent through its own stable
 endpoint. Verify its instructions, conversation isolation, selected travel.art MCP,
@@ -137,5 +173,8 @@ endpoint, their verified versions, evidence locations, and every workshop-owned
 resource still running.
 Ask before stopping or deleting specific
 resources. Keep shared projects/models and other students' resources untouched.
+Include saved tool connections and Toolbox versions in the owned-resource
+inventory. Check remaining consumers before proposing deletion; removing a
+connection can break more than one retained binding or recovery version.
 If cleanup removes an endpoint, label it retired in the release record rather
 than continuing to claim it is callable.
